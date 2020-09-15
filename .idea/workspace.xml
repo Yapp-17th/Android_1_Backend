@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hY2nTeh9vViYK2XrFiJIymK6ub" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RunManager">
+    <configuration name="PiconApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="picon.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.picon.picon.PiconApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="node" />
+      <package-manager value="npm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="" />
+      <created>1600173871102</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600173871102</updated>
+      <workItem from="1600173873671" duration="248000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="246" y="52" key="CommitChangelistDialog2" timestamp="1600174307817">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="246" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1600174307817" />
+    <state x="144" y="78" key="DiffContextDialog" timestamp="1600174302454">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1600174302454" />
+    <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1600173926078">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600173926078" />
+    <state x="97" y="128" key="new project wizard" timestamp="1600173982639">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="97" y="128" key="new project wizard/0.0.1440.900@0.0.1440.900" timestamp="1600173982639" />
+  </component>
+</project>
