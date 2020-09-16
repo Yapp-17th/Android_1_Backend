@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="" />
+    <list default="true" id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/DisplayApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/display-service/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/DomainApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domain-service/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eureka-server/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eureka-server/src/main/java/org/picon/EurekaApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/display-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/domain-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/domain-service/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,22 +25,65 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1hY2nTeh9vViYK2XrFiJIymK6ub" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="show.run.dashboard.notification" value="false" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.DomainApplication">
+    <configuration name="DisplayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="picon.display-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.picon.DisplayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DomainApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="picon.domain-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.picon.DomainApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="picon.eureka-server.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.picon.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.picon.EurekaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PiconApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="picon.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.picon.picon.PiconApplication" />
@@ -43,6 +99,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.EurekaApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -66,29 +127,82 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600173871102</updated>
-      <workItem from="1600173873671" duration="248000" />
+      <workItem from="1600173873671" duration="5991000" />
     </task>
+    <task id="LOCAL-00001" summary="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성">
+      <created>1600174363340</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600174363340</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성" />
+    <option name="LAST_COMMIT_MESSAGE" value="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="246" y="52" key="CommitChangelistDialog2" timestamp="1600174307817">
+    <state x="320" y="115" key="#Project_Structure" timestamp="1600234874130">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="246" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1600174307817" />
+    <state x="320" y="115" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1600234874130" />
+    <state x="246" y="52" key="CommitChangelistDialog2" timestamp="1600174363184">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="246" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1600174363184" />
     <state x="144" y="78" key="DiffContextDialog" timestamp="1600174302454">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1600174302454" />
+    <state width="1398" height="202" key="GridCell.Tab.0.bottom" timestamp="1600238320749">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
+    <state width="1398" height="202" key="GridCell.Tab.0.center" timestamp="1600238320748">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600238320748" />
+    <state width="1398" height="202" key="GridCell.Tab.0.left" timestamp="1600238320747">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600238320747" />
+    <state width="1398" height="202" key="GridCell.Tab.0.right" timestamp="1600238320749">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
+    <state width="1398" height="202" key="GridCell.Tab.1.bottom" timestamp="1600238320752">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600238320752" />
+    <state width="1398" height="202" key="GridCell.Tab.1.center" timestamp="1600238320751">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1600238320751" />
+    <state width="1398" height="202" key="GridCell.Tab.1.left" timestamp="1600238320750">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1600238320750" />
+    <state width="1398" height="202" key="GridCell.Tab.1.right" timestamp="1600238320751">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="202" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1600238320751" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600174367239">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1600174367239" />
     <state x="301" y="175" width="837" height="550" key="find.popup" timestamp="1600173926078">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="301" y="175" width="837" height="550" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600173926078" />
-    <state x="97" y="128" key="new project wizard" timestamp="1600173982639">
+    <state x="97" y="128" key="new project wizard" timestamp="1600234966849">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="97" y="128" key="new project wizard/0.0.1440.900@0.0.1440.900" timestamp="1600173982639" />
+    <state x="97" y="128" key="new project wizard/0.0.1440.900@0.0.1440.900" timestamp="1600234966849" />
   </component>
 </project>

@@ -1,4 +1,5 @@
 rootProject.name = 'picon'
 include 'domain-service'
 include 'display-service'
+include 'eureka-server'
 
