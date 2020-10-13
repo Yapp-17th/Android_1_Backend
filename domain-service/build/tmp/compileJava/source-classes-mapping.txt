@@ -1,20 +1,20 @@
-org/picon/DomainApplication.java
- org.picon.DomainApplication
-org/picon/domain/PostImage.java
- org.picon.domain.PostImage
-org/picon/domain/Posts.java
- org.picon.domain.Posts
-org/picon/domain/Color.java
- org.picon.domain.Color
-org/picon/domain/PostImages.java
- org.picon.domain.PostImages
 org/picon/domain/Address.java
  org.picon.domain.Address
+org/picon/domain/Posts.java
+ org.picon.domain.Posts
 org/picon/domain/Coordinate.java
  org.picon.domain.Coordinate
+org/picon/domain/PostImages.java
+ org.picon.domain.PostImages
 org/picon/controller/PostController.java
  org.picon.controller.PostController
+org/picon/domain/Color.java
+ org.picon.domain.Color
 org/picon/repository/PostRepository.java
  org.picon.repository.PostRepository
+org/picon/domain/PostImage.java
+ org.picon.domain.PostImage
 org/picon/domain/Post.java
  org.picon.domain.Post
+org/picon/DomainApplication.java
+ org.picon.DomainApplication

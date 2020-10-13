@@ -1,0 +1,20 @@
+version: '3'
+
+services: 
+  eureka-service:
+    build: ./Picon-BackEnd/eureka-server
+    ports:
+      - "8100:8100"
+  domain-service:
+    build: ./Picon-BackEnd/domain-service
+    ports:
+      - "8101:8101"
+  display-service:
+    build: ./Picon-BackEnd/display-service
+    ports:
+      - "8102:8102"
+
+
+
+
+

@@ -1,9 +1,9 @@
-org/picon/DisplayApplication.java
- org.picon.DisplayApplication
 org/picon/service/FeignPostRemoteServiceFallbackFactory.java
  org.picon.service.FeignPostRemoteServiceFallbackFactory
 org/picon/service/FeignPostRemoteServiceFallbackImpl.java
  org.picon.service.FeignPostRemoteServiceFallbackImpl
+org/picon/DisplayApplication.java
+ org.picon.DisplayApplication
 org/picon/controller/DisplayController.java
  org.picon.controller.DisplayController
 org/picon/service/FeignPostRemoteService.java
