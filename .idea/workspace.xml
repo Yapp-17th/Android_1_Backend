@@ -20,26 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/controller/DisplayController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/service/FeignPostRemoteService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/service/FeignPostRemoteServiceFallbackFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/service/FeignPostRemoteServiceFallbackImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/controller/PostController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Color.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Coordinate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/PostImage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/PostImages.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Posts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/src/main/java/org/picon/DisplayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/DisplayApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/display-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/domain-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" afterDir="false" />
     </list>
@@ -52,6 +35,37 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="picon" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="picon" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="picon" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -179,6 +193,7 @@
       <updated>1600173871102</updated>
       <workItem from="1600173873671" duration="5991000" />
       <workItem from="1600724183943" duration="5754000" />
+      <workItem from="1602549538281" duration="1114000" />
     </task>
     <task id="LOCAL-00001" summary="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성">
       <created>1600174363340</created>
@@ -203,6 +218,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -226,57 +242,58 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1600174302454" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1600730371850">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1602549520057">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819715" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520057" />
     <state width="1638" height="295" key="GridCell.Tab.0.bottom/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371850" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1600730371848">
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1602549520056">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600238320748" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819714" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520056" />
     <state width="1638" height="295" key="GridCell.Tab.0.center/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371848" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1600730371847">
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1602549520055">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600238320747" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819713" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520055" />
     <state width="1638" height="295" key="GridCell.Tab.0.left/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371847" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1600730371849">
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1602549520056">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819714" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520056" />
     <state width="1638" height="295" key="GridCell.Tab.0.right/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371849" />
-    <state width="1638" height="295" key="GridCell.Tab.1.bottom" timestamp="1600730371853">
+    <state width="1638" height="295" key="GridCell.Tab.1.bottom" timestamp="1602549520044">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600238320752" />
-    <state width="1638" height="295" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819718" />
+    <state width="1638" height="295" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520044" />
     <state width="1638" height="295" key="GridCell.Tab.1.bottom/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371853" />
-    <state width="1638" height="295" key="GridCell.Tab.1.center" timestamp="1600730371851">
+    <state width="1638" height="295" key="GridCell.Tab.1.center" timestamp="1602549520044">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1600238320751" />
-    <state width="1638" height="295" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819716" />
+    <state width="1638" height="295" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520044" />
     <state width="1638" height="295" key="GridCell.Tab.1.center/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371851" />
-    <state width="1638" height="295" key="GridCell.Tab.1.left" timestamp="1600730371851">
+    <state width="1638" height="295" key="GridCell.Tab.1.left" timestamp="1602549520043">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1600238320750" />
-    <state width="1638" height="295" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819716" />
+    <state width="1638" height="295" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520043" />
     <state width="1638" height="295" key="GridCell.Tab.1.left/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371851" />
-    <state width="1638" height="295" key="GridCell.Tab.1.right" timestamp="1600730371852">
+    <state width="1638" height="295" key="GridCell.Tab.1.right" timestamp="1602549520044">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1600238320751" />
-    <state width="1638" height="295" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1600724819717" />
+    <state width="1638" height="295" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1602549520044" />
     <state width="1638" height="295" key="GridCell.Tab.1.right/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730371852" />
-    <state width="531" height="476" key="SwitcherDM" timestamp="1600730367582">
+    <state width="531" height="476" key="SwitcherDM" timestamp="1602636275622">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state width="531" height="476" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1602636275622" />
     <state width="531" height="476" key="SwitcherDM/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600730367582" />
     <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600174367239">
       <screen x="0" y="0" width="1440" height="900" />

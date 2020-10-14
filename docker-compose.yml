@@ -4,7 +4,7 @@ services:
   eureka-service:
     build: ./Picon-BackEnd/eureka-server
     ports:
-      - "8100:8100"
+      - "8761:8761"
   domain-service:
     build: ./Picon-BackEnd/domain-service
     ports:
