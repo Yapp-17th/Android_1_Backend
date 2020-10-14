@@ -13,8 +13,10 @@ services:
     build: ./display-service
     ports:
       - "8081:8081"
-
-
-
-
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
