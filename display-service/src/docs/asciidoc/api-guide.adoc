@@ -1,0 +1,80 @@
+= API 문서
+API 문서 입니다.
+:toc: left
+:toc-title: 목차
+:toclevels: 2
+:sectnumlevels: 2
+:sectnums:
+:sectlinks:
+:icons: font
+
+== asciidoc 기본 사용법
+
+asciidoc 기본 사용법에 대해 다룹니다.
+
+https://narusas.github.io/2018/03/21/Asciidoc-basic.html
+
+https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+link:asciidocs-guide.html[asciidocs 가이드]
+
+== 전체 API
+
+전체 API에 대한 목록과 개발 진행 현황을 다룹니다.
+
+[NOTE]
+====
+주의할 것들
+
+진행 상태 단계
+1. 진행중
+2. 확인요청 (백 -> 프론트)
+3. 확인완료
+====
+
+[cols="2,3,2"]
+.게시글
+|===
+|API 이름 | 설명 | 진행 현황
+
+|게시글 조회 | 게시글을 조회한다. | 진행중
+
+|===
+
+== 게시글
+
+=== 게시글 조회
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/rest-docs-test/path-parameters.adoc[]
+
+===== request-parameter
+
+include::{snippets}/rest-docs-test/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/rest-docs-test/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/rest-docs-test/1/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/rest-docs-test/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/rest-docs-test/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/rest-docs-test/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/rest-docs-test/1/curl-request.adoc[]
