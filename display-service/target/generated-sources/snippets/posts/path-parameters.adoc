@@ -1,0 +1,8 @@
+.+/displays/posts/{id}+
+|===
+|Parameter|Description
+
+|`+id+`
+|조회하고 싶은 게시글의 번호
+
+|===

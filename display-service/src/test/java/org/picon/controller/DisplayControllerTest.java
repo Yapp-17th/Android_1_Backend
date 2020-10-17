@@ -3,6 +3,7 @@ package org.picon.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.picon.config.RestDocsConfiguration;
 import org.picon.dto.Address;
 import org.picon.dto.Coordinate;
 import org.picon.dto.Post;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -37,42 +39,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @see <a href="https://github.com/ePages-de/restdocs-wiremock/blob/master/server/src/test/java/com/example/notes/ApiDocumentation.java">참고 링크</a>
  */
-//@RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = DisplayController.class)
 @AutoConfigureMockMvc
-@AutoConfigureRestDocs(outputDir = "target/generated-sources/snippets")
-//@WebAppConfiguration
+@AutoConfigureRestDocs
+@Import(RestDocsConfiguration.class)
 public class DisplayControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     @MockBean
     FeignPostRemoteService feignPostRemoteService;
-
-    // ========== <mockMvc Setting> ==========
-
-    //    @Rule
-//    public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
-
-//    private RestDocumentationResultHandler documentationHandler;
-//
-//    @Autowired
-//    private WebApplicationContext context;
-
     @Autowired
     private MockMvc mockMvc;
-
-//    @Before
-//    public void each() {
-//        this.documentationHandler = document("{method-name}",
-//                preprocessRequest(prettyPrint()),
-//                preprocessResponse(prettyPrint()),
-//                wiremockJson()
-//        );
-//
-//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-//                .apply(documentationConfiguration(this.restDocumentation))
-//                .alwaysDo(this.documentationHandler)
-//                .build();
-//    }
 
     @Test
     public void restDocsTest() throws Exception {
@@ -87,7 +63,7 @@ public class DisplayControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(notNullValue())))
                 .andDo(
-                        document("",
+                        document("posts",
 //                                wiremockJson(idFieldReplacedWithPathParameterValue()),
                                 pathParameters(
                                         parameterWithName("id").description("조회하고 싶은 게시글의 번호")

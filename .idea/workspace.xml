@@ -20,48 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97407b32-4bbd-4d6c-bea0-d2284a304834" name="Android_1_Backend-1 restdocs 설정" comment="Android_1_Backend-1 restdocs 설정">
-      <change afterPath="$PROJECT_DIR$/display-service/src/docs/asciidoc/api-guide.adoc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/docs/asciidoc/asciidocs-guide.adoc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/dto/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/dto/Coordinate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/dto/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/test/java/org/picon/controller/DisplayControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/display-service/src/test/resources/templates/request-fields.snippet" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/picon.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/classes/java/main/org/picon/controller/DisplayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build/classes/java/main/org/picon/controller/DisplayController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/classes/java/main/org/picon/service/FeignPostRemoteServiceFallbackFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build/classes/java/main/org/picon/service/FeignPostRemoteServiceFallbackFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/libs/display-service-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build/resources/main/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/src/main/java/org/picon/controller/DisplayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/src/main/java/org/picon/controller/DisplayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/display-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/DomainApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/controller/PostController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/Address.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/Color.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/Coordinate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/Post.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/PostImage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/PostImages.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/domain/Posts.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/classes/java/main/org/picon/repository/PostRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/libs/domain-service-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/resources/main/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/domain-service/src/main/java/org/picon/domain/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/build/classes/java/main/org/picon/EurekaApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/build/libs/eureka-server-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/build/resources/main/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/build/tmp/bootJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <list id="d9df5784-6abb-4343-b4cf-215c2cc359e8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +143,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -364,7 +324,7 @@
       <updated>1602918283266</updated>
       <workItem from="1602918029830" duration="231000" />
       <workItem from="1602918283947" duration="17042000" />
-      <workItem from="1602946052398" duration="5258000" />
+      <workItem from="1602946052398" duration="7057000" />
     </task>
     <task id="LOCAL-00002" summary="아아">
       <created>1602918255001</created>
@@ -396,15 +356,16 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성" />
-    <option name="LAST_COMMIT_MESSAGE" value="프로젝트 구조 생성&#10;- domain / display 마이크로서비스 생성" />
+    <MESSAGE value="Android_1_Backend-1 restdocs 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="Android_1_Backend-1 restdocs 설정" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="373" y="134" key="#Project_Structure" timestamp="1602949737862">
+    <state x="373" y="134" key="#Project_Structure" timestamp="1602951928824">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="320" y="115" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1600234874130" />
     <state x="373" y="134" key="#Project_Structure/0.0.1680.1050@0.0.1680.1050" timestamp="1602919098929" />
-    <state x="373" y="134" key="#Project_Structure/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602949737862" />
+    <state x="373" y="134" key="#Project_Structure/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602951928824" />
     <state x="507" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602945905820">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -414,6 +375,10 @@
     </state>
     <state x="653" y="238" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1602928311248" />
     <state x="653" y="238" key="#com.intellij.ide.util.MemberChooser/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1600729286591" />
+    <state x="447" y="456" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1602953000748">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="447" y="456" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602953000748" />
     <state x="285" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602945779825">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -430,30 +395,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1600174302454" />
-    <state width="1638" height="416" key="GridCell.Tab.0.bottom" timestamp="1602951333742">
+    <state width="1638" height="416" key="GridCell.Tab.0.bottom" timestamp="1602953034205">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
     <state width="1638" height="416" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1602931886395" />
-    <state width="1638" height="416" key="GridCell.Tab.0.bottom/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602951333742" />
-    <state width="1638" height="416" key="GridCell.Tab.0.center" timestamp="1602951333741">
+    <state width="1638" height="416" key="GridCell.Tab.0.bottom/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602953034205" />
+    <state width="1638" height="416" key="GridCell.Tab.0.center" timestamp="1602953034203">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600238320748" />
     <state width="1638" height="416" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1602931886394" />
-    <state width="1638" height="416" key="GridCell.Tab.0.center/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602951333741" />
-    <state width="1638" height="416" key="GridCell.Tab.0.left" timestamp="1602951333740">
+    <state width="1638" height="416" key="GridCell.Tab.0.center/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602953034203" />
+    <state width="1638" height="416" key="GridCell.Tab.0.left" timestamp="1602953034202">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600238320747" />
     <state width="1638" height="416" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1602931886393" />
-    <state width="1638" height="416" key="GridCell.Tab.0.left/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602951333740" />
-    <state width="1638" height="416" key="GridCell.Tab.0.right" timestamp="1602951333742">
+    <state width="1638" height="416" key="GridCell.Tab.0.left/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602953034202" />
+    <state width="1638" height="416" key="GridCell.Tab.0.right" timestamp="1602953034204">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1398" height="202" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600238320749" />
     <state width="1638" height="416" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1602931886394" />
-    <state width="1638" height="416" key="GridCell.Tab.0.right/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602951333742" />
+    <state width="1638" height="416" key="GridCell.Tab.0.right/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602953034204" />
     <state width="1638" height="364" key="GridCell.Tab.1.bottom" timestamp="1602946034658">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -488,11 +453,11 @@
     </state>
     <state x="586" y="157" key="SimpleOpenTaskDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1602918260294" />
     <state x="586" y="168" key="SimpleOpenTaskDialog/0.23.1680.967@0.23.1680.967" timestamp="1602918029587" />
-    <state width="531" height="496" key="SwitcherDM" timestamp="1602950838243">
+    <state width="531" height="496" key="SwitcherDM" timestamp="1602952966046">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="531" height="496" key="SwitcherDM/0.0.1680.1050@0.0.1680.1050" timestamp="1602931625090" />
-    <state width="531" height="496" key="SwitcherDM/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602950838243" />
+    <state width="531" height="496" key="SwitcherDM/1680.52.1024.768/0.0.1680.1050@0.0.1680.1050" timestamp="1602952966046" />
     <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600174367239">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

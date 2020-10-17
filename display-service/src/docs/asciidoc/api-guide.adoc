@@ -49,32 +49,32 @@ link:asciidocs-guide.html[asciidocs 가이드]
 
 ===== path-parameter
 
-include::{snippets}/rest-docs-test/path-parameters.adoc[]
+include::{snippets}/posts/path-parameters.adoc[]
 
 ===== request-parameter
 
-include::{snippets}/rest-docs-test/request-parameters.adoc[]
+//include::{snippets}/posts/request-parameters.adoc[]
 
 ===== request-header
 
-include::{snippets}/rest-docs-test/request-headers.adoc[]
+include::{snippets}/posts/request-headers.adoc[]
 
 ===== request-body
 
-include::{snippets}/rest-docs-test/1/request-body.adoc[]
+//include::{snippets}/posts/1/request-body.adoc[]
 
 ==== 응답
 
-include::{snippets}/rest-docs-test/response-fields.adoc[]
+include::{snippets}/posts/response-fields.adoc[]
 
 ==== 요청 HTTP
 
-include::{snippets}/rest-docs-test/http-request.adoc[]
+include::{snippets}/posts/http-request.adoc[]
 
 ==== 응답 HTTP
 
-include::{snippets}/rest-docs-test/http-response.adoc[]
+include::{snippets}/posts/http-response.adoc[]
 
 ==== curl
 
-include::{snippets}/rest-docs-test/1/curl-request.adoc[]
+include::{snippets}/posts/curl-request.adoc[]
