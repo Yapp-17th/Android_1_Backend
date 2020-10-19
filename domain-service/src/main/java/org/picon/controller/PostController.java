@@ -15,4 +15,9 @@ public class PostController {
         System.out.println(postById);
         return postById;
     }
+
+    @GetMapping("/test")
+    public String test(@RequestHeader String accessToken) {
+        return "this is domain service api!!!!"+accessToken;
+    }
 }
