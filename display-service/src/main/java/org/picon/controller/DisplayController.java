@@ -16,7 +16,7 @@ public class DisplayController {
     @GetMapping(path = "/posts/{postId}")
     public String getDisplayDetail(@PathVariable Long postId) {
         String postInfo = getPostInfo(postId);
-        return String.format("display id : post, info : " + postInfo);
+        return postInfo;
     }
 
     private String getPostInfo(Long postId) {

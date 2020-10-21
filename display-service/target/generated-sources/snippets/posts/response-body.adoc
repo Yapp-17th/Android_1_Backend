@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+{"id":1,"coordinate":{"lat":1.1,"lng":1.1},"address":{"address":"??","addrCity":"?","addrDo":"?","addrGu":"?"},"createDate":{"year":2020,"month":"JANUARY","era":"CE","dayOfYear":1,"dayOfWeek":"WEDNESDAY","leapYear":true,"dayOfMonth":1,"monthValue":1,"chronology":{"id":"ISO","calendarType":"iso8601"}}}
+----

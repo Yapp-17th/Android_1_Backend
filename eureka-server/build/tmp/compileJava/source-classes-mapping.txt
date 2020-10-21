@@ -1,2 +1,0 @@
-org/picon/EurekaApplication.java
- org.picon.EurekaApplication
