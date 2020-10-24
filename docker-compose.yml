@@ -11,11 +11,15 @@ services:
     ports:
       - "8082:8082"
     network_mode: host
+    depends_on:
+      - eureka-service
   display-service:
     build: ./display-service
     ports:
       - "8081:8081"
     network_mode: host
+    depends_on:
+      - eureka-service
   nginx:
     image: nginx
     ports:
@@ -23,3 +27,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     network_mode: host
+    depends_on:
+      - eureka-service
+      - display-service
+      - domain-service
