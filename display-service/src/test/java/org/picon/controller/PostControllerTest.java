@@ -32,6 +32,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -71,6 +72,12 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.id", is(notNullValue())))
                 .andDo(
                         document("post-read",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
                                 pathParameters(
                                         parameterWithName("id").description("조회하고 싶은 게시글의 번호")
                                 ),
@@ -124,6 +131,12 @@ class PostControllerTest {
 //                .andExpect(jsonPath("$.id", is(notNullValue())))
                 .andDo(
                         document("post-create",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
 //                                pathParameters(
 //                                        parameterWithName("id").description("조회하고 싶은 게시글의 번호")
 //                                ),
