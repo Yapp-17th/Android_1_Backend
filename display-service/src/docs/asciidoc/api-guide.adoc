@@ -62,7 +62,7 @@ include::{snippets}/post-read/request-headers.adoc[]
 
 ===== request-body
 
-//include::{snippets}/posts/1/request-body.adoc[]
+//include::{snippets}/post-create/response-fields.adoc[]
 
 ==== 응답
 
@@ -98,7 +98,7 @@ include::{snippets}/post-create/request-headers.adoc[]
 
 ===== request-body
 
-include::{snippets}/post-create/request-body.adoc[]
+include::{snippets}/post-create/request-fields.adoc[]
 
 ==== 응답
 
