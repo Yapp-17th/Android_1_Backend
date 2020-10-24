@@ -16,4 +16,6 @@ public class Post {
     private Coordinate coordinate;
     private Address address;
     private LocalDate createDate;
+    private Emotion emotion;
+    private String memo;
 }
