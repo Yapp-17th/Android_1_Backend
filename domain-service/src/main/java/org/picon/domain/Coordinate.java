@@ -1,21 +1,15 @@
 package org.picon.domain;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Coordinate {
-    private final double lat;
-    private final double lng;
-
-    public Coordinate(double lat, double lng) {
-        this.lat = lat;
-        this.lng = lng;
-    }
-
-    @Override public String toString() {
-        return "Coordinate{" +
-                "lat=" + lat +
-                ", lng=" + lng +
-                '}';
-    }
+    private double lat;
+    private double lng;
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.picon.config.RestDocsConfiguration;
 import org.picon.dto.Address;
 import org.picon.dto.Coordinate;
+import org.picon.dto.Emotion;
 import org.picon.dto.Post;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,64 +40,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @see <a href="https://github.com/ePages-de/restdocs-wiremock/blob/master/server/src/test/java/com/example/notes/ApiDocumentation.java">참고 링크</a>
  */
-@SpringBootTest(classes = DisplayController.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Import(RestDocsConfiguration.class)
 public class DisplayControllerTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    @MockBean
-    FeignPostRemoteService feignPostRemoteService;
-    @Autowired
-    private MockMvc mockMvc;
 
-    @Test
-    public void restDocsTest() throws Exception {
-        given(feignPostRemoteService.getPostInfo(any())).willReturn(getExpectedReturnValue());
-
-        mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/displays/posts/{id}", 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-        )
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(notNullValue())))
-                .andDo(
-                        document("posts",
-//                                wiremockJson(idFieldReplacedWithPathParameterValue()),
-                                pathParameters(
-                                        parameterWithName("id").description("조회하고 싶은 게시글의 번호")
-                                ),
-//                                requestParameters(
-//                                        parameterWithName("X").description("쿼리 파라미터 없음")
-//                                ),
-                                requestHeaders(
-                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header")
-                                ),
-//                                requestFields(
-//                                        fieldWithPath("X").description("요청 본문 없음")
-//                                ),
-                                relaxedResponseFields(
-                                        fieldWithPath("id").type(Integer.class).description("게시글 식별자"),
-                                        fieldWithPath("coordinate").type(Object.class).description("게시글이 가진 좌표,주소 객체"),
-                                        fieldWithPath("coordinate.lat").type(String.class).description("위도"),
-                                        fieldWithPath("coordinate.lng").type(String.class).description("경도"),
-                                        fieldWithPath("address").type(Object.class).description("게시글이 가진 주소 객체"),
-                                        fieldWithPath("address.address").type(Object.class).description("주소명"),
-                                        fieldWithPath("address.addrCity").type(Object.class).description("시"),
-                                        fieldWithPath("address.addrDo").type(Object.class).description("도"),
-                                        fieldWithPath("address.addrGu").type(Object.class).description("구"),
-                                        fieldWithPath("createDate").type(Object.class).description("생성 날짜")
-                                )
-                        )
-                );
-    }
-
-    private String getExpectedReturnValue() throws JsonProcessingException {
-        Coordinate coordinate = new Coordinate(1.1d, 1.1d);
-        Address address = new Address("주소", "시", "도", "구");
-        Post post = new Post(1L, coordinate, address, LocalDate.of(2020, 1, 1));
-        return objectMapper.writeValueAsString(post);
-    }
 }

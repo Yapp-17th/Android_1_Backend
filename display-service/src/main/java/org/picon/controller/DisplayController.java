@@ -13,14 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class DisplayController {
     private final FeignPostRemoteService feignPostRemoteService;
 
-    @GetMapping(path = "/posts/{postId}")
-    public String getDisplayDetail(@PathVariable Long postId) {
-        String postInfo = getPostInfo(postId);
-        return postInfo;
-    }
-
-    private String getPostInfo(Long postId) {
-        return feignPostRemoteService.getPostInfo(postId);
+    @GetMapping(path = "/")
+    public String test() {
+        return "hello";
     }
 
 }

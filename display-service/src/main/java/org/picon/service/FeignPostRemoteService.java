@@ -1,11 +1,14 @@
 package org.picon.service;
 
+import org.picon.dto.Post;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "domain", fallbackFactory = FeignPostRemoteServiceFallbackFactory.class)
 public interface FeignPostRemoteService {
-    @RequestMapping(path = "/posts/{postId}")
-    String getPostInfo(@PathVariable("postId") Long postId);
+    @GetMapping(path = "/post/{postId}")
+    Post getPostInfo(@PathVariable("postId") Long postId);
+
+    @PostMapping(path = "/post/")
+    Post createPost(Post post);
 }

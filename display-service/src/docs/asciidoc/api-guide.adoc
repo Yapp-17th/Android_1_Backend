@@ -38,6 +38,7 @@ link:asciidocs-guide.html[asciidocs 가이드]
 |API 이름 | 설명 | 진행 현황
 
 |게시글 조회 | 게시글을 조회한다. | 진행중
+|게시글 생성 | 게시글 생성한다. | 진행중
 
 |===
 
@@ -49,7 +50,7 @@ link:asciidocs-guide.html[asciidocs 가이드]
 
 ===== path-parameter
 
-include::{snippets}/posts/path-parameters.adoc[]
+include::{snippets}/post-read/path-parameters.adoc[]
 
 ===== request-parameter
 
@@ -57,7 +58,7 @@ include::{snippets}/posts/path-parameters.adoc[]
 
 ===== request-header
 
-include::{snippets}/posts/request-headers.adoc[]
+include::{snippets}/post-read/request-headers.adoc[]
 
 ===== request-body
 
@@ -65,16 +66,53 @@ include::{snippets}/posts/request-headers.adoc[]
 
 ==== 응답
 
-include::{snippets}/posts/response-fields.adoc[]
+include::{snippets}/post-read/response-fields.adoc[]
 
 ==== 요청 HTTP
 
-include::{snippets}/posts/http-request.adoc[]
+include::{snippets}/post-read/http-request.adoc[]
 
 ==== 응답 HTTP
 
-include::{snippets}/posts/http-response.adoc[]
+include::{snippets}/post-read/http-response.adoc[]
 
 ==== curl
 
-include::{snippets}/posts/curl-request.adoc[]
+include::{snippets}/post-read/curl-request.adoc[]
+
+=== 게시글 생성
+
+==== 요청
+
+===== path-parameter
+
+//include::{snippets}/post-create/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/posts/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/post-create/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/post-create/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/post-create/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/post-create/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/post-create/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/post-create/curl-request.adoc[]
+
