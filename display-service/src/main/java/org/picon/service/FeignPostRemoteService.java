@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "domain", fallbackFactory = FeignPostRemoteServiceFallbackFactory.class)
 public interface FeignPostRemoteService {
     @GetMapping(path = "/post/{postId}")
-    Post getPostInfo(@PathVariable("postId") Long postId);
+    Post readPost(@PathVariable("postId") Long postId);
 
     @PostMapping(path = "/post/")
-    Post createPost(Post post);
+    Post createPost(@RequestBody Post post);
 }

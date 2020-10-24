@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FeignPostRemoteServiceFallbackImpl implements FeignPostRemoteService {
-    @Override public Post getPostInfo(Long postId) {
+    @Override public Post readPost(Long postId) {
         return null;
     }
 

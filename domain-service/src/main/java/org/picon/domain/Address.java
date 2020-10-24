@@ -1,14 +1,13 @@
 package org.picon.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
+import javax.persistence.Embeddable;
+
+@Getter
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Embeddable
 public class Address {
     private String address;
     private String addrCity;

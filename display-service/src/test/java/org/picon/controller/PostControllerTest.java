@@ -60,7 +60,7 @@ class PostControllerTest {
     @Test
     @DisplayName("게시글 정보를 얻어온다.")
     public void getPostTest() throws Exception {
-        given(feignPostRemoteService.getPostInfo(any())).willReturn(getExpectedReturnValue());
+        given(feignPostRemoteService.readPost(any())).willReturn(getExpectedReturnValue());
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/displays/post/{id}", 1)

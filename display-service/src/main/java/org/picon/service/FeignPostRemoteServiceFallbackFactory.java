@@ -10,7 +10,7 @@ public class FeignPostRemoteServiceFallbackFactory implements FallbackFactory<Fe
     public FeignPostRemoteService create(Throwable cause) {
         System.out.println("t = " + cause);
         return new FeignPostRemoteService() {
-            @Override public Post getPostInfo(Long postId) {
+            @Override public Post readPost(Long postId) {
                 return null;
             }
 
