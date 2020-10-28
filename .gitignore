@@ -20,7 +20,8 @@ bin/
 *.iml
 *.ipr
 
-
+### docker-volume
+docker-local-mysql/mysql-volume/**
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,gradle
