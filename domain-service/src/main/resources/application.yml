@@ -8,6 +8,11 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${YAPP_17_RDS_URL}
+    username: ${YAPP_17_RDS_USERNAME}
+    password: ${YAPP_17_RDS_PASSWORD}
   cloud:
     refresh:
       enabled: false # jpa hikari HikariDatasource 오류 https://www.python2.net/questions-52486.htm
