@@ -50,4 +50,8 @@ public class MemberService {
             new PasswordMismatchException();
         }
     }
+
+    public String test(SignInRequest signInRequest) {
+        return signInRequest.getEmail();
+    }
 }

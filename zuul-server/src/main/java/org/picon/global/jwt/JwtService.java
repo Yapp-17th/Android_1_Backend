@@ -25,13 +25,13 @@ import java.util.Map;
 public class JwtService {
     private final UserDetailServiceImpl userDetailService;
 
-    @Value("${JWT_SECRET_KEY}")
+    @Value("${JWT.SECRET.KEY}")
     private String SECRET_KEY;
 
-    @Value("${JWT_ACCESS_TOKEN_VALIDITY}")
+    @Value("${JWT.ACCESS.TOKEN.VALIDITY}")
     private Long JWT_ACCESS_TOKEN_VALIDITY;
 
-    @Value("${JWT_REFRESH_TOKEN_VALIDITY}")
+    @Value("${JWT.REFRESH.TOKEN.VALIDITY}")
     private Long JWT_REFRESH_TOKEN_VALIDITY;
 
     @PostConstruct

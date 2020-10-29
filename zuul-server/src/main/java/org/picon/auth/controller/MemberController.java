@@ -35,4 +35,10 @@ public class MemberController {
     public AccessTokenResponse getAccessToken(@RequestHeader String refreshToken) {
         return memberService.getAccessToken(refreshToken);
     }
+
+    @PostMapping("/test")
+    @ResponseStatus(HttpStatus.OK)
+    public String test(@RequestBody SignInRequest signInRequest) {
+        return memberService.test(signInRequest);
+    }
 }
