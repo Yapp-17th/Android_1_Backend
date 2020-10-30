@@ -9,7 +9,6 @@ import org.picon.auth.entity.Member;
 import org.picon.auth.repository.MemberRepository;
 import org.picon.auth.request.LogInRequest;
 import org.picon.auth.request.SignInRequest;
-import org.picon.auth.response.AccessTokenResponse;
 import org.picon.auth.response.LogInResponse;
 import org.picon.auth.service.MemberService;
 import org.picon.global.jwt.JwtService;
@@ -34,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MemberControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-   @Autowired
+    @Autowired
     private MockMvc mockMvc;
 
     @Mock
@@ -99,7 +98,7 @@ class MemberControllerTest {
     @Test
     @DisplayName("로그인 성공")
     public void logInSuccess() throws Exception{
-       Member member = signInForLogInTest();
+        Member member = signInForLogInTest();
         LogInRequest logInRequest = new LogInRequest("Email", "Password");
         LogInResponse logInResponse = LogInResponse.builder()
                 .accessToken(jwtService.generateAccessTokenBy(member))
