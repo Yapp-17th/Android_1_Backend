@@ -4,6 +4,7 @@ buildscript {
         springCloudVersion = 'Finchley.SR2'
     }
     repositories {
+        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -16,7 +17,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.elevenst'
+group = 'org.picon'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -43,9 +44,7 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter-api')
     testCompile('org.junit.jupiter:junit-jupiter-params')
     testRuntime('org.junit.jupiter:junit-jupiter-engine')
-    // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
-    // https://mvnrepository.com/artifact/org.mockito/mockito-core
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
 }
 
