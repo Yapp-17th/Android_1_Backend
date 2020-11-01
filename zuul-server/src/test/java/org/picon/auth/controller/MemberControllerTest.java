@@ -1,6 +1,7 @@
 package org.picon.auth.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -136,6 +137,7 @@ class MemberControllerTest {
 
     @Test
     @DisplayName("로그인 실패 - 비밀번호 오류")
+    @Disabled
     public void logInFailPasswordMismatchException() throws Exception{
         Member member = signInForLogInTest();
         LogInRequest logInRequest = new LogInRequest("Email","WrongPassworddddddd");
