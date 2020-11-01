@@ -42,12 +42,18 @@ public class MemberService {
     }
 
     public AccessTokenResponse getAccessToken(String refreshToken) {
-        return null;
+        AccessTokenResponse accessTokenResponse = AccessTokenResponse.builder()
+        .accessToken(jwtService.generateAccessTokenBy(refreshToken)).build();
+        return accessTokenResponse;
     }
 
     public void checkPw(String logInPW, String memberPw) {
         if(!passwordEncoder.matches(logInPW,memberPw)){
-            new PasswordMismatchException();
+            throw new PasswordMismatchException();
         }
+    }
+
+    public String test(SignInRequest signInRequest) {
+        return signInRequest.getEmail();
     }
 }
