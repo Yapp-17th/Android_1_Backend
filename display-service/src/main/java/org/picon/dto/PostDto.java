@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.picon.dto.post.AddressDto;
+import org.picon.dto.post.CoordinateDto;
+import org.picon.dto.post.Emotion;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

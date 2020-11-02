@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
-
 /**
  * @see <a href="https://github.com/ePages-de/restdocs-wiremock/blob/master/server/src/test/java/com/example/notes/ApiDocumentation.java">참고 링크</a>
  */

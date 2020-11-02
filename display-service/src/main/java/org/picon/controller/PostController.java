@@ -1,9 +1,11 @@
 package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
-
-import org.picon.dto.PostDto;
+import org.picon.dto.post.PostDto;
+import org.picon.dto.post.PostRequest;
+import org.picon.dto.post.PostResponse;
 import org.picon.service.FeignPostRemoteService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,12 +15,15 @@ public class PostController {
     private final FeignPostRemoteService feignPostRemoteService;
 
     @GetMapping("/post/{id}")
-    public PostDto getPost(@PathVariable Long id) {
-        return feignPostRemoteService.readPost(id);
+    public ResponseEntity<?> getPost(@PathVariable Long id) {
+        PostDto postDto = feignPostRemoteService.readPost(id);
+        PostResponse postResponse = new PostResponse(postDto);
+        return ResponseEntity.ok().body(postResponse);
     }
 
     @PostMapping("/post")
-    public PostDto createPost(@RequestBody PostDto post) {
-        return feignPostRemoteService.createPost(post);
+    public ResponseEntity<?> createPost(@RequestBody PostRequest postRequest) {
+        PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost());
+        return ResponseEntity.ok().body(postDto);
     }
 }

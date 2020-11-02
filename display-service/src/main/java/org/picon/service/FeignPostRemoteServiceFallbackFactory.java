@@ -1,8 +1,7 @@
 package org.picon.service;
 
 import feign.hystrix.FallbackFactory;
-
-import org.picon.dto.PostDto;
+import org.picon.dto.post.PostDto;
 import org.springframework.stereotype.Component;
 
 @Component
