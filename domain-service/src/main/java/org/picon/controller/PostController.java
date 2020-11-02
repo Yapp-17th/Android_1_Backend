@@ -2,15 +2,15 @@ package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.picon.domain.Address;
-import org.picon.domain.Coordinate;
-import org.picon.domain.Emotion;
-import org.picon.domain.Post;
+import org.picon.domain.*;
+import org.picon.dto.PostDto;
 import org.picon.repository.PostRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,17 +31,21 @@ public class PostController {
 
     @PostMapping(path = "/")
     @Transactional
-    public Post createPost(@RequestBody org.picon.dto.Post postDto) {
+    public Post createPost(@RequestBody PostDto postDto) {
         log.info("========== CREATE POST ========== ");
-        Coordinate coordinate = new Coordinate(postDto.getCoordinate().getLat(), postDto.getCoordinate().getLng());
+        Coordinate coordinate = new Coordinate(postDto.getCoordinateDto().getLat(), postDto.getCoordinateDto().getLng());
         Address address = new Address(
-                postDto.getAddress().getAddress(),
-                postDto.getAddress().getAddrCity(),
-                postDto.getAddress().getAddrDo(),
-                postDto.getAddress().getAddrGu()
+                postDto.getAddressDto().getAddress(),
+                postDto.getAddressDto().getAddrCity(),
+                postDto.getAddressDto().getAddrDo(),
+                postDto.getAddressDto().getAddrGu()
         );
         Emotion emotion = Emotion.valueOf(postDto.getEmotion().name());
-        Post save = postRepository.save(Post.of(coordinate, address, emotion, postDto.getMemo()));
+        Set<Image> images = new HashSet<>();
+        postDto.getImageDto().getImageUrls().stream().forEach(image -> {
+            images.add(new Image(image));
+        });
+        Post save = postRepository.save(Post.of(coordinate, address, emotion, images, postDto.getMemo()));
         log.info("========== END OF CREATE POST ========== ");
         return save;
     }

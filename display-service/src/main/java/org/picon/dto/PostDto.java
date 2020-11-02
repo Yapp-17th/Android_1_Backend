@@ -12,11 +12,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post {
+public class PostDto {
     private Long id;
-    private Coordinate coordinate;
-    private Address address;
+    private CoordinateDto coordinateDto;
+    private AddressDto addressDto;
     private Emotion emotion;
+    private ImageDto imageDto;
     private String memo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
