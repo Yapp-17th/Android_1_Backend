@@ -41,7 +41,8 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    runtimeOnly 'com.h2database:h2'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.891'
+    implementation(platform("software.amazon.awssdk:bom:2.10.30"))
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
