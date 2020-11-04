@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Posts")
 @Getter
 public class Post {
     @Id @GeneratedValue
