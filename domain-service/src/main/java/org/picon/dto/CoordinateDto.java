@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Address {
-    private String address;
-    private String addrCity;
-    private String addrDo;
-    private String addrGu;
+public class CoordinateDto {
+    private double lat;
+    private double lng;
 }

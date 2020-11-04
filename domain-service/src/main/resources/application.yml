@@ -9,21 +9,30 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${YAPP_17_RDS_URL}
-    username: ${YAPP_17_RDS_USERNAME}
-    password: ${YAPP_17_RDS_PASSWORD}
-#    url: jdbc:mysql://localhost:3306/db?serverTimezone=UTC&characterEncoding=UTF-8
-#    username: root
-#    password: password
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    username: ${YAPP_17_RDS_USERNAME}
+    #    password: ${YAPP_17_RDS_PASSWORD}
+    url: jdbc:mysql://localhost:3306/db?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: password
   cloud:
     refresh:
       enabled: false # jpa hikari HikariDatasource 오류 https://www.python2.net/questions-52486.htm
+    aws:
+      credentials:
+        accessKey: ${YAPP_17_S3_ACCESSKEY}
+        secretKey: ${YAPP_17_S3_SECRETKEY}
+        instanceProfile: true
+      s3:
+        bucket: yapp-picon
+      region:
+        static: ap-northeast-2
+
+      stack:
+        auto: false
 eureka:
   instance:
     prefer-ip-address: true # 서비스간 통신 시 hostname 보다 ip 를 우선 사용 - 개발모드
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka # 클라이언트 서버가 등록되는 경로
-
-

@@ -1,7 +1,8 @@
 package org.picon.service;
 
 import feign.hystrix.FallbackFactory;
-import org.picon.dto.Post;
+
+import org.picon.dto.PostDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,11 +11,11 @@ public class FeignPostRemoteServiceFallbackFactory implements FallbackFactory<Fe
     public FeignPostRemoteService create(Throwable cause) {
         System.out.println("t = " + cause);
         return new FeignPostRemoteService() {
-            @Override public Post readPost(Long postId) {
+            @Override public PostDto readPost(Long postId) {
                 return null;
             }
 
-            @Override public Post createPost(Post post) {
+            @Override public PostDto createPost(PostDto post) {
                 return null;
             }
         };

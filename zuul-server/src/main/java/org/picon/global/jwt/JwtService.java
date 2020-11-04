@@ -28,10 +28,10 @@ public class JwtService {
     @Value("${JWT.SECRET.KEY}")
     private String SECRET_KEY;
 
-    @Value("${JWT.ACCESS.TOKEN.VALIDITY}")
+    @Value("${JWT.TOKEN.VALIDITY.ACCESS}")
     private Long JWT_ACCESS_TOKEN_VALIDITY;
 
-    @Value("${JWT.REFRESH.TOKEN.VALIDITY}")
+    @Value("${JWT.TOKEN.VALIDITY.REFRESH}")
     private Long JWT_REFRESH_TOKEN_VALIDITY;
 
     @PostConstruct
