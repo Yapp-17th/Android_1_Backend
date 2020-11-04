@@ -1,7 +1,6 @@
 package org.picon.service;
 
-
-import org.picon.dto.PostDto;
+import org.picon.dto.post.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

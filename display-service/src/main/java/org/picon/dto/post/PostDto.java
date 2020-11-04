@@ -1,4 +1,4 @@
-package org.picon.dto;
+package org.picon.dto.post;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,16 +8,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
 public class PostDto {
     private Long id;
-    private CoordinateDto coordinateDto;
-    private AddressDto addressDto;
+    private CoordinateDto coordinate;
+    private AddressDto address;
     private Emotion emotion;
-    private ImageDto imageDto;
     private String memo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
