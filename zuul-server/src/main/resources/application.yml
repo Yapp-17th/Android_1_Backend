@@ -3,9 +3,16 @@ spring:
     name: zuul
   jpa:
     show-sql: true
-  h2:
-    console:
-      enabled: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    username: ${YAPP_17_RDS_USERNAME}
+    #    password: ${YAPP_17_RDS_PASSWORD}
+    url: jdbc:mysql://localhost:3306/db?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: password
   main:
     allow-bean-definition-overriding: true
 JWT:
