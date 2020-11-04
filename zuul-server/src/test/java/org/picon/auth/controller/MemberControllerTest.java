@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -44,6 +46,8 @@ class MemberControllerTest {
     protected static final String PW = "TestPassword";
 
     @DisplayName("회원가입 성공")
+    @Rollback
+//    @Commit
     @Test
     public void signInSuccess() throws Exception{
         SignInRequest signInRequest = createSignInRequest();
@@ -108,6 +112,7 @@ class MemberControllerTest {
     }
 
     @DisplayName("로그인 성공")
+    @Rollback
     @Test
     public void logInSuccess() throws Exception {
         SignInResponse signInResponse = createUser();
@@ -139,6 +144,7 @@ class MemberControllerTest {
     }
 
     @DisplayName("엑세스 토큰 요청 성공")
+    @Rollback
     @Test
     public void requestAccessTokenSuccess() throws Exception {
         LogInResponse logInResponse = createLogInResponse();

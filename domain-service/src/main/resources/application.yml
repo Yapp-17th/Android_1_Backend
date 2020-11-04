@@ -1,17 +1,20 @@
+logging:
+  level:
+    org.hibernate.type: trace
 server:
   port: 8082
 spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
   application:
     name: domain
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
-  jpa:
-    show-sql: true
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
   datasource:
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     #    username: ${YAPP_17_RDS_USERNAME}

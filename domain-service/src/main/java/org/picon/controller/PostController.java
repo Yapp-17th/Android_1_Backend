@@ -2,60 +2,57 @@ package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.picon.domain.*;
 import org.picon.dto.AddressDto;
 import org.picon.dto.CoordinateDto;
 import org.picon.dto.PostDto;
+import org.picon.repository.MemberRepository;
 import org.picon.repository.PostRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.ws.rs.core.SecurityContext;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
+@RequestMapping("/domain/post")
 @Slf4j
 @Transactional(readOnly = true)
 public class PostController {
+    private final ModelMapper modelMapper;
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
-    @GetMapping(path = "/{id}")
-    public Post readPost(@PathVariable Long id) {
+    @GetMapping(path = "/")
+    public List<PostDto> readPostsByMember(@RequestParam("email") String email) {
         log.info("========== READ POST ========== ");
-        Post findPost = postRepository.findById(id)
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(EntityNotFoundException::new);
+        List<Post> findPosts = postRepository.findAllByMember(member);
+        List<PostDto> collect = findPosts.stream()
+                .map(e -> modelMapper.map(e, PostDto.class))
+                .collect(Collectors.toList());
         log.info("========== END OF READ POST ========== ");
-        CoordinateDto coordinateDto = CoordinateDto.coordinateDtoOf(findPost.getCoordinate());
-        AddressDto addressDto = AddressDto.AddressDtoOf(findPost.getAddress());
-        List<String> imageUrls = new ArrayList<>();
-        findPost.getImages().stream().forEach(image -> {
-            imageUrls.add(image.getImageUrl());
-        });
-        return findPost;
+        return collect;
     }
 
     @PostMapping(path = "/")
     @Transactional
-    public Post createPost(@RequestBody PostDto postDto) {
+    public Post createPost(@RequestBody PostDto postDto, @RequestParam("email") String email) {
         log.info("========== CREATE POST ========== ");
-        Coordinate coordinate = new Coordinate(postDto.getCoordinateDto().getLat(), postDto.getCoordinateDto().getLng());
-        Address address = new Address(
-                postDto.getAddressDto().getAddress(),
-                postDto.getAddressDto().getAddrCity(),
-                postDto.getAddressDto().getAddrDo(),
-                postDto.getAddressDto().getAddrGu()
-        );
-        Emotion emotion = Emotion.valueOf(postDto.getEmotion().name());
-        Set<Image> images = new HashSet<>();
-        postDto.getImageUrls().stream().forEach(image -> {
-            images.add(new Image(image));
-        });
-        Post save = postRepository.save(Post.of(coordinate, address, emotion, images, postDto.getMemo()));
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+        Post post = modelMapper.map(postDto, Post.class);
+        post.setMember(member);
+        Post save = postRepository.save(post);
         log.info("========== END OF CREATE POST ========== ");
         return save;
     }
