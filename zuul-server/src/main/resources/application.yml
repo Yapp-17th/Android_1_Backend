@@ -31,6 +31,10 @@ zuul:
     domain:
       path: /domains/**
       serviceId: domain
+      stripPrefix: true
+    display:
+      path: /displays/**
+      serviceId: display
       stripPrefix: false
 eureka:
   instance:

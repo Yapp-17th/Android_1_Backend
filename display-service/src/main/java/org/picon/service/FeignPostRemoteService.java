@@ -11,4 +11,5 @@ public interface FeignPostRemoteService {
 
     @PostMapping(path = "/post/")
     PostDto createPost(@RequestBody PostDto post);
+
 }

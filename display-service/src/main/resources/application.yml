@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: display
-
-
 eureka:
   instance:
     prefer-ip-address: true # 서비스간 통신 시 hostname 보다 ip 를 우선 사용 - 개발모드
@@ -14,3 +12,14 @@ eureka:
 feign:
   hystrix:
     enabled: true
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000
+    client:
+      config:
+        default:
+          connectTimeout: 5000
+          readTimeout: 5000

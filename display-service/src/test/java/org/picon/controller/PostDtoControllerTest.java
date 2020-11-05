@@ -109,7 +109,13 @@ class PostDtoControllerTest {
     private PostDto getExpectedPostDto() {
         CoordinateDto coordinateDto = new CoordinateDto(1.1d, 1.1d);
         AddressDto addressDto = new AddressDto("주소", "시", "도", "구");
-        PostDto post = new PostDto(1L, coordinateDto, addressDto, Emotion.BLUE_GRAY, "memo", LocalDate.of(2020, 1, 1));
+        PostDto post = PostDto.builder()
+                .id(1L)
+                .coordinateDto(coordinateDto)
+                .addressDto(addressDto)
+                .emotion(Emotion.BLUE_GRAY)
+                .memo("memo")
+                .createDate(LocalDate.of(2020, 1, 1)).build();
         return post;
     }
 

@@ -27,7 +27,6 @@ spring:
         bucket: yapp-picon
       region:
         static: ap-northeast-2
-
       stack:
         auto: false
 eureka:
