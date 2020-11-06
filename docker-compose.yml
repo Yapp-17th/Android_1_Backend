@@ -14,6 +14,8 @@ services:
       - YAPP_17_RDS_URL=${YAPP_17_RDS_URL}
       - YAPP_17_RDS_USERNAME=${YAPP_17_RDS_USERNAME}
       - YAPP_17_RDS_PASSWORD=${YAPP_17_RDS_PASSWORD}
+      - YAPP_17_S3_ACESSKEY=${YAPP_17_S3_ACESSKEY}
+      - YAPP_17_S3_SECRETKEY=${YAPP_17_S3_SECRETKEY}
     network_mode: host
   display-service:
     build: ./display-service
@@ -37,6 +39,10 @@ services:
     build: ./zuul-server
     ports:
       - "8765:8765"
+    environment:
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ACCESS_TOKEN_VALIDITY=${JWT_ACCESS_TOKEN_VALIDITY}
+      - JWT_REFRESH_TOKEN_VALIDITY=${JWT_REFRESH_TOKEN_VALIDITY}
     network_mode: host
     depends_on:
       - redis
