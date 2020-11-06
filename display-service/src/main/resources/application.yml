@@ -5,25 +5,27 @@ spring:
     name: display
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 50MB
+      max-request-size: 50MB
 eureka:
   instance:
     prefer-ip-address: true # 서비스간 통신 시 hostname 보다 ip 를 우선 사용 - 개발모드
   client:
+    fetchRegistry: true
     service-url:
       defaultZone: http://localhost:8761/eureka # 클라이언트 서버가 등록되는 경로
 ribbon:
-  ConnectTimeout: 10000
-  ReadTimeout: 10000
+  ConnectTimeout: 7000 # 클라이언트 서버에 연결되는 제한시간
+  ReadTimeout: 7000 # 요청에 대한 응답을 받는 제한시간
   MaxTotalHttpConnections: 10000
   MaxConnectionsPerHost: 100
 feign:
   hystrix:
-    enabled: true
-  client:
-    config:
-      default:
-        connectTimeout: 10000
-        readTimeout: 10000
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 10000
+    enabled: true #fegin에 내장된 hystrix 기능을 사용하기 위해선 true로 설정해주어야 함
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutImMilliseconds: 10000 #Ribbon에서 설정한 타임아웃보다 커야지 동작

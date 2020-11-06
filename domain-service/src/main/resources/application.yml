@@ -5,8 +5,8 @@ spring:
     name: domain
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+      max-file-size: 50MB
+      max-request-size: 50MB
   jpa:
     show-sql: true
     generate-ddl: true
@@ -37,5 +37,6 @@ eureka:
   instance:
     prefer-ip-address: true # 서비스간 통신 시 hostname 보다 ip 를 우선 사용 - 개발모드
   client:
+    fetchRegistry: true # 레지스터리에 있는 클라이언트 서버목록을 캐시하겠다
     service-url:
       defaultZone: http://localhost:8761/eureka # 클라이언트 서버가 등록되는 경로
