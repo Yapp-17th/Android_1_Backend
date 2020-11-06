@@ -7,16 +7,19 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
 public class PostDto {
     private Long id;
-    private CoordinateDto coordinate;
-    private AddressDto address;
+    private CoordinateDto coordinateDto;
+    private AddressDto addressDto;
     private Emotion emotion;
+    private List<String> imageUrls = new ArrayList<>();
     private String memo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;

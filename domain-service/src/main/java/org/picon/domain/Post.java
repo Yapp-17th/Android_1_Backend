@@ -9,12 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "Posts")
 @Getter
 public class Post {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Coordinate coordinate;
     private Address address;
@@ -30,7 +29,23 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
 
+    @Builder
+    public Post(Coordinate coordinate, Address address, Emotion emotion, String memo, Set<Image> images, LocalDate createDate) {
+        this.coordinate = coordinate;
+        this.address = address;
+        this.emotion = emotion;
+        this.memo = memo;
+        this.images = images;
+        this.createDate = createDate;
+    }
+
     public static Post of(Coordinate coordinate, Address address, Emotion emotion, Set<Image> images, String memo) {
-        return new Post(null, coordinate, address, emotion, memo,images,  LocalDate.now());
+        return Post.builder()
+                .coordinate(coordinate)
+                .address(address)
+                .emotion(emotion)
+                .memo(memo)
+                .images(images)
+                .createDate(LocalDate.now()).build();
     }
 }
