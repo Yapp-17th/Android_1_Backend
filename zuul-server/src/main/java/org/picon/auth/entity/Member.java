@@ -1,19 +1,19 @@
 package org.picon.auth.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.checkerframework.checker.units.qual.A;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(name = "Members")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "MEMBERS")
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Member {
 
-    @Id
+    @Id @Column(name = "MEMBER_ID", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,10 +21,10 @@ public class Member {
     private String password;
     private String role;
 
-    @Builder
-    public Member(String email, String password, String role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+//    @Builder
+//    public Member(String email, String password, String role) {
+//        this.email = email;
+//        this.password = password;
+//        this.role = role;
+//    }
 }

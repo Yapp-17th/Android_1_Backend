@@ -1,7 +1,0 @@
-|===
-|Name|Description
-
-|`+Content-Type+`
-|Content Type Header
-
-|===

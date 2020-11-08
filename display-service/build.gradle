@@ -52,6 +52,11 @@ dependencies {
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.4.RELEASE'
 
+    // spring validator
+    implementation('org.springframework.boot:spring-boot-starter-validation')
+
+    compile 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation('org.glassfish.jaxb:jaxb-runtime')
 }
 
 dependencyManagement {

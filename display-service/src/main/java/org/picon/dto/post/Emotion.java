@@ -2,7 +2,6 @@ package org.picon.dto.post;
 
 import lombok.Getter;
 
-@Getter
 public enum Emotion {
     SOFT_BLUE("8187DA"),
     CORN_FLOWER("6699FC"),
@@ -11,6 +10,10 @@ public enum Emotion {
     WARM_GRAY("9A948B");
 
     private final String rgb;
+
+    public String getRgb() {
+        return rgb;
+    }
 
     Emotion(String rgb) {
         this.rgb = rgb;

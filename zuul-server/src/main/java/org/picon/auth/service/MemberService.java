@@ -23,6 +23,7 @@ public class MemberService {
 
     public Member signIn(SignInRequest signInRequest){
         Member member = Member.builder()
+                .id(null)
                 .email(signInRequest.getEmail())
                 .password(passwordEncoder.encode(signInRequest.getPassword()))
                 .role(signInRequest.getRole()).build();

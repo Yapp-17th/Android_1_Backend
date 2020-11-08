@@ -43,7 +43,7 @@ public class JwtService {
         Date now = new Date();
         Date expireTime = new Date(System.currentTimeMillis() + JWT_ACCESS_TOKEN_VALIDITY * 1000);
         return Jwts.builder()
-                .setHeaderParam("type","JWT")
+                .setHeaderParam("type", "JWT")
                 .setSubject("accessToken")
                 .setClaims(claimMap)
                 .setIssuedAt(now)
@@ -54,24 +54,24 @@ public class JwtService {
 
     public String generateAccessTokenBy(Member member) {
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL",member.getEmail());
+        claimMap.put("EMAIL", member.getEmail());
         return generateAccessToken(claimMap);
     }
 
     public String generateAccessTokenBy(String refreshToken) {
         String email = findEmailByToken(refreshToken);
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL",email);
+        claimMap.put("EMAIL", email);
         return generateAccessToken(claimMap);
     }
 
     public String generateRefreshToken(Member member) {
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL",member.getEmail());
+        claimMap.put("EMAIL", member.getEmail());
         Date now = new Date();
         Date expireTime = new Date(System.currentTimeMillis() + JWT_REFRESH_TOKEN_VALIDITY * 1000);
         return Jwts.builder()
-                .setHeaderParam("type","JWT")
+                .setHeaderParam("type", "JWT")
                 .setSubject("refreshToken")
                 .setClaims(claimMap)
                 .setIssuedAt(now)
@@ -93,7 +93,7 @@ public class JwtService {
         }
     }
 
-    public String findEmailByToken(String token){
+    public String findEmailByToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
@@ -102,9 +102,9 @@ public class JwtService {
         return (String) claims.get("EMAIL");
     }
 
-    public Authentication getAuthentication(String token){
+    public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailService.loadUserByUsername(findEmailByToken(token));
-        return new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
 }
