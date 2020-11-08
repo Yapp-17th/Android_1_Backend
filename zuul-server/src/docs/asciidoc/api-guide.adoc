@@ -1,0 +1,99 @@
+= API 문서
+API 문서 입니다.
+
+[cols="2,3,2"]
+.회원
+|===
+|API 이름 | 설명 | 진행 현황
+
+|회원가입 | 회원 가입을 진행한다. | 진행중
+|로그인 | 로그인을 진행한다. | 진행중
+|엑세스 토큰 재발급 | 엑세스 토큰을 재발급받는다. | 진행중
+
+|===
+
+== 회원
+
+=== 회원가입
+
+==== 요청
+
+===== request-fields
+
+include::{snippets}/auth-signIn/request-fields.adoc[]
+
+===== request-body
+
+include::{snippets}/auth-signIn/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/auth-signIn/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/auth-signIn/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/auth-signIn/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/auth-signIn/curl-request.adoc[]
+
+=== 로그인
+
+==== 요청
+
+===== request-fields
+
+include::{snippets}/auth-signIn/request-fields.adoc[]
+
+===== request-body
+
+include::{snippets}/auth-signIn/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/auth-signIn/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/auth-signIn/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/auth-signIn/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/auth-signIn/curl-request.adoc[]
+
+=== 엑세스토큰 재발급
+
+==== 요청
+
+===== request-fields
+
+include::{snippets}/auth-refreshAccess/request-fields.adoc[]
+
+===== request-body
+
+include::{snippets}/auth-refreshAccess/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/auth-refreshAccess/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/auth-refreshAccess/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/auth-refreshAccess/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/auth-refreshAccess/curl-request.adoc[]

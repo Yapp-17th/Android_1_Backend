@@ -1,157 +1,167 @@
 package org.picon.auth.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.picon.auth.entity.Member;
-import org.picon.auth.repository.MemberRepository;
 import org.picon.auth.request.LogInRequest;
 import org.picon.auth.request.SignInRequest;
 import org.picon.auth.response.LogInResponse;
-import org.picon.auth.service.MemberService;
-import org.picon.global.jwt.JwtService;
+import org.picon.auth.response.SignInResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.BDDMockito.given;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+
+import static org.picon.config.ApiDocumentUtils.getDocumentRequest;
+import static org.picon.config.ApiDocumentUtils.getDocumentResponse;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@AutoConfigureMockMvc
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
+@AutoConfigureRestDocs
+@AutoConfigureMockMvc
 class MemberControllerTest {
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Mock
-    MemberService memberService;
+    private static int testNO = 0;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    protected static final String ROLE = "USER";
 
-    @Mock
-    JwtService jwtService;
+    protected static final String PW = "TestPassword";
 
-    @Autowired
-    MemberRepository memberRepository;
-
-    @Test
-    @DisplayName("예제 테스트")
-    public void test() throws Exception {
-        SignInRequest signInRequest = new SignInRequest("Email","Password","USER");
-        given(memberService.test(signInRequest)).willReturn(signInRequest.getEmail());
-
-        mockMvc.perform(
-                post("/auth/test")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-                        .content(objectMapper.writeValueAsString(signInRequest))
-        )
-                .andDo(print())
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
     @DisplayName("회원가입 성공")
-    public void signInSuccess() throws Exception {
-        SignInRequest signInRequest = new SignInRequest("Email","Password","USER");
-        Member member = Member.builder()
-                .role(signInRequest.getRole())
-                .email(signInRequest.getEmail())
-                .password(passwordEncoder.encode(signInRequest.getPassword())).build();
-
-        given(memberService.signIn(signInRequest)).willReturn(member);
-
-        mockMvc.perform(
-                post("/auth/signIn")
+    @Test
+    public void signInSuccess() throws Exception{
+        SignInRequest signInRequest = createSignInRequest();
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResultActions resultActions = mockMvc.perform(
+                RestDocumentationRequestBuilders.post("/auth/signIn")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(signInRequest))
-        )
-                .andDo(print())
-                .andExpect(status().isCreated());
+        );
+        resultActions.andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("auth-signIn",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("email").type(String.class).description("이메일"),
+                                fieldWithPath("password").type(String.class).description("비밀번호"),
+                                fieldWithPath("role").type(String.class).description("권한")
+                        )
+                ));
     }
 
-    public Member signInForLogInTest() {
-        SignInRequest signInRequest = new SignInRequest("Email","Password","USER");
-        Member member = Member.builder()
-                .role(signInRequest.getRole())
-                .email(signInRequest.getEmail())
-                .password(passwordEncoder.encode(signInRequest.getPassword())).build();
-        return memberRepository.save(member);
+    protected SignInRequest createSignInRequest() {
+        testNO++;
+
+        return new SignInRequest(
+                "testEmail" + testNO,
+                PW,
+                ROLE
+        );
     }
 
-    @Test
+    public SignInResponse createUser() throws Exception {
+        SignInRequest signInRequest = createSignInRequest();
+        ObjectMapper objectMapper = new ObjectMapper();
+        MvcResult mvcResult = mockMvc.perform(
+                post("/auth/signIn")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(signInRequest))
+        ).andReturn();
+
+        return objectMapper.readValue(
+                mvcResult.getResponse().getContentAsString(),
+                SignInResponse.class
+        );
+    }
+
+    public LogInResponse createLogInResponse() throws Exception {
+        SignInResponse signInResponse = createUser();
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(),PW);
+        ObjectMapper objectMapper = new ObjectMapper();
+        MvcResult mvcResult = mockMvc.perform(
+                post("/auth/logIn")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(logInRequest))
+        ).andReturn();
+
+        return objectMapper.readValue(
+                mvcResult.getResponse().getContentAsString(),
+                LogInResponse.class
+        );
+    }
+
     @DisplayName("로그인 성공")
-    public void logInSuccess() throws Exception{
-        Member member = signInForLogInTest();
-        LogInRequest logInRequest = new LogInRequest("Email", "Password");
-        LogInResponse logInResponse = LogInResponse.builder()
-                .accessToken(jwtService.generateAccessTokenBy(member))
-                .refreshToken(jwtService.generateRefreshToken(member)).build();
-        given(memberService.logIn(logInRequest)).willReturn(logInResponse);
-
-        mockMvc.perform(
-                post("/auth/logIn")
+    @Test
+    public void logInSuccess() throws Exception {
+        SignInResponse signInResponse = createUser();
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(),PW);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResultActions resultActions = mockMvc.perform(
+                RestDocumentationRequestBuilders.post("/auth/logIn")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(logInRequest))
-        )
-                .andDo(print())
-                .andExpect(status().isOk());
+        );
+        resultActions.andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("auth-logIn",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestFields(
+                                fieldWithPath("email").type(String.class).description("이메일"),
+                                fieldWithPath("password").type(String.class).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(Integer.class).description("응답상태 코드"),
+                                fieldWithPath("errors").type(String.class).description("상세 에러 메세지"),
+                                fieldWithPath("errorCode").type(String.class).description("에러 코드"),
+                                fieldWithPath("errorMessage").type(String.class).description("에러 메세지"),
+                                fieldWithPath("accessToken").type(String.class).description("accessToken"),
+                                fieldWithPath("refreshToken").type(String.class).description("refreshToken")
+                        )
+                ));
     }
 
+    @DisplayName("엑세스 토큰 요청 성공")
     @Test
-    @DisplayName("로그인 실패 - 이메일 오류")
-    public void logInFailMemberNotFoundException() throws Exception{
-        Member member = signInForLogInTest();
-        LogInRequest logInRequest = new LogInRequest("wrongEmail","Password");
-        LogInResponse logInResponse = LogInResponse.builder()
-                .accessToken(jwtService.generateAccessTokenBy(member))
-                .refreshToken(jwtService.generateRefreshToken(member)).build();
-        given(memberService.logIn(logInRequest)).willReturn(logInResponse);
-        mockMvc.perform(
-                post("/auth/logIn")
+    public void requestAccessTokenSuccess() throws Exception {
+        LogInResponse logInResponse = createLogInResponse();
+        ResultActions resultActions = mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/auth/accessToken")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-                        .content(objectMapper.writeValueAsString(logInRequest))
-        )
-                .andDo(print())
-                .andExpect(status().isNotFound());
-    }
-
-    @Test
-    @DisplayName("로그인 실패 - 비밀번호 오류")
-    @Disabled
-    public void logInFailPasswordMismatchException() throws Exception{
-        Member member = signInForLogInTest();
-        LogInRequest logInRequest = new LogInRequest("Email","WrongPassworddddddd");
-        LogInResponse logInResponse = LogInResponse.builder()
-                .accessToken(jwtService.generateAccessTokenBy(member))
-                .refreshToken(jwtService.generateRefreshToken(member)).build();
-        given(memberService.logIn(logInRequest)).willReturn(logInResponse);
-        mockMvc.perform(
-                post("/auth/logIn")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("utf-8")
-                        .content(objectMapper.writeValueAsString(logInRequest))
-        )
-                .andDo(print())
-                .andExpect(status().isForbidden());
+                        .header("refreshToken",logInResponse.getRefreshToken())
+        );
+        resultActions.andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("auth-refreshAccessToken",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        requestHeaders(
+                                headerWithName("refreshToken").description("refreshToken")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(Integer.class).description("응답상태 코드"),
+                                fieldWithPath("errors").type(String.class).description("상세 에러 메세지"),
+                                fieldWithPath("errorCode").type(String.class).description("에러 코드"),
+                                fieldWithPath("errorMessage").type(String.class).description("에러 메세지"),
+                                fieldWithPath("accessToken").type(String.class).description("새로 생성된 accessToken")
+                        )
+                ));
     }
 }
