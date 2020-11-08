@@ -7,16 +7,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+//@SpringBootTest
 class JwtServiceTest {
-    @Autowired
-    JwtService jwtService;
-
-    @Test
-    @DisplayName("findEmailByToken 테스트 ")
-    void findEmailByTokenTest() {
-        String emailByToken = jwtService.findEmailByToken("eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJFTUFJTCI6InRlc3RFbWFpbDEiLCJleHAiOjE2MDQ4MzI2NzYsImlhdCI6MTYwNDgzMjA3Nn0.3fwOpLaE6Wf9xL7Nhy-1Wu0yNZj8fMzna-d93o1J3Dg");
-        System.out.println("emailByToken = " + emailByToken);
-    }
+//    @Autowired
+//    JwtService jwtService;
+//
+//    @Test
+//    @DisplayName("findEmailByToken 테스트 ")
+//    void findEmailByTokenTest() {
+//        String emailByToken = jwtService.findEmailByToken("eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJFTUFJTCI6InRlc3RFbWFpbDEiLCJleHAiOjE2MDQ4MzI2NzYsImlhdCI6MTYwNDgzMjA3Nn0.3fwOpLaE6Wf9xL7Nhy-1Wu0yNZj8fMzna-d93o1J3Dg");
+//        System.out.println("emailByToken = " + emailByToken);
+//    }
 
 }
