@@ -116,3 +116,31 @@ include::{snippets}/post-create/http-response.adoc[]
 
 include::{snippets}/post-create/curl-request.adoc[]
 
+[cols="2,3,2"]
+.이미지 업로드
+|===
+|API 이름 | 설명 | 진행 현황
+
+|이미지 업로드 | 이미지 파일들을 업로드한다. | 완료
+
+|===
+
+== 이미지
+
+=== 이미지 업로드
+
+==== 응답
+
+include::{snippets}/post-uploadImages/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/post-uploadImages/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/post-uploadImages/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/post-uploadImages/curl-request.adoc[]
