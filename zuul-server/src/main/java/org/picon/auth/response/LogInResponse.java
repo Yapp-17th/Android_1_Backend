@@ -1,10 +1,14 @@
 package org.picon.auth.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.picon.common.BaseResponse;
 
 @Getter
-public class LogInResponse {
+@NoArgsConstructor
+public class LogInResponse extends BaseResponse {
     private String accessToken;
     private String refreshToken;
 
