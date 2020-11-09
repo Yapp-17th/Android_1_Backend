@@ -1,31 +1,6 @@
 version: '3'
 
-services: 
-  eureka-service:
-    build: ./eureka-server
-    ports:
-      - "8761:8761"
-    network_mode: host
-  domain-service:
-    build: ./domain-service
-    ports:
-      - "8082:8082"
-    environment:
-      - YAPP_17_RDS_URL=${YAPP_17_RDS_URL}
-      - YAPP_17_RDS_USERNAME=${YAPP_17_RDS_USERNAME}
-      - YAPP_17_RDS_PASSWORD=${YAPP_17_RDS_PASSWORD}
-      - YAPP_17_S3_ACCESSKEY=${YAPP_17_S3_ACCESSKEY}
-      - YAPP_17_S3_SECRETKEY=${YAPP_17_S3_SECRETKEY}
-    network_mode: host
-  display-service:
-    build: ./display-service
-    ports:
-      - "8081:8081"
-    network_mode: host
-    environment:
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - JWT_ACCESS_TOKEN_VALIDITY=${JWT_ACCESS_TOKEN_VALIDITY}
-      - JWT_REFRESH_TOKEN_VALIDITY=${JWT_REFRESH_TOKEN_VALIDITY}
+services:
   nginx:
     image: nginx
     ports:
@@ -34,11 +9,18 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     network_mode: host
 
+  eureka-service:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    network_mode: host
+
   redis:
     image: redis
     ports:
       - "6379:6379"
     network_mode: host
+
   zuul-service:
     build: ./zuul-server
     ports:
@@ -53,3 +35,32 @@ services:
     network_mode: host
     depends_on:
       - redis
+      - eureka-service
+
+  domain-service:
+    build: ./domain-service
+    ports:
+      - "8082:8082"
+    environment:
+      - YAPP_17_RDS_URL=${YAPP_17_RDS_URL}
+      - YAPP_17_RDS_USERNAME=${YAPP_17_RDS_USERNAME}
+      - YAPP_17_RDS_PASSWORD=${YAPP_17_RDS_PASSWORD}
+      - YAPP_17_S3_ACCESSKEY=${YAPP_17_S3_ACCESSKEY}
+      - YAPP_17_S3_SECRETKEY=${YAPP_17_S3_SECRETKEY}
+    network_mode: host
+    depends_on:
+      - zuul-service
+      - eureka-service
+
+  display-service:
+    build: ./display-service
+    ports:
+      - "8081:8081"
+    network_mode: host
+    environment:
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ACCESS_TOKEN_VALIDITY=${JWT_ACCESS_TOKEN_VALIDITY}
+      - JWT_REFRESH_TOKEN_VALIDITY=${JWT_REFRESH_TOKEN_VALIDITY}
+    depends_on:
+      - zuul-service
+      - eureka-service

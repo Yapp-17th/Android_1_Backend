@@ -48,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/auth/logIn/**","/auth/signIn/**","/auth/accessToken").permitAll().
                 and().
                 authorizeRequests().
-                antMatchers("/displays/**").permitAll().
+                antMatchers("/display/docs/**").permitAll().
                 and().
                 authorizeRequests().
-                antMatchers("/docs/**").permitAll().
+                antMatchers("/auth/docs/**").permitAll().
                 and().
                 authorizeRequests().
                 antMatchers("/admin/**").hasRole("ADMIN").
