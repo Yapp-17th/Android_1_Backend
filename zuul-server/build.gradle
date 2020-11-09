@@ -86,6 +86,6 @@ asciidoctor.doLast {
 bootJar {
     dependsOn asciidoctor
     from("${asciidoctor.outputDir}/html5/") {
-        into 'static/docs/auth/'
+        into 'static/auth/docs'
     }
 }

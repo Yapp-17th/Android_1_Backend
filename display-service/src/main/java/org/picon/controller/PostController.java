@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Validated
-@RequestMapping(path = "/displays")
+@RequestMapping(path = "/display")
 @RequiredArgsConstructor
 @Slf4j
 public class PostController {

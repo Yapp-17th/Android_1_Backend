@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/displays/post")
+@RequestMapping("/display/post")
 @RequiredArgsConstructor
 public class ImageController {
     private final FeignPostRemoteService feignPostRemoteService;

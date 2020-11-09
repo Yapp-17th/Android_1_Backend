@@ -34,11 +34,11 @@ server:
 zuul:
   routes:
     domain:
-      path: /domains/**
+      path: /domain/**
       serviceId: domain
       stripPrefix: true
     display:
-      path: /displays/**
+      path: /display/**
       serviceId: display
       stripPrefix: false
 eureka:

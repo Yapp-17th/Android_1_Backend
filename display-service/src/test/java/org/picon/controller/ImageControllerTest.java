@@ -40,7 +40,7 @@ class ImageControllerTest {
         MockMultipartFile firstImage = new MockMultipartFile("firstImage","firstImage.jpg", "multipart/form-data","sampleImage".getBytes());
         MockMultipartFile secondImage = new MockMultipartFile("secondImage", "secondImage.png", "multipart/form-data", "sampleImage2".getBytes());
 
-        ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.fileUpload("/displays/post/images")
+        ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.fileUpload("/display/post/images")
                 .file(firstImage)
                 .file(secondImage)
                 );

@@ -84,7 +84,7 @@ class PostDtoControllerTest {
         given(jwtService.findEmailByToken(any())).willReturn("email");
 
         mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/displays/post/", 1)
+                RestDocumentationRequestBuilders.get("/display/post/", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("AccessToken", "accessToken Example")
                         .characterEncoding("utf-8")
@@ -151,7 +151,7 @@ class PostDtoControllerTest {
         given(jwtService.findEmailByToken(any())).willReturn("email");
 
         mockMvc.perform(
-                RestDocumentationRequestBuilders.post("/displays/post")
+                RestDocumentationRequestBuilders.post("/display/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("AccessToken", "accessToken Example")
                         .characterEncoding("utf-8")
@@ -207,7 +207,7 @@ class PostDtoControllerTest {
         String requestPostStr = objectMapper.writeValueAsString(new PostRequest(getExpectedPostDto().toBuilder().address(null).build()));
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/displays/post")
+                MockMvcRequestBuilders.post("/display/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("AccessToken", "accessToken Example")
                         .characterEncoding("utf-8")
