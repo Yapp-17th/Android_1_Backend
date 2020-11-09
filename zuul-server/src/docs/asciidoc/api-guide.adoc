@@ -28,7 +28,9 @@ include::{snippets}/auth-signIn/request-body.adoc[]
 
 ==== 응답
 
-include::{snippets}/auth-signIn/response-fields.adoc[]
+응답 없음
+
+//include::{snippets}/auth-signIn/response-fields.adoc[]
 
 ==== 요청 HTTP
 
@@ -56,7 +58,8 @@ include::{snippets}/auth-signIn/request-body.adoc[]
 
 ==== 응답
 
-include::{snippets}/auth-signIn/response-fields.adoc[]
+응답 없음
+//include::{snippets}/auth-signIn/response-fields.adoc[]
 
 ==== 요청 HTTP
 
@@ -76,24 +79,24 @@ include::{snippets}/auth-signIn/curl-request.adoc[]
 
 ===== request-fields
 
-include::{snippets}/auth-refreshAccess/request-fields.adoc[]
+//include::{snippets}/auth-refreshAccessToken/request-fields.adoc[]
 
 ===== request-body
 
-include::{snippets}/auth-refreshAccess/request-body.adoc[]
+include::{snippets}/auth-refreshAccessToken/request-body.adoc[]
 
 ==== 응답
 
-include::{snippets}/auth-refreshAccess/response-fields.adoc[]
+include::{snippets}/auth-refreshAccessToken/response-fields.adoc[]
 
 ==== 요청 HTTP
 
-include::{snippets}/auth-refreshAccess/http-request.adoc[]
+include::{snippets}/auth-refreshAccessToken/http-request.adoc[]
 
 ==== 응답 HTTP
 
-include::{snippets}/auth-refreshAccess/http-response.adoc[]
+include::{snippets}/auth-refreshAccessToken/http-response.adoc[]
 
 ==== curl
 
-include::{snippets}/auth-refreshAccess/curl-request.adoc[]
+include::{snippets}/auth-refreshAccessToken/curl-request.adoc[]

@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -36,20 +34,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MemberControllerTest {
 
+    protected static final String ROLE = "USER";
+    protected static final String PW = "TestPassword";
+    private static int testNO = 0;
     @Autowired
     private MockMvc mockMvc;
-
-    private static int testNO = 0;
-
-    protected static final String ROLE = "USER";
-
-    protected static final String PW = "TestPassword";
 
     @DisplayName("회원가입 성공")
     @Rollback
 //    @Commit
     @Test
-    public void signInSuccess() throws Exception{
+    public void signInSuccess() throws Exception {
         SignInRequest signInRequest = createSignInRequest();
         ObjectMapper objectMapper = new ObjectMapper();
         ResultActions resultActions = mockMvc.perform(
@@ -68,6 +63,7 @@ class MemberControllerTest {
                                 fieldWithPath("role").type(String.class).description("권한")
                         )
                 ));
+
     }
 
     protected SignInRequest createSignInRequest() {
@@ -97,7 +93,7 @@ class MemberControllerTest {
 
     public LogInResponse createLogInResponse() throws Exception {
         SignInResponse signInResponse = createUser();
-        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(),PW);
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(), PW);
         ObjectMapper objectMapper = new ObjectMapper();
         MvcResult mvcResult = mockMvc.perform(
                 post("/auth/logIn")
@@ -116,7 +112,7 @@ class MemberControllerTest {
     @Test
     public void logInSuccess() throws Exception {
         SignInResponse signInResponse = createUser();
-        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(),PW);
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(), PW);
         ObjectMapper objectMapper = new ObjectMapper();
         ResultActions resultActions = mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/auth/logIn")
@@ -151,7 +147,7 @@ class MemberControllerTest {
         ResultActions resultActions = mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/auth/accessToken")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("refreshToken",logInResponse.getRefreshToken())
+                        .header("refreshToken", logInResponse.getRefreshToken())
         );
         resultActions.andDo(print())
                 .andExpect(status().isOk())
