@@ -1,4 +1,4 @@
-package org.picon.controller;
+package org.picon.exception;
 
 import org.picon.dto.BaseResponse;
 import org.springframework.http.ResponseEntity;

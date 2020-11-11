@@ -33,7 +33,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -216,5 +215,42 @@ class PostDtoControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("status", is(400)));
+    }
+
+    @Test
+    @DisplayName("게시글을 삭제한다")
+    public void deletePostSuccess() throws Exception {
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.delete("/display/post/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "accessToken Example")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(
+                        document("post-delete",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+                                pathParameters(
+                                        parameterWithName("id").description("삭제하고 싶은 게시글의 번호")
+                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                ),
+                                responseFields(
+                                        fieldWithPath("status").type(Integer.class).description("응답상태 코드"),
+                                        fieldWithPath("errors").type(String.class).description("상세 에러 메세지"),
+                                        fieldWithPath("errorCode").type(String.class).description("에러 코드"),
+                                        fieldWithPath("errorMessage").type(String.class).description("에러 메세지")
+                                )
+                        )
+                );
     }
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Validated
@@ -36,6 +35,13 @@ public class PostController {
     public ResponseEntity<?> createPost(@RequestBody @Valid PostRequest postRequest, @RequestHeader("AccessToken") String accessToken) {
         String emailByToken = jwtService.findEmailByToken(accessToken);
         PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost(), emailByToken);
+        return ResponseEntity.ok().body(new BaseResponse());
+    }
+
+    @DeleteMapping("/post/{id}")
+    public ResponseEntity deletePost(@RequestHeader("AccessToken")String accessToken, @PathVariable Long id) {
+        String emailByToken = jwtService.findEmailByToken(accessToken);
+        feignPostRemoteService.deletePost(id,emailByToken);
         return ResponseEntity.ok().body(new BaseResponse());
     }
 }

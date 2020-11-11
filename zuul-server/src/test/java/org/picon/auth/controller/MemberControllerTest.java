@@ -42,7 +42,6 @@ class MemberControllerTest {
 
     @DisplayName("회원가입 성공")
     @Rollback
-//    @Commit
     @Test
     public void signInSuccess() throws Exception {
         SignInRequest signInRequest = createSignInRequest();
