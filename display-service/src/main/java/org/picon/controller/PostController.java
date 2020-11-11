@@ -27,18 +27,14 @@ public class PostController {
 
     @GetMapping("/post/")
     public ResponseEntity<?> getPosts(@RequestHeader("AccessToken") String accessToken) {
-        System.out.println("accessToken = " + accessToken);
         String emailByToken = jwtService.findEmailByToken(accessToken);
-
         List<PostDto> postDtos = feignPostRemoteService.readPostsByMember(emailByToken);
         return ResponseEntity.ok().body(new PostResponse(postDtos));
     }
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostRequest postRequest, @RequestHeader("AccessToken") String accessToken) {
-        System.out.println("accessToken = " + accessToken);
         String emailByToken = jwtService.findEmailByToken(accessToken);
-
         PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost(), emailByToken);
         return ResponseEntity.ok().body(new BaseResponse());
     }

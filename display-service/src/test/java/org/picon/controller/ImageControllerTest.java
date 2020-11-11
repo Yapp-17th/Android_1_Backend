@@ -3,6 +3,7 @@ package org.picon.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -33,6 +34,12 @@ class ImageControllerTest {
 
     @MockBean
     FeignPostRemoteService feignPostRemoteService;
+
+    @MockBean
+    PostController postController;
+
+    @MockBean
+    JwtService jwtService;
 
     @DisplayName("S3에 이미지 업로드")
     @Test
