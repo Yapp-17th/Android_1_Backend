@@ -9,9 +9,11 @@ import org.picon.auth.request.LogInRequest;
 import org.picon.auth.request.SignInRequest;
 import org.picon.auth.response.AccessTokenResponse;
 import org.picon.auth.response.LogInResponse;
+
 import org.picon.global.jwt.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +25,6 @@ public class MemberService {
 
     public Member signIn(SignInRequest signInRequest){
         Member member = Member.builder()
-                .id(null)
                 .email(signInRequest.getEmail())
                 .password(passwordEncoder.encode(signInRequest.getPassword()))
                 .role(signInRequest.getRole()).build();
@@ -52,9 +53,5 @@ public class MemberService {
         if(!passwordEncoder.matches(logInPW,memberPw)){
             throw new PasswordMismatchException();
         }
-    }
-
-    public String test(SignInRequest signInRequest) {
-        return signInRequest.getEmail();
     }
 }

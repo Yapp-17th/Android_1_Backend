@@ -4,21 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.picon.domain.*;
-import org.picon.dto.AddressDto;
-import org.picon.dto.CoordinateDto;
 import org.picon.dto.PostDto;
 import org.picon.repository.MemberRepository;
 import org.picon.repository.PostRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import javax.ws.rs.core.SecurityContext;
-import java.nio.file.attribute.UserPrincipal;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -56,4 +51,17 @@ public class PostController {
         log.info("========== END OF CREATE POST ========== ");
         return save;
     }
+
+    @DeleteMapping(path = "/{id}")
+    @Modifying
+    @Transactional
+    public ResponseEntity deletePost(@PathVariable Long id, @RequestParam("email") String email) {
+        log.info("========= DELETE POST =============");
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(EntityNotFoundException::new);
+        postRepository.deletePostByMemberAndId(member,id);
+        log.info("======== END OF DELETE POST ==========");
+        return ResponseEntity.ok().build();
+    }
+
 }

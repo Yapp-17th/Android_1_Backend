@@ -2,6 +2,7 @@ package org.picon.service;
 
 import org.picon.dto.post.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,5 +21,7 @@ public interface FeignPostRemoteService {
     @PostMapping(path = "/domain/post/images", consumes = MULTIPART_FORM_DATA_VALUE)
     List<String> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles);
 
+    @DeleteMapping(path = "/domain/post/{id}")
+    ResponseEntity deletePost(@PathVariable Long id,@RequestParam("email")String email);
 }
 

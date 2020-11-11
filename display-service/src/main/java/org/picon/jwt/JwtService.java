@@ -22,7 +22,6 @@ public class JwtService {
     }
 
     public String findEmailByToken(String token) {
-        System.out.println("SECRET_KEY = " + SECRET_KEY);
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)

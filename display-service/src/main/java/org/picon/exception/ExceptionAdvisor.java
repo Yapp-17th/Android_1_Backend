@@ -1,4 +1,4 @@
-package org.picon.controller;
+package org.picon.exception;
 
 import org.picon.dto.BaseResponse;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +16,13 @@ public class ExceptionAdvisor {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> processValidationError(MethodArgumentNotValidException exception) {
         BindingResult bindingResult = exception.getBindingResult();
-
         StringBuilder builder = new StringBuilder();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             builder.append("{");
-            builder.append(String.format("\"%s\"", fieldError.getField()));
-            builder.append(": {");
-            builder.append(String.format("\"message\" : \"%s\"", fieldError.getDefaultMessage()));
-            builder.append(String.format("\"value\" : \"%s\"", fieldError.getRejectedValue()));
-            builder.append("}");
-            builder.append("}");
+            builder.append("error field: "+fieldError.getField());
+            builder.append(" message: "+fieldError.getDefaultMessage());
+            builder.append(" value: "+fieldError.getRejectedValue());
+            builder.append("}, ");
         }
 
         String errors = builder.toString();

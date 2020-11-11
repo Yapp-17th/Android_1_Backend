@@ -39,6 +39,7 @@ link:asciidocs-guide.html[asciidocs 가이드]
 
 |게시글 조회 | 게시글을 조회한다. | 진행중
 |게시글 생성 | 게시글 생성한다. | 진행중
+|게시글 삭제 | 게시글을 삭제한다. | 진행중
 
 |===
 
@@ -116,6 +117,43 @@ include::{snippets}/post-create/http-response.adoc[]
 ==== curl
 
 include::{snippets}/post-create/curl-request.adoc[]
+
+=== 게시글 삭제
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/post-delete/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/posts-delete/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/post-delete/request-headers.adoc[]
+
+===== request-body
+
+//include::{snippets}/post-delete/request-fields.adoc[]
+
+
+==== 응답
+
+include::{snippets}/post-delete/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/post-delete/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/post-delete/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/post-delete/curl-request.adoc[]
 
 [cols="2,3,2"]
 .이미지 업로드

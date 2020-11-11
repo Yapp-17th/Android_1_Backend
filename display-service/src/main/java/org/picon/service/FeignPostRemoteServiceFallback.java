@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.post.PostDto;
 import org.picon.exception.BusinessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -40,6 +41,19 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
 
     @Override
     public List<String> ImagesUpload(MultipartFile[] multipartFiles) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override
+    public ResponseEntity deletePost(Long id, String email) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

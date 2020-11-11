@@ -54,12 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/auth/docs/**").permitAll().
                 and().
                 authorizeRequests().
-                antMatchers("/admin/**").hasRole("ADMIN").
-                and().
-                authorizeRequests().
-                antMatchers("/user/**").hasRole("USER").
-                and().
-                authorizeRequests().
                 and().
                 authorizeRequests().
                 anyRequest().authenticated()
