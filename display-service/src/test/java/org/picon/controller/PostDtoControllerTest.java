@@ -80,7 +80,7 @@ class PostDtoControllerTest {
     @DisplayName("게시글 정보를 얻어온다.")
     public void getPostTest() throws Exception {
         given(feignPostRemoteService.readPostsByMember(any())).willReturn(Collections.singletonList(getExpectedPostDto()));
-        given(jwtService.findEmailByToken(any())).willReturn("email");
+        given(jwtService.findIdentityByToken(any())).willReturn("identity");
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/display/post/", 1)
@@ -147,7 +147,7 @@ class PostDtoControllerTest {
     @DisplayName("게시글을 생성한다.")
     void createPostTest() throws Exception {
         given(feignPostRemoteService.createPost(any(), any())).willReturn(getExpectedPostDto());
-        given(jwtService.findEmailByToken(any())).willReturn("email");
+        given(jwtService.findIdentityByToken(any())).willReturn("identity");
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/post")
@@ -200,7 +200,7 @@ class PostDtoControllerTest {
     @DisplayName("게시글 생성 시 좌표값이 없으면 status 400을 리턴한다.(http status 200)")
     void createTestExceptionTest() throws Exception {
         given(feignPostRemoteService.createPost(any(), any())).willReturn(getExpectedPostDto());
-        given(jwtService.findEmailByToken(any())).willReturn("email");
+        given(jwtService.findIdentityByToken(any())).willReturn("identity");
 
 //        String requestPostStr = "{\"post\":{\"id\":1,\"coordinate\":{\"lat\":null,\"lng\":null},\"address\":{\"address\":\"주소\",\"addrCity\":\"시\",\"addrDo\":\"도\",\"addrGu\":\"구\"},\"emotion\":\"BLUE_GRAY\",\"memo\":\"memo\"}}";
         String requestPostStr = objectMapper.writeValueAsString(new PostRequest(getExpectedPostDto().toBuilder().address(null).build()));

@@ -2,8 +2,7 @@ package org.picon.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import org.picon.auth.entity.Member;
-import org.picon.auth.exception.MemberNotFoundException;
-import org.picon.auth.exception.PasswordMismatchException;
+import org.picon.auth.exception.*;
 import org.picon.auth.repository.MemberRepository;
 import org.picon.auth.request.LogInRequest;
 import org.picon.auth.request.SignInRequest;
@@ -14,7 +13,6 @@ import org.picon.global.jwt.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -23,18 +21,20 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public Member signIn(SignInRequest signInRequest){
+    public Member signIn(SignInRequest signInRequest) {
+        ValidateSignIn(signInRequest.getIdentity(), signInRequest.getNickName());
         Member member = Member.builder()
-                .email(signInRequest.getEmail())
+                .identity(signInRequest.getIdentity())
                 .password(passwordEncoder.encode(signInRequest.getPassword()))
-                .role(signInRequest.getRole()).build();
+                .nickName(signInRequest.getNickName())
+                .role("USER").build();
 
         return memberRepository.save(member);
     }
 
     public LogInResponse logIn(LogInRequest logInRequest) {
-        Member member = memberRepository.findByEmail(logInRequest.getEmail()).orElseThrow(MemberNotFoundException::new);
-        checkPw(logInRequest.getPassword(), member.getPassword());
+        Member member = memberRepository.findByIdentity(logInRequest.getIdentity()).orElseThrow(MemberNotFoundException::new);
+        ValidatePassword(logInRequest.getPassword(), member.getPassword());
         String accessToken = jwtService.generateAccessTokenBy(member);
         String refreshToken = jwtService.generateRefreshToken(member);
         return LogInResponse.builder()
@@ -45,12 +45,20 @@ public class MemberService {
 
     public AccessTokenResponse getAccessToken(String refreshToken) {
         AccessTokenResponse accessTokenResponse = AccessTokenResponse.builder()
-        .accessToken(jwtService.generateAccessTokenBy(refreshToken)).build();
+                .accessToken(jwtService.generateAccessTokenBy(refreshToken)).build();
         return accessTokenResponse;
     }
 
-    public void checkPw(String logInPW, String memberPw) {
-        if(!passwordEncoder.matches(logInPW,memberPw)){
+    public void ValidateSignIn(String identity, String nickName) {
+        if (memberRepository.findByNickName(nickName).isPresent()) {
+            throw new NickNameAlreadyExistException();
+        } else if (memberRepository.findByIdentity(identity).isPresent()) {
+            throw new IdentityAlreadyExistException();
+        }
+    }
+
+    public void ValidatePassword(String logInPW, String memberPw) {
+        if (!passwordEncoder.matches(logInPW, memberPw)) {
             throw new PasswordMismatchException();
         }
     }

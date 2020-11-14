@@ -8,9 +8,10 @@ import org.picon.auth.response.AccessTokenResponse;
 import org.picon.auth.response.LogInResponse;
 import org.picon.auth.response.SignInResponse;
 import org.picon.auth.service.MemberService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,11 +21,13 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signIn")
-    public ResponseEntity signIn(@RequestBody SignInRequest signInRequest) {
+    public ResponseEntity signIn(@RequestBody@Valid SignInRequest signInRequest) {
         Member member = memberService.signIn(signInRequest);
         SignInResponse signInResponse = SignInResponse.builder()
                 .id(member.getId())
-                .email(member.getEmail()).build();
+                .identity(member.getIdentity())
+                .nickName(member.getNickName())
+                .build();
         return ResponseEntity.ok().body(signInResponse);
     }
 

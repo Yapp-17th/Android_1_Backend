@@ -26,22 +26,22 @@ public class PostController {
 
     @GetMapping("/post/")
     public ResponseEntity<?> getPosts(@RequestHeader("AccessToken") String accessToken) {
-        String emailByToken = jwtService.findEmailByToken(accessToken);
-        List<PostDto> postDtos = feignPostRemoteService.readPostsByMember(emailByToken);
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        List<PostDto> postDtos = feignPostRemoteService.readPostsByMember(identityByToken);
         return ResponseEntity.ok().body(new PostResponse(postDtos));
     }
 
     @PostMapping("/post")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostRequest postRequest, @RequestHeader("AccessToken") String accessToken) {
-        String emailByToken = jwtService.findEmailByToken(accessToken);
-        PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost(), emailByToken);
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost(), identityByToken);
         return ResponseEntity.ok().body(new BaseResponse());
     }
 
     @DeleteMapping("/post/{id}")
     public ResponseEntity deletePost(@RequestHeader("AccessToken")String accessToken, @PathVariable Long id) {
-        String emailByToken = jwtService.findEmailByToken(accessToken);
-        feignPostRemoteService.deletePost(id,emailByToken);
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        feignPostRemoteService.deletePost(id,identityByToken);
         return ResponseEntity.ok().body(new BaseResponse());
     }
 }

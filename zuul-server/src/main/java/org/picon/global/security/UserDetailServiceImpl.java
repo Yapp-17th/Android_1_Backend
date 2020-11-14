@@ -23,12 +23,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     private final MemberRepository memberRepository;
 
-    @Cacheable(value = CacheKey.MEMBER, key = "#email", cacheManager = "cacheManager")
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    @Cacheable(value = CacheKey.MEMBER, key = "#identity", cacheManager = "cacheManager")
+    public UserDetails loadUserByUsername(String identity) throws UsernameNotFoundException {
         System.out.println("loadUserByUsername is Running");
-        Member member = memberRepository.findByEmail(email).orElseThrow(MemberNotFoundException::new);
+        Member member = memberRepository.findByIdentity(identity).orElseThrow(MemberNotFoundException::new);
 
-        return new User(member.getEmail(), member.getPassword(), makeGrantedAuthority(member.getRole()));
+        return new User(member.getIdentity(), member.getPassword(), makeGrantedAuthority(member.getRole()));
     }
 
     private List<? extends GrantedAuthority> makeGrantedAuthority(String role) {

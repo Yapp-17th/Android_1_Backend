@@ -1,6 +1,5 @@
 package org.picon.auth.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,13 @@ import org.picon.common.BaseResponse;
 @NoArgsConstructor
 public class SignInResponse extends BaseResponse {
     private Long id;
-    private String email;
+    private String identity;
+    private String nickName;
 
     @Builder
-    public SignInResponse(Long id, String email) {
+    public SignInResponse(Long id, String identity, String nickName) {
         this.id = id;
-        this.email = email;
+        this.identity = identity;
+        this.nickName = nickName;
     }
 }

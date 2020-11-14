@@ -15,7 +15,7 @@ import java.util.List;
 public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     private final Throwable cause;
 
-    @Override public List<PostDto> readPostsByMember(String email) {
+    @Override public List<PostDto> readPostsByMember(String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
@@ -27,7 +27,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public PostDto createPost(PostDto post, String email) {
+    @Override public PostDto createPost(PostDto post, String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
@@ -53,7 +53,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     }
 
     @Override
-    public ResponseEntity deletePost(Long id, String email) {
+    public ResponseEntity deletePost(Long id, String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

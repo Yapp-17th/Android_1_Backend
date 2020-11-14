@@ -8,7 +8,11 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 
 public interface ApiDocumentUtils {
     static OperationRequestPreprocessor getDocumentRequest() {
-        return preprocessRequest(prettyPrint()); // 문서의 request를 예쁘게 출력
+        return  preprocessRequest(modifyUris()
+                        .scheme("http")
+                        .host("www.yappandone17.shop")
+                        .removePort(),
+                prettyPrint()); // 문서의 request를 예쁘게 출력
     }
 
     static OperationResponsePreprocessor getDocumentResponse() {

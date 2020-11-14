@@ -27,9 +27,9 @@ public class PostController {
     private final MemberRepository memberRepository;
 
     @GetMapping(path = "/")
-    public List<PostDto> readPostsByMember(@RequestParam("email") String email) {
+    public List<PostDto> readPostsByMember(@RequestParam("identity") String identity) {
         log.info("========== READ POST ========== ");
-        Member member = memberRepository.findByEmail(email)
+        Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Post> findPosts = postRepository.findAllByMember(member);
         List<PostDto> collect = findPosts.stream()
@@ -41,9 +41,9 @@ public class PostController {
 
     @PostMapping(path = "/")
     @Transactional
-    public Post createPost(@RequestBody PostDto postDto, @RequestParam("email") String email) {
+    public Post createPost(@RequestBody PostDto postDto, @RequestParam("identity") String identity) {
         log.info("========== CREATE POST ========== ");
-        Member member = memberRepository.findByEmail(email)
+        Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         Post post = modelMapper.map(postDto, Post.class);
         post.setMember(member);
@@ -55,9 +55,9 @@ public class PostController {
     @DeleteMapping(path = "/{id}")
     @Modifying
     @Transactional
-    public ResponseEntity deletePost(@PathVariable Long id, @RequestParam("email") String email) {
+    public ResponseEntity deletePost(@PathVariable Long id, @RequestParam("identity") String identity) {
         log.info("========= DELETE POST =============");
-        Member member = memberRepository.findByEmail(email)
+        Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         postRepository.deletePostByMemberAndId(member,id);
         log.info("======== END OF DELETE POST ==========");

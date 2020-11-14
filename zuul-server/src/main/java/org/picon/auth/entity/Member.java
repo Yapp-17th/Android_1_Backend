@@ -1,8 +1,6 @@
 package org.picon.auth.entity;
 
 import lombok.*;
-import org.checkerframework.checker.units.qual.A;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,8 +15,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    private String identity;
     private String password;
+    private String nickName;
     private String role;
 
 }

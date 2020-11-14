@@ -21,12 +21,12 @@ public class JwtService {
         SECRET_KEY = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
     }
 
-    public String findEmailByToken(String token) {
+    public String findIdentityByToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return (String) claims.get("EMAIL");
+        return (String) claims.get("IDENTITY");
     }
 }

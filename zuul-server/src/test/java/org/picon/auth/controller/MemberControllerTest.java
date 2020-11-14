@@ -34,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MemberControllerTest {
 
-    protected static final String ROLE = "USER";
     protected static final String PW = "TestPassword";
     private static int testNO = 0;
     @Autowired
@@ -57,9 +56,18 @@ class MemberControllerTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(
-                                fieldWithPath("email").type(String.class).description("이메일"),
-                                fieldWithPath("password").type(String.class).description("비밀번호"),
-                                fieldWithPath("role").type(String.class).description("권한")
+                                fieldWithPath("identity").type(String.class).description("아이디"),
+                                fieldWithPath("nickName").type(String.class).description("닉네임"),
+                                fieldWithPath("password").type(String.class).description("비밀번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("status").type(Integer.class).description("응답상태 코드"),
+                                fieldWithPath("errors").type(String.class).description("상세 에러 메세지"),
+                                fieldWithPath("errorCode").type(String.class).description("에러 코드"),
+                                fieldWithPath("errorMessage").type(String.class).description("에러 메세지"),
+                                fieldWithPath("id").type(Long.class).description("회원 id 번호"),
+                                fieldWithPath("identity").type(String.class).description("회원 아이디"),
+                                fieldWithPath("nickName").type(Long.class).description("회원 닉네임")
                         )
                 ));
 
@@ -69,9 +77,9 @@ class MemberControllerTest {
         testNO++;
 
         return new SignInRequest(
-                "testEmail" + testNO,
+                "testidentity" + testNO,
                 PW,
-                ROLE
+                "testNickName" + testNO
         );
     }
 
@@ -92,7 +100,7 @@ class MemberControllerTest {
 
     public LogInResponse createLogInResponse() throws Exception {
         SignInResponse signInResponse = createUser();
-        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(), PW);
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getIdentity(), PW);
         ObjectMapper objectMapper = new ObjectMapper();
         MvcResult mvcResult = mockMvc.perform(
                 post("/auth/logIn")
@@ -111,7 +119,7 @@ class MemberControllerTest {
     @Test
     public void logInSuccess() throws Exception {
         SignInResponse signInResponse = createUser();
-        LogInRequest logInRequest = new LogInRequest(signInResponse.getEmail(), PW);
+        LogInRequest logInRequest = new LogInRequest(signInResponse.getIdentity(), PW);
         ObjectMapper objectMapper = new ObjectMapper();
         ResultActions resultActions = mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/auth/logIn")
@@ -124,7 +132,7 @@ class MemberControllerTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         requestFields(
-                                fieldWithPath("email").type(String.class).description("이메일"),
+                                fieldWithPath("identity").type(String.class).description("아이디"),
                                 fieldWithPath("password").type(String.class).description("비밀번호")
                         ),
                         responseFields(

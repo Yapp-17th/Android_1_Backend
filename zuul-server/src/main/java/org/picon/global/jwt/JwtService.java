@@ -54,20 +54,20 @@ public class JwtService {
 
     public String generateAccessTokenBy(Member member) {
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL", member.getEmail());
+        claimMap.put("IDENTITY", member.getIdentity());
         return generateAccessToken(claimMap);
     }
 
     public String generateAccessTokenBy(String refreshToken) {
-        String email = findEmailByToken(refreshToken);
+        String identity = findIdentityByToken(refreshToken);
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL", email);
+        claimMap.put("IDENTITY", identity);
         return generateAccessToken(claimMap);
     }
 
     public String generateRefreshToken(Member member) {
         Map<String, Object> claimMap = new HashMap<>();
-        claimMap.put("EMAIL", member.getEmail());
+        claimMap.put("IDENTITY", member.getIdentity());
         Date now = new Date();
         Date expireTime = new Date(System.currentTimeMillis() + JWT_REFRESH_TOKEN_VALIDITY * 1000);
         return Jwts.builder()
@@ -93,17 +93,17 @@ public class JwtService {
         }
     }
 
-    public String findEmailByToken(String token) {
+    public String findIdentityByToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return (String) claims.get("EMAIL");
+        return (String) claims.get("IDENTITY");
     }
 
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailService.loadUserByUsername(findEmailByToken(token));
+        UserDetails userDetails = userDetailService.loadUserByUsername(findIdentityByToken(token));
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
