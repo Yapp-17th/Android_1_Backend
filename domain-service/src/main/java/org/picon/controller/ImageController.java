@@ -19,7 +19,6 @@ public class ImageController {
 
     @PostMapping("/images")
     public List<String> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles) throws IOException {
-        log.info("==========Start Upload Images ================");
         return s3Uploader.uploadImages(multipartFiles, "picon");
     }
 

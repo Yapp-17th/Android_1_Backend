@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
@@ -35,9 +36,11 @@ public class ZuulPreFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-
-        log.info("Request Method : " + request.getMethod());
-        log.info("Request URL : " + request.getRequestURL().toString());
+        log.info("=================  Request Log Start  =================");
+        log.info("| Request Time => "+ LocalDateTime.now());
+        log.info("| Request Method => "+ request.getMethod());
+        log.info("| Request URL => "+ request.getRequestURL().toString());
+        log.info("=================   Request Log End   =================");
         return null;
     }
 
