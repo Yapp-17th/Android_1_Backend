@@ -21,7 +21,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signIn")
-    public ResponseEntity signIn(@RequestBody@Valid SignInRequest signInRequest) {
+    public ResponseEntity signIn(@RequestBody @Valid SignInRequest signInRequest) {
         Member member = memberService.signIn(signInRequest);
         SignInResponse signInResponse = SignInResponse.builder()
                 .id(member.getId())
@@ -33,7 +33,7 @@ public class MemberController {
 
     @PostMapping("/logIn")
     public ResponseEntity logIn(@RequestBody LogInRequest logInRequest) {
-        LogInResponse logInResponse= memberService.logIn(logInRequest);
+        LogInResponse logInResponse = memberService.logIn(logInRequest);
         return ResponseEntity.ok().body(logInResponse);
     }
 

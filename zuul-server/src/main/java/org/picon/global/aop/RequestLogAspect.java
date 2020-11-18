@@ -11,7 +11,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
-@Component
+//@Component
 @Aspect
 @Slf4j
 public class RequestLogAspect {

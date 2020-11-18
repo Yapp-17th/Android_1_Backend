@@ -22,6 +22,6 @@ public interface FeignPostRemoteService {
     List<String> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles);
 
     @DeleteMapping(path = "/domain/post/{id}")
-    ResponseEntity deletePost(@PathVariable Long id,@RequestParam("identity")String identity);
+    ResponseEntity deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity);
 }
 

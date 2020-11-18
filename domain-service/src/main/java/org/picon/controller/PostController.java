@@ -51,7 +51,7 @@ public class PostController {
     @DeleteMapping(path = "/{id}")
     @Modifying
     @Transactional
-    public ResponseEntity deletePost(@PathVariable Long id, @RequestParam("identity") String identity) {
+    public ResponseEntity<?> deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         postRepository.deletePostByMemberAndId(member,id);

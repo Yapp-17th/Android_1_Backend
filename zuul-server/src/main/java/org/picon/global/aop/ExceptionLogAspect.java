@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 @Slf4j
-@Component
+//@Component
 @Aspect
 public class ExceptionLogAspect {
     @AfterThrowing(value = "execution(* org.picon.auth.*(..))", throwing = "exception")

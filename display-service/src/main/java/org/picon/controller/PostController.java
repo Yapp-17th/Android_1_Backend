@@ -39,9 +39,9 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity deletePost(@RequestHeader("AccessToken")String accessToken, @PathVariable Long id) {
+    public ResponseEntity<?> deletePost(@RequestHeader("AccessToken") String accessToken, @PathVariable("id") Long id) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        feignPostRemoteService.deletePost(id,identityByToken);
+        feignPostRemoteService.deletePost(id, identityByToken);
         return ResponseEntity.ok().body(new BaseResponse());
     }
 }

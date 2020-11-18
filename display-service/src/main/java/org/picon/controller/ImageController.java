@@ -3,6 +3,7 @@ package org.picon.controller;
 import lombok.RequiredArgsConstructor;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,8 +16,8 @@ public class ImageController {
     private final FeignPostRemoteService feignPostRemoteService;
 
     @PostMapping("/images")
-    @ResponseStatus(HttpStatus.OK)
-    public List<String> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles) {
-        return feignPostRemoteService.ImagesUpload(multipartFiles);
+    public ResponseEntity<?> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles) {
+        List<String> strings = feignPostRemoteService.ImagesUpload(multipartFiles);
+        return ResponseEntity.ok().body(strings);
     }
 }
