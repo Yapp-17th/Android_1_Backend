@@ -51,8 +51,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs
 @ExtendWith({RestDocumentationExtension.class})
 @Import(RestDocsConfiguration.class)
-class PostDtoControllerTest {
+class PostControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
+
     @MockBean
     FeignPostRemoteService feignPostRemoteService;
 
