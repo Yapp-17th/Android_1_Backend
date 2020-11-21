@@ -23,4 +23,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "and p.member =:member")
     List<Post> findAllByMemberAndCreateMonth(@Param("member") Member member, @Param("startDate")LocalDate stateDate, @Param("endDate")LocalDate endDate);
 
+
 }

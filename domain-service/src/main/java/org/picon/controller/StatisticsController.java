@@ -55,6 +55,8 @@ public class StatisticsController {
                         addressListEntry.getValue().size()))
                 .collect(Collectors.toList());
 
+
+
         List<AddressCount> sortedAddressCounts = addressCounts.stream()
                 .sorted(Comparator.comparing(AddressCount::getTotal))
                 .limit(5)
