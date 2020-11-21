@@ -62,6 +62,6 @@ public class StatisticsController {
                 .limit(5)
                 .collect(toList());
 
-        return new StatisticsDto(new EmotionCounts(emotionCounts),new AddressCounts(addressCounts));
+        return new StatisticsDto(emotionCounts,posts.size(),sortedAddressCounts);
     }
 }
