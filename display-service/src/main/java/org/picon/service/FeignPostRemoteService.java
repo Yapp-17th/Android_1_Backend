@@ -1,6 +1,8 @@
 package org.picon.service;
 
 import org.picon.dto.post.PostDto;
+import org.picon.dto.statics.EmotionCounts;
+import org.picon.dto.statics.StatisticsDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +25,8 @@ public interface FeignPostRemoteService {
 
     @DeleteMapping(path = "/domain/post/{id}")
     ResponseEntity deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity);
+
+    @GetMapping(path = "/domain/statistics/{month}")
+    StatisticsDto getPostsByStatistics(@PathVariable("month")int month, @RequestParam("identity")String identity);
 }
 

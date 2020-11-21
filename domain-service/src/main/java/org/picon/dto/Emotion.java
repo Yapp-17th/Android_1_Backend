@@ -15,5 +15,4 @@ public enum Emotion {
     Emotion(String rgb) {
         this.rgb = rgb;
     }
-
 }
