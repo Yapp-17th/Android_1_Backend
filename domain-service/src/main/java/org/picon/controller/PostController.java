@@ -32,8 +32,6 @@ public class PostController {
         Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Post> findPosts = postRepository.findAllByMember(member);
-        modelMapper.createTypeMap(Post.class, PostDto.class)
-                .addMapping(e -> e.getMember().getProfileImageUrl(), PostDto::setProfileImageUrl);
         List<PostDto> collect = findPosts.stream()
                 .map(e -> modelMapper.map(e, PostDto.class))
                 .collect(Collectors.toList());
