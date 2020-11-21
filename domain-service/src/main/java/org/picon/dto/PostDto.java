@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.picon.domain.Emotion;
+import org.picon.domain.Post;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.Valid;
@@ -18,6 +20,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class PostDto {
     private Long id;
+    private String profileImageUrl;
     private CoordinateDto coordinate;
     private AddressDto address;
     private List<String> imageUrls;

@@ -34,7 +34,7 @@ public class Post {
     @CreatedDate
     private LocalDate createDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
     private Member member;
 

@@ -3,7 +3,7 @@ package org.picon.service;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.picon.dto.MemberDto;
+import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
 import org.picon.exception.BusinessException;
 import org.springframework.http.ResponseEntity;

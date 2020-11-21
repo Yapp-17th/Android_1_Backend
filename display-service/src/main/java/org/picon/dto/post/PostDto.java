@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import java.util.List;
 @Builder(toBuilder = true)
 public class PostDto {
     private Long id;
+    @Nullable
+    private String profileImageUrl;
     @NotNull @Valid
     private CoordinateDto coordinate;
     @NotNull @Valid

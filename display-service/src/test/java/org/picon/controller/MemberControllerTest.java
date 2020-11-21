@@ -8,10 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.picon.config.RestDocsConfiguration;
-import org.picon.dto.MemberDto;
-import org.picon.dto.post.AddressDto;
-import org.picon.dto.post.CoordinateDto;
-import org.picon.dto.post.Emotion;
+import org.picon.dto.member.MemberDto;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +25,6 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;

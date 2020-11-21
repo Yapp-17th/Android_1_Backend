@@ -1,4 +1,4 @@
-package org.picon.dto;
+package org.picon.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
