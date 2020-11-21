@@ -1,5 +1,6 @@
 package org.picon.service;
 
+import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
 import org.picon.dto.statics.EmotionCounts;
 import org.picon.dto.statics.StatisticsDto;
@@ -28,5 +29,8 @@ public interface FeignPostRemoteService {
 
     @GetMapping(path = "/domain/statistics/{month}")
     StatisticsDto getPostsByStatistics(@PathVariable("month")int month, @RequestParam("identity")String identity);
+
+    @GetMapping(path = "/domain/member/")
+    MemberDto getMember(@RequestParam("identity") String identity);
 }
 

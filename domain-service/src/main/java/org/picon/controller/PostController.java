@@ -3,7 +3,8 @@ package org.picon.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.picon.domain.*;
+import org.picon.domain.Member;
+import org.picon.domain.Post;
 import org.picon.dto.PostDto;
 import org.picon.repository.MemberRepository;
 import org.picon.repository.PostRepository;
@@ -55,8 +56,7 @@ public class PostController {
     public ResponseEntity<?> deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
-        postRepository.deletePostByMemberAndId(member,id);
+        postRepository.deletePostByMemberAndId(member, id);
         return ResponseEntity.ok().build();
     }
-
 }

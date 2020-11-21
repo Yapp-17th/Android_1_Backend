@@ -9,6 +9,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @Embeddable
 @ToString
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Address {
     private String address;

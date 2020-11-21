@@ -51,8 +51,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureRestDocs
 @ExtendWith({RestDocumentationExtension.class})
 @Import(RestDocsConfiguration.class)
-class PostDtoControllerTest {
+class PostControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
+
     @MockBean
     FeignPostRemoteService feignPostRemoteService;
 
@@ -135,6 +136,7 @@ class PostDtoControllerTest {
         AddressDto addressDto = new AddressDto("주소", "시", "도", "구");
         return PostDto.builder()
                 .id(1L)
+                .profileImageUrl("example_profile_url.com")
                 .coordinate(coordinateDto)
                 .address(addressDto)
                 .emotion(Emotion.BLUE_GRAY)
@@ -180,6 +182,7 @@ class PostDtoControllerTest {
                                 requestFields(
                                         fieldWithPath("post").type(PostDto.class).description("게시글 정보"),
                                         fieldWithPath("post.id").type(Long.class).description("게시글 식별자"),
+                                        fieldWithPath("post.profileImageUrl").type(String.class).description("게시글을 가진 회원의 프로필 사진").ignored(),
                                         fieldWithPath("post.coordinate").type(CoordinateDto.class).description("게시글이 가진 좌표,주소 객체"),
                                         fieldWithPath("post.coordinate.lat").type(BigDecimal.class).description("위도"),
                                         fieldWithPath("post.coordinate.lng").type(BigDecimal.class).description("경도"),
