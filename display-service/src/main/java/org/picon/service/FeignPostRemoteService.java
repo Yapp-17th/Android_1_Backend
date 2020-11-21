@@ -1,5 +1,6 @@
 package org.picon.service;
 
+import org.picon.dto.MemberDto;
 import org.picon.dto.post.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,8 @@ public interface FeignPostRemoteService {
 
     @DeleteMapping(path = "/domain/post/{id}")
     ResponseEntity deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity);
+
+    @GetMapping(path = "/domain/member/")
+    MemberDto getMember(@RequestParam("identity") String identity);
 }
 

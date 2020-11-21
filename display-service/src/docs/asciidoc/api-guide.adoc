@@ -183,3 +183,41 @@ include::{snippets}/post-uploadImages/http-response.adoc[]
 ==== curl
 
 include::{snippets}/post-uploadImages/curl-request.adoc[]
+
+== 회원
+
+=== 회원 조회
+
+==== 요청
+
+===== path-parameter
+
+//include::{snippets}/member-get/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/member-get/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/member-get/request-headers.adoc[]
+
+===== request-body
+
+//include::{snippets}/member-get/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/member-get/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/member-get/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/member-get/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/member-get/curl-request.adoc[]
