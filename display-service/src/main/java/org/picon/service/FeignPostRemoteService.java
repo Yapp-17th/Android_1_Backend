@@ -1,6 +1,6 @@
 package org.picon.service;
 
-import org.picon.dto.MemberDto;
+import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

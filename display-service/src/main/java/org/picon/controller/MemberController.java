@@ -2,11 +2,8 @@ package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.picon.dto.BaseResponse;
-import org.picon.dto.MemberDto;
+import org.picon.dto.member.MemberDto;
 import org.picon.dto.member.MemberResponse;
-import org.picon.dto.post.PostDto;
-import org.picon.dto.post.PostResponse;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @Validated
