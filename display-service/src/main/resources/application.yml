@@ -5,8 +5,8 @@ spring:
     name: display
   servlet:
     multipart:
-      max-file-size: 200MB
-      max-request-size: 200MB
+      max-file-size: 500MB
+      max-request-size: 500MB
 eureka:
   instance:
     prefer-ip-address: true # 서비스간 통신 시 hostname 보다 ip 를 우선 사용 - 개발모드
