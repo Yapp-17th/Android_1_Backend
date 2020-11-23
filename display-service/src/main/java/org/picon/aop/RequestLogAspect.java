@@ -20,7 +20,6 @@ public class RequestLogAspect {
     @Around("execution(* org.picon.controller.*.*(..))")
     public Object printRequestLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
-        try {
             Object result = proceedingJoinPoint.proceed();
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
@@ -36,11 +35,5 @@ public class RequestLogAspect {
             log.info("=================   Request Log End   =================");
 
             return result;
-        } catch (Exception e) {
-            log.info("============ AspectJ Around Exception Start ===============");
-            log.info("Exception Message => " + e.getMessage());
-            log.info("============ AspectJ Around Exception End ===============");
-            return null;
-        }
     }
 }

@@ -1,6 +1,8 @@
 package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.picon.dto.statics.StatisticsDto;
+import org.picon.exception.NotFoundException;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +21,11 @@ public class ImageController {
     public ResponseEntity<?> ImagesUpload(@RequestPart("images") MultipartFile[] multipartFiles) {
         List<String> strings = feignPostRemoteService.ImagesUpload(multipartFiles);
         return ResponseEntity.ok().body(strings);
+    }
+
+    public void validateResponse(String images) {
+        if (images == null) {
+            throw new NotFoundException("이미지 저장에 실패하였습니다");
+        }
     }
 }

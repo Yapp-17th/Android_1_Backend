@@ -31,12 +31,12 @@ public class StatisticsController {
         Member member = memberRepository.findByIdentity(identity).orElseThrow(EntityNotFoundException::new);
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate = LocalDate.of(year, month + 1, 1);
-        List<Post> posts = postRepository.findAllByMemberAndCreateMonth(member, startDate, endDate);
-
+        List<Post> posts = postRepository.findAllByMemberAndCreateMonth(member, startDate, endDate).orElseThrow(EntityNotFoundException::new);
         List<EmotionCount> emotionCounts = posts.stream()
                 .collect(groupingBy(Post::getEmotion))
                 .entrySet().stream()
                 .map(entry -> new EmotionCount(entry.getKey(), entry.getValue().size()))
+                .sorted(Comparator.comparing(EmotionCount::getCount).reversed())
                 .collect(Collectors.toList());
 
         List<AddressCount> addressCounts = posts.stream()
@@ -56,7 +56,7 @@ public class StatisticsController {
                 .collect(Collectors.toList());
 
         List<AddressCount> sortedAddressCounts = addressCounts.stream()
-                .sorted(Comparator.comparing(AddressCount::getTotal))
+                .sorted(Comparator.comparing(AddressCount::getTotal).reversed())
                 .limit(5)
                 .collect(toList());
 

@@ -16,6 +16,7 @@ public class FeignPostRemoteServiceFallbackFactory implements FallbackFactory<Fe
     public FeignPostRemoteService create(Throwable cause) {
         log.info("============Start FeignPostRemoteServiceFallbackFactory's Throwable===================");
         log.info(String.valueOf(cause));
+        log.info(String.valueOf(cause.getStackTrace()));
         log.info("============End FeignPostRemoteServiceFallbackFactory's Throwable===================");
         return new FeignPostRemoteServiceFallback(cause);
     }

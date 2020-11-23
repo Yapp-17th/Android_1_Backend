@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
@@ -24,7 +25,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "where p.createDate " +
             "between :startDate and :endDate " +
             "and p.member =:member")
-    List<Post> findAllByMemberAndCreateMonth(@Param("member") Member member, @Param("startDate")LocalDate stateDate, @Param("endDate")LocalDate endDate);
+   Optional<List<Post>> findAllByMemberAndCreateMonth(@Param("member") Member member, @Param("startDate")LocalDate stateDate, @Param("endDate")LocalDate endDate);
 
 
 }
