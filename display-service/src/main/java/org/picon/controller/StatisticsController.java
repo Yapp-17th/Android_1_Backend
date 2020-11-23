@@ -17,10 +17,10 @@ public class StatisticsController {
     private final FeignPostRemoteService feignPostRemoteService;
     private final JwtService jwtService;
 
-    @GetMapping("/statistics/{month}")
-    public ResponseEntity getPostsByStatistics(@RequestHeader("AccessToken") String accessToken, @PathVariable("month") int month) {
+    @GetMapping("/statistics/{year}/{month}")
+    public ResponseEntity getPostsByStatistics(@RequestHeader("AccessToken") String accessToken, @PathVariable("year") int year, @PathVariable("month") int month) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        StatisticsDto statisticsDto = feignPostRemoteService.getPostsByStatistics(month,identityByToken);
+        StatisticsDto statisticsDto = feignPostRemoteService.getPostsByStatistics(year,month,identityByToken);
         return ResponseEntity.ok().body(statisticsDto);
     }
 

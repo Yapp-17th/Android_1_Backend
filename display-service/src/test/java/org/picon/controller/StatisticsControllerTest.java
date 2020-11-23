@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.picon.config.RestDocsConfiguration;
 import org.picon.dto.post.Emotion;
+import org.picon.dto.statics.AddressCount;
+import org.picon.dto.statics.EmotionCount;
 import org.picon.dto.statics.StatisticsDto;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
@@ -21,6 +23,8 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -56,12 +60,18 @@ class StatisticsControllerTest {
     @DisplayName("감정별, 지역별 게시글 통계값 가져오기 성공")
     public void getPostCountsByStatisticsSuccess() throws Exception {
 
-        StatisticsDto statisticsDto =  new EasyRandom().nextObject(StatisticsDto.class);
+        List<EmotionCount> emotionCounts = new ArrayList<>();
+        emotionCounts.add(new EmotionCount(Emotion.CORN_FLOWER,3));
+        emotionCounts.add(new EmotionCount(Emotion.BLUE_GRAY,2));
+        List<AddressCount> addressCounts = new ArrayList<>();
+        addressCounts.add(new AddressCount("서울시","성북구",emotionCounts,5));
+        addressCounts.add(new AddressCount("서울시","강남구",emotionCounts,5));
+
         given(jwtService.findIdentityByToken(any())).willReturn("identity");
-        given(feignPostRemoteService.getPostsByStatistics(11,"identity")).willReturn(statisticsDto);
+        given(feignPostRemoteService.getPostsByStatistics(2020,11,"identity")).willReturn(new StatisticsDto(emotionCounts,5,addressCounts));
 
         mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/display/statistics/{month}", 11)
+                RestDocumentationRequestBuilders.get("/display/statistics/{year}/{month}", 2020,11)
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("AccessToken", "accessToken Example")
                         .characterEncoding("utf-8")
@@ -77,6 +87,7 @@ class StatisticsControllerTest {
                                         prettyPrint()
                                 ),
                                 pathParameters(
+                                        parameterWithName("year").description("조회하고싶은 게시글 년도"),
                                         parameterWithName("month").description("조회하고싶은 게시글 월")
                                 ),
                                 requestHeaders(

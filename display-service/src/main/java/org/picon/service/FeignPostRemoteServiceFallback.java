@@ -68,7 +68,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     }
 
     @Override
-    public StatisticsDto getPostsByStatistics(int month, String identity) {
+    public StatisticsDto getPostsByStatistics(int year, int month, String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

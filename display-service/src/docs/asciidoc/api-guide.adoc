@@ -79,7 +79,9 @@ include::{snippets}/post-uploadImages/curl-request.adoc[]
 |===
 |API 이름 | 설명 | 진행 현황
 
-|회원 조회 | 본인의 회원정보를 조회한다 | 완료
+|회원 조회 | 자신의 회원 정보를 조회한다 | 완료
+
+|===
 
 == 회원
 
@@ -119,13 +121,14 @@ include::{snippets}/member-get/http-response.adoc[]
 
 include::{snippets}/member-get/curl-request.adoc[]
 
-
 [cols="2,3,2"]
 .통계 조회
 |===
 |API 이름 | 설명 | 진행 현황
 
-|통계 조회 | 월에 대한 게시글 통계 목록을 조회한다 | 완료
+|통계 조회 | 감정별 장소별 통계 목록을 조회한다 | 확인요청
+
+|===
 
 == 통계
 

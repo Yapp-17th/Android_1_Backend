@@ -26,8 +26,8 @@ public interface FeignPostRemoteService {
     @DeleteMapping(path = "/domain/post/{id}")
     ResponseEntity deletePost(@PathVariable("id") Long id, @RequestParam("identity") String identity);
 
-    @GetMapping(path = "/domain/statistics/{month}")
-    StatisticsDto getPostsByStatistics(@PathVariable("month")int month, @RequestParam("identity")String identity);
+    @GetMapping(path = "/domain/statistics/{year}/{month}")
+    StatisticsDto getPostsByStatistics(@PathVariable("year")int year, @PathVariable("month")int month, @RequestParam("identity")String identity);
 
     @GetMapping(path = "/domain/member/")
     MemberDto getMember(@RequestParam("identity") String identity);

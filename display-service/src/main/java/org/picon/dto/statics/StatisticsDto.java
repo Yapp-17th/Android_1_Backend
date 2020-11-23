@@ -17,4 +17,5 @@ public class StatisticsDto extends BaseResponse {
     private List<EmotionCount> emotionCounts;
     private int emotionTotal;
     private List<AddressCount> addressCounts;
+
 }
