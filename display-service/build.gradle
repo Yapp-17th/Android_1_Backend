@@ -51,6 +51,7 @@ dependencies {
 
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.4.RELEASE'
+    testImplementation('org.jeasy:easy-random-core:4.0.0')
 
     compile 'io.jsonwebtoken:jjwt:0.9.1'
     implementation('org.glassfish.jaxb:jaxb-runtime')

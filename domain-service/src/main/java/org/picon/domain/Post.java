@@ -1,17 +1,10 @@
 package org.picon.domain;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.lang.NonNull;
+import org.picon.config.BaseEntity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -20,7 +13,7 @@ import java.util.Set;
 @Getter
 @Builder
 @ToString
-public class Post {
+public class Post extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_ID")
     private Long id;
@@ -31,8 +24,6 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private Emotion emotion;
     private String memo;
-    @CreatedDate
-    private LocalDate createDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")

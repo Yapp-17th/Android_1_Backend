@@ -19,7 +19,6 @@ import java.util.List;
 @Validated
 @RequestMapping(path = "/display")
 @RequiredArgsConstructor
-@Slf4j
 public class PostController {
     private final FeignPostRemoteService feignPostRemoteService;
     private final JwtService jwtService;

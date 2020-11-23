@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
+import org.picon.dto.statics.StatisticsDto;
 import org.picon.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,6 +56,19 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
 
     @Override
     public ResponseEntity deletePost(Long id, String identity) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override
+    public StatisticsDto getPostsByStatistics(int month, String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
