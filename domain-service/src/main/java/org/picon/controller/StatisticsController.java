@@ -26,7 +26,7 @@ public class StatisticsController {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
-    @GetMapping("/{month}")
+    @GetMapping("/{year}/{month}")
     public StatisticsDto getPostsByStatistics(@PathVariable("year") int year, @PathVariable("month") int month, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity).orElseThrow(EntityNotFoundException::new);
         LocalDate startDate = LocalDate.of(year, month, 1);
