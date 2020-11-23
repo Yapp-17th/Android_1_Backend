@@ -2,7 +2,6 @@ package org.picon.service;
 
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
-import org.picon.dto.statics.EmotionCounts;
 import org.picon.dto.statics.StatisticsDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;

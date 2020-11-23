@@ -30,7 +30,7 @@ public class StatisticsController {
     public StatisticsDto getPostsByStatistics(@PathVariable("month") int month, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity).orElseThrow(EntityNotFoundException::new);
         LocalDate startDate = LocalDate.of(LocalDate.now().getYear(), month, 1);
-        LocalDate endDate = LocalDate.of(LocalDate.now().getYear(), month, 30);
+        LocalDate endDate = LocalDate.of(LocalDate.now().getYear(), month + 1, 1);
         List<Post> posts = postRepository.findAllByMemberAndCreateMonth(member, startDate, endDate);
 
         List<EmotionCount> emotionCounts = posts.stream()
@@ -44,24 +44,22 @@ public class StatisticsController {
                 .entrySet().stream()
                 .map(addressListEntry ->
                         new AddressCount(addressListEntry.getKey().getAddrCity(),
-                        addressListEntry.getKey().getAddrGu(),
-                        addressListEntry.getValue()
-                        .stream()
-                        .collect(groupingBy(Post::getEmotion))
-                        .entrySet()
-                        .stream()
-                        .map(emotionListEntry -> new EmotionCount(emotionListEntry.getKey(),emotionListEntry.getValue().size()))
-                        .collect(toList()),
-                        addressListEntry.getValue().size()))
+                                addressListEntry.getKey().getAddrGu(),
+                                addressListEntry.getValue()
+                                        .stream()
+                                        .collect(groupingBy(Post::getEmotion))
+                                        .entrySet()
+                                        .stream()
+                                        .map(emotionListEntry -> new EmotionCount(emotionListEntry.getKey(), emotionListEntry.getValue().size()))
+                                        .collect(toList()),
+                                addressListEntry.getValue().size()))
                 .collect(Collectors.toList());
-
-
 
         List<AddressCount> sortedAddressCounts = addressCounts.stream()
                 .sorted(Comparator.comparing(AddressCount::getTotal))
                 .limit(5)
                 .collect(toList());
 
-        return new StatisticsDto(emotionCounts,posts.size(),sortedAddressCounts);
+        return new StatisticsDto(emotionCounts, posts.size(), sortedAddressCounts);
     }
 }

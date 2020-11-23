@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.post.PostDto;
-import org.picon.dto.statics.EmotionCounts;
 import org.picon.dto.statics.StatisticsDto;
 import org.picon.exception.BusinessException;
 import org.springframework.http.ResponseEntity;

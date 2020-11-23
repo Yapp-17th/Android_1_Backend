@@ -74,6 +74,13 @@ include::{snippets}/post-uploadImages/http-response.adoc[]
 
 include::{snippets}/post-uploadImages/curl-request.adoc[]
 
+[cols="2,3,2"]
+.회원 조회
+|===
+|API 이름 | 설명 | 진행 현황
+
+|회원 조회 | 본인의 회원정보를 조회한다 | 완료
+
 == 회원
 
 === 회원 조회
@@ -111,3 +118,42 @@ include::{snippets}/member-get/http-response.adoc[]
 ==== curl
 
 include::{snippets}/member-get/curl-request.adoc[]
+
+
+[cols="2,3,2"]
+.통계 조회
+|===
+|API 이름 | 설명 | 진행 현황
+
+|통계 조회 | 월에 대한 게시글 통계 목록을 조회한다 | 완료
+
+== 통계
+
+=== 통계 조회
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/statistics/path-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/statistics/request-headers.adoc[]
+
+
+==== 응답
+
+include::{snippets}/statistics/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/statistics/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/statistics/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/statistics/curl-request.adoc[]
