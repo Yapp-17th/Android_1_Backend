@@ -1,6 +1,7 @@
 package org.picon.domain;
 
 import lombok.*;
+import org.picon.config.BaseEntity;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @Column(name = "MEMBER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

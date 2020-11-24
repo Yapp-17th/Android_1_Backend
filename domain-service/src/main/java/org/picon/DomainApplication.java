@@ -2,7 +2,9 @@ package org.picon;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
+import org.picon.domain.Member;
 import org.picon.domain.Post;
+import org.picon.dto.MemberDto;
 import org.picon.dto.PostDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +30,9 @@ public class DomainApplication {
                 .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
         modelMapper.createTypeMap(Post.class, PostDto.class)
                 .addMapping(e -> e.getMember().getProfileImageUrl(), PostDto::setProfileImageUrl);
+        modelMapper.createTypeMap(Member.class, MemberDto.class)
+                .addMapping(Member::getCreateDate, MemberDto::setCreatedDate);
+
         return modelMapper;
     }
 }

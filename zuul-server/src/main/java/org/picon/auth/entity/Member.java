@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class Member {
+public class Member extends BaseEntity{
 
     @Id @Column(name = "MEMBER_ID", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
