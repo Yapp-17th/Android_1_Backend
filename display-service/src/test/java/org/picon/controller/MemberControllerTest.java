@@ -25,6 +25,8 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -71,7 +73,7 @@ class MemberControllerTest {
     @Test
     @DisplayName("회원 정보를 얻어온다.")
     public void getMemberTest() throws Exception {
-        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", "image_url");
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"image_url");
         given(feignPostRemoteService.getMember(any())).willReturn(memberDto);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
@@ -110,6 +112,7 @@ class MemberControllerTest {
                                         fieldWithPath("member.identity").type(String.class).description("아이디"),
                                         fieldWithPath("member.nickName").type(String.class).description("닉네임"),
                                         fieldWithPath("member.role").type(String.class).description("역할"),
+                                        fieldWithPath("member.createdDate").type(LocalDate.class).description("회원가입 날짜"),
                                         fieldWithPath("member.profileImageUrl").type(String.class).description("프로필 이미지 사진")
                                 )
                         )
