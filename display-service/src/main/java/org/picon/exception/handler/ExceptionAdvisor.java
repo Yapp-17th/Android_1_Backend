@@ -1,6 +1,7 @@
 package org.picon.exception.handler;
 
 import org.picon.dto.BaseResponse;
+import org.picon.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -29,6 +30,17 @@ public class ExceptionAdvisor {
         String errors = builder.toString();
 
         BaseResponse baseResponse = new BaseResponse(400, errors, "0001", "요청값이 잘못되었습니다.");
+
+        return ResponseEntity.ok().body(baseResponse);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<?> businessException(BusinessException exception) {
+        Throwable cause = exception.getCause();
+
+        String errors = cause.toString();
+
+        BaseResponse baseResponse = new BaseResponse(200, errors, "0003", "로직 오류");
 
         return ResponseEntity.ok().body(baseResponse);
     }

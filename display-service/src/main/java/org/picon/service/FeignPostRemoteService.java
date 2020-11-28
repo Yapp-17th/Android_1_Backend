@@ -31,5 +31,11 @@ public interface FeignPostRemoteService {
 
     @GetMapping(path = "/domain/member/")
     MemberDto getMember(@RequestParam("identity") String identity);
+
+    @GetMapping(path = "/domain/member/search")
+    List<MemberDto> searchMember(@RequestParam("input") String input);
+
+    @PostMapping(path = "/domain/member/follow/{id}")
+    void follow(@RequestParam("identity") String identity, @PathVariable("id") Long followMemberId);
 }
 

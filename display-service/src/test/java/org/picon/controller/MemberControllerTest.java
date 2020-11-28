@@ -26,6 +26,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -35,6 +38,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,7 +82,7 @@ class MemberControllerTest {
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/display/member/", 1)
+                RestDocumentationRequestBuilders.get("/display/member/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("AccessToken", "accessToken Example")
                         .characterEncoding("utf-8")
@@ -95,7 +99,7 @@ class MemberControllerTest {
                                         prettyPrint()
                                 ),
 //                                pathParameters(
-//                                        parameterWithName("id").description("조회하고 싶은 게시글의 번호")
+//                                        parameterWithName("X").description("없음")
 //                                ),
 //                                requestParameters(
 //                                        parameterWithName("X").description("쿼리 파라미터 없음")
@@ -118,5 +122,85 @@ class MemberControllerTest {
                         )
                 );
     }
+
+    @Test
+    @DisplayName("회원 정보를 검색한다.")
+    public void searchMemberTest() throws Exception {
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"image_url");
+        given(feignPostRemoteService.searchMember(any())).willReturn(Collections.singletonList(memberDto));
+        given(jwtService.findIdentityByToken(any())).willReturn("id");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/display/member/search")
+                        .param("input", "input")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "accessToken Example")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("member-search",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+                                requestParameters(
+                                        parameterWithName("input").description("검색어")
+                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                ),
+                                relaxedResponseFields(
+                                        fieldWithPath("members[]").type(List.class).description("회원 정보"),
+                                        fieldWithPath("members[].id").type(MemberDto.class).description("회원 식별자"),
+                                        fieldWithPath("members[].identity").type(String.class).description("아이디"),
+                                        fieldWithPath("members[].nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("members[].role").type(String.class).description("역할"),
+                                        fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진")
+                                )
+                        )
+                );
+    }
+
+
+    @Test
+    @DisplayName("회원을 팔로잉한다.")
+    public void followingTest() throws Exception {
+        given(jwtService.findIdentityByToken(any())).willReturn("id");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.post("/display/member/follow/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "accessToken Example")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("follow",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+                                pathParameters(
+                                        parameterWithName("id").description("팔로잉하는 회원 식별자")
+                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                )
+                        )
+                );
+    }
+
 
 }
