@@ -30,7 +30,7 @@ public class StatisticsController {
     public StatisticsDto getPostsByStatistics(@PathVariable("year") int year, @PathVariable("month") int month, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity).orElseThrow(EntityNotFoundException::new);
         LocalDate startDate = LocalDate.of(year, month, 1);
-        LocalDate endDate = LocalDate.of(year, month + 1, 1);
+        LocalDate endDate = LocalDate.of(year, month, 30);
         List<Post> posts = postRepository.findAllByMemberAndCreateMonth(member, startDate, endDate).orElseThrow(EntityNotFoundException::new);
         List<EmotionCount> emotionCounts = posts.stream()
                 .collect(groupingBy(Post::getEmotion))
