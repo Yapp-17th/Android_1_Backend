@@ -3,6 +3,7 @@ package org.picon.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jdk.vm.ci.meta.Local;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -124,7 +126,6 @@ class PostControllerTest {
                                         fieldWithPath("posts[].address.addrCity").type(String.class).description("시").optional(),
                                         fieldWithPath("posts[].address.addrDo").type(String.class).description("도").optional(),
                                         fieldWithPath("posts[].address.addrGu").type(String.class).description("구").optional(),
-                                        fieldWithPath("posts[].createdDate").type(String.class).description("생성날짜").optional(),
                                         fieldWithPath("posts[].emotion").type(Emotion.class).description("감정").optional(),
                                         fieldWithPath("posts[].memo").type(String.class).description("메모").optional()
                                 )
@@ -193,6 +194,7 @@ class PostControllerTest {
                                         fieldWithPath("post.address.addrCity").type(JsonFieldType.STRING).description("시").optional(),
                                         fieldWithPath("post.address.addrDo").type(JsonFieldType.STRING).description("도").optional(),
                                         fieldWithPath("post.address.addrGu").type(JsonFieldType.STRING).description("구").optional(),
+                                        fieldWithPath("post.createdDate").type(LocalDate.class).description("생성날짜").optional(),
                                         fieldWithPath("post.emotion").type(Emotion.class).description("감정").optional(),
                                         fieldWithPath("post.memo").type(JsonFieldType.STRING).description("메모").optional()
                                 )
