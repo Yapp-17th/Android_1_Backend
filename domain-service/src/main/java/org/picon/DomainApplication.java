@@ -29,7 +29,8 @@ public class DomainApplication {
                 .setFieldMatchingEnabled(true)
                 .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
         modelMapper.createTypeMap(Post.class, PostDto.class)
-                .addMapping(e -> e.getMember().getProfileImageUrl(), PostDto::setProfileImageUrl);
+                .addMapping(e -> e.getMember().getProfileImageUrl(), PostDto::setProfileImageUrl)
+                .addMapping(e -> e.getCreateDate(),PostDto::setCreatedDate);
         modelMapper.createTypeMap(Member.class, MemberDto.class)
                 .addMapping(Member::getCreateDate, MemberDto::setCreatedDate);
 

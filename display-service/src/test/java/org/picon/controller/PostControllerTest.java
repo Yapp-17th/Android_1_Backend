@@ -124,6 +124,7 @@ class PostControllerTest {
                                         fieldWithPath("posts[].address.addrCity").type(String.class).description("시").optional(),
                                         fieldWithPath("posts[].address.addrDo").type(String.class).description("도").optional(),
                                         fieldWithPath("posts[].address.addrGu").type(String.class).description("구").optional(),
+                                        fieldWithPath("posts[].createdDate").type(String.class).description("생성날짜").optional(),
                                         fieldWithPath("posts[].emotion").type(Emotion.class).description("감정").optional(),
                                         fieldWithPath("posts[].memo").type(String.class).description("메모").optional()
                                 )
