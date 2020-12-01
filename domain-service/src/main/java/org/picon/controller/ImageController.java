@@ -24,7 +24,7 @@ public class ImageController {
     }
 
     @PostMapping("/member/image")
-    public ProfileResponse ImagUpload(@RequestPart("profile") MultipartFile multipartFile) throws IOException {
+    public ProfileResponse ImagUpload(@RequestPart("image") MultipartFile multipartFile) throws IOException {
         return new ProfileResponse(s3Uploader.uploadImage(multipartFile, "picon/profile"));
     }
 }
