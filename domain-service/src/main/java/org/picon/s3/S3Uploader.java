@@ -42,6 +42,12 @@ public class S3Uploader {
         return ImagesUrls;
     }
 
+    public String uploadImage(MultipartFile multipartFile, String dirName) throws IOException {
+        String fielName = dirName+"/" +UUID.randomUUID().toString();
+        String profileUrl = putS3(multipartFile, fielName);
+        return profileUrl;
+    }
+
     private String putS3(MultipartFile multipartFile, String fileName) throws IOException {
         ObjectMetadata objectMetadata = new ObjectMetadata();
 
@@ -55,4 +61,5 @@ public class S3Uploader {
 
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
+
 }

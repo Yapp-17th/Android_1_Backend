@@ -46,11 +46,12 @@ link:asciidocs-guide.html[asciidocs 가이드]
 include::get-post.adoc[]
 
 [cols="2,3,2"]
-.이미지 업로드
+.이미지
 |===
 |API 이름 | 설명 | 진행 현황
 
 |이미지 업로드 | 이미지 파일들을 업로드한다. | 완료
+|프로필 이미지 업로드 | 프로필 이미지를 업로드한다. | 완료
 
 |===
 
@@ -74,12 +75,32 @@ include::{snippets}/post-uploadImages/http-response.adoc[]
 
 include::{snippets}/post-uploadImages/curl-request.adoc[]
 
+
+=== 프로필 이미지 업로드
+
+==== 응답
+
+include::{snippets}/member-uploadImage/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/member-uploadImage/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/member-uploadImage/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/member-uploadImage/curl-request.adoc[]
+
 [cols="2,3,2"]
-.회원 조회
+.회원
 |===
 |API 이름 | 설명 | 진행 현황
 
 |회원 조회 | 자신의 회원 정보를 조회한다 | 완료
+|회원 프로필 업로드 | 자신의 프로필 사진을 업로드한다 | 완료
 
 |===
 
@@ -120,6 +141,66 @@ include::{snippets}/member-get/http-response.adoc[]
 ==== curl
 
 include::{snippets}/member-get/curl-request.adoc[]
+
+=== 프로필 업로드
+
+==== 요청
+
+include::{snippets}/member-uploadProfile/request-fields.adoc[]
+
+===== request-header
+
+include::{snippets}/member-uploadProfile/request-headers.adoc[]
+
+
+==== 응답
+
+include::{snippets}/member-uploadProfile/response-fields.adoc[]
+
+===== response-body
+
+include::{snippets}/member-uploadProfile/response-body.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/member-uploadProfile/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/member-uploadProfile/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/member-uploadProfile/curl-request.adoc[]
+
+=== 프로필 삭제
+
+==== 요청
+
+===== request-header
+
+include::{snippets}/member-deleteProfile/request-headers.adoc[]
+
+
+==== 응답
+
+include::{snippets}/member-deleteProfile/response-fields.adoc[]
+
+===== response-body
+
+include::{snippets}/member-deleteProfile/response-body.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/member-deleteProfile/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/member-deleteProfile/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/member-deleteProfile/curl-request.adoc[]
 
 [cols="2,3,2"]
 .통계 조회

@@ -4,6 +4,8 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.member.MemberDto;
+import org.picon.dto.member.ProfileRequest;
+import org.picon.dto.member.ProfileResponse;
 import org.picon.dto.post.PostDto;
 import org.picon.dto.statics.StatisticsDto;
 import org.picon.exception.BusinessException;
@@ -92,6 +94,34 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
+    @Override
+    public ProfileResponse ImageUpload(MultipartFile multipartFile) {
+
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override
+    public MemberDto UploadProfile(String identity, ProfileRequest profileRequest) {
+
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
     @Override public List<MemberDto> searchMember(String input) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
@@ -105,6 +135,19 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     }
 
     @Override public void follow(String identity, Long followMemberId) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override
+    public void deleteProfile(String identityByToken) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
