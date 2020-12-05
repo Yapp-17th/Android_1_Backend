@@ -29,8 +29,19 @@ public class PostController {
     private final MemberRepository memberRepository;
 
     @GetMapping(path = "/")
-    public List<PostDto> readPostsByMember(@RequestParam("identity") String identity) {
+    public List<PostDto> readPostsByLoginId(@RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity)
+                .orElseThrow(EntityNotFoundException::new);
+        List<Post> findPosts = postRepository.findAllByMember(member);
+        List<PostDto> collect = findPosts.stream()
+                .map(e -> modelMapper.map(e, PostDto.class))
+                .collect(Collectors.toList());
+        return collect;
+    }
+
+    @GetMapping(path = "/member")
+    public List<PostDto> readPostsById(@RequestParam("id") Long id) {
+        Member member = memberRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
         List<Post> findPosts = postRepository.findAllByMember(member);
         List<PostDto> collect = findPosts.stream()

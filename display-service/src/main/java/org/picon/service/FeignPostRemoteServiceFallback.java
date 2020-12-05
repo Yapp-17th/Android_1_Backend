@@ -19,7 +19,19 @@ import java.util.List;
 public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     private final Throwable cause;
 
-    @Override public List<PostDto> readPostsByMember(String identity) {
+    @Override public List<PostDto> readPostsByLoginId(String identity) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override public List<PostDto> readPostsById(Long id) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
@@ -109,7 +121,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
     }
 
     @Override
-    public MemberDto UploadProfile(String identity, ProfileRequest profileRequest) {
+    public MemberDto uploadProfile(String identity, ProfileRequest profileRequest) {
 
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"

@@ -1,7 +1,6 @@
 package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.BaseResponse;
 import org.picon.dto.post.PostDto;
 import org.picon.dto.post.PostRequest;
@@ -26,7 +25,7 @@ public class PostController {
     @GetMapping("/post/")
     public ResponseEntity<?> getPosts(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        List<PostDto> postDtos = feignPostRemoteService.readPostsByMember(identityByToken);
+        List<PostDto> postDtos = feignPostRemoteService.readPostsByLoginId(identityByToken);
         return ResponseEntity.ok().body(new PostResponse(postDtos));
     }
 
@@ -35,6 +34,13 @@ public class PostController {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
         PostDto postDto = feignPostRemoteService.createPost(postRequest.getPost(), identityByToken);
         return ResponseEntity.ok().body(new BaseResponse());
+    }
+
+    @GetMapping("/post/member/{id}")
+    public ResponseEntity<?> getPostsOfMember(@RequestHeader("AccessToken") String accessToken, @PathVariable Long id) {
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        List<PostDto> postDtos = feignPostRemoteService.readPostsById(id);
+        return ResponseEntity.ok().body(new PostResponse(postDtos));
     }
 
     @DeleteMapping("/post/{id}")

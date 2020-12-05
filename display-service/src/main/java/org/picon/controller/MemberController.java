@@ -7,6 +7,8 @@ import org.picon.dto.member.MemberDto;
 import org.picon.dto.member.MemberResponse;
 import org.picon.dto.member.MemberSearchResponse;
 import org.picon.dto.member.ProfileRequest;
+import org.picon.dto.post.PostDto;
+import org.picon.dto.post.PostResponse;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +27,14 @@ public class MemberController {
     private final JwtService jwtService;
 
     @PostMapping("/member/profile")
-    public ResponseEntity uploadProfile(@RequestHeader("AccessToken")String accessToken,@RequestBody ProfileRequest profileRequest) {
+    public ResponseEntity<?> uploadProfile(@RequestHeader("AccessToken")String accessToken,@RequestBody ProfileRequest profileRequest) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        MemberDto memberDto = feignPostRemoteService.UploadProfile(identityByToken,profileRequest);
+        MemberDto memberDto = feignPostRemoteService.uploadProfile(identityByToken,profileRequest);
         return ResponseEntity.ok().body(new MemberResponse(memberDto));
     }
 
     @DeleteMapping("/member/profile")
-    public ResponseEntity deleteProfile(@RequestHeader("AccessToken")String accessToken) {
+    public ResponseEntity<?> deleteProfile(@RequestHeader("AccessToken")String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
         feignPostRemoteService.deleteProfile(identityByToken);
         return ResponseEntity.ok().body(new BaseResponse());

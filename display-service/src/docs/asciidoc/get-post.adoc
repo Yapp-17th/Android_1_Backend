@@ -1,6 +1,7 @@
 
 == 게시글
 
+// /* ========== <게시글 조회 시작> ========== */
 === 게시글 조회
 
 ==== 요청
@@ -36,6 +37,8 @@ include::{snippets}/post-read/http-response.adoc[]
 ==== curl
 
 include::{snippets}/post-read/curl-request.adoc[]
+
+// /* ========== <게시글 조회 끝> ========== */
 
 === 게시글 생성
 
@@ -110,3 +113,43 @@ include::{snippets}/post-delete/http-response.adoc[]
 ==== curl
 
 include::{snippets}/post-delete/curl-request.adoc[]
+
+// /* ========== <지정한 회원의 게시글 조회 끝> ========== */
+
+=== 지정한 회원의 게시글 조회
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/post-member-read/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/post-member-read/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/post-member-read/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/post-member-read/response-fields.adoc[]
+
+==== 응답
+
+include::{snippets}/post-member-read/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/post-member-read/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/post-member-read/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/post-member-read/curl-request.adoc[]
+
+// /* ========== <지정한 회원의 게시글 조회 끝> ========== */

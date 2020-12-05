@@ -81,7 +81,7 @@ class MemberControllerTest {
         ProfileRequest profileRequest = new ProfileRequest("profileURL");
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "ProfileURL", false);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
-        given(feignPostRemoteService.UploadProfile("id", profileRequest)).willReturn(memberDto);
+        given(feignPostRemoteService.uploadProfile("id", profileRequest)).willReturn(memberDto);
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/member/profile")

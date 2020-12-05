@@ -17,7 +17,10 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @FeignClient(name = "domain", fallbackFactory = FeignPostRemoteServiceFallbackFactory.class)
 public interface FeignPostRemoteService {
     @GetMapping(path = "/domain/post/")
-    List<PostDto> readPostsByMember(@RequestParam("identity") String identity);
+    List<PostDto> readPostsByLoginId(@RequestParam("identity") String identity);
+
+    @GetMapping(path = "/domain/post/member")
+    List<PostDto> readPostsById(@RequestParam("id") Long id);
 
     @PostMapping(path = "/domain/post/")
     PostDto createPost(@RequestBody PostDto post, @RequestParam("identity") String identity);
@@ -38,7 +41,7 @@ public interface FeignPostRemoteService {
     ProfileResponse ImageUpload(@RequestPart("image") MultipartFile multipartFile);
 
     @PostMapping(path = "/domain/member/profile")
-    MemberDto UploadProfile(@RequestParam("identity") String identity, @RequestBody ProfileRequest profileRequest);
+    MemberDto uploadProfile(@RequestParam("identity") String identity, @RequestBody ProfileRequest profileRequest);
 
     @GetMapping(path = "/domain/member/search")
     List<MemberDto> searchMember(@RequestParam("identity") String identity, @RequestParam("input") String input);

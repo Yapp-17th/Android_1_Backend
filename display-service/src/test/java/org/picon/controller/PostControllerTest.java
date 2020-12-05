@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -81,13 +81,13 @@ class PostControllerTest {
     @Test
     @DisplayName("게시글 정보를 얻어온다.")
     public void getPostTest() throws Exception {
-        given(feignPostRemoteService.readPostsByMember(any())).willReturn(Collections.singletonList(getExpectedPostDto()));
+        given(feignPostRemoteService.readPostsByLoginId(anyString())).willReturn(Collections.singletonList(getExpectedPostDto()));
         given(jwtService.findIdentityByToken(any())).willReturn("identity");
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/display/post/", 1)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -104,6 +104,60 @@ class PostControllerTest {
 //                                pathParameters(
 //                                        parameterWithName("id").description("조회하고 싶은 게시글의 번호")
 //                                ),
+//                                requestParameters(
+//                                        parameterWithName("X").description("쿼리 파라미터 없음")
+//                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                ),
+//                                requestFields(
+//                                        fieldWithPath("X").description("요청 본문 없음")
+//                                ),
+                                relaxedResponseFields(
+                                        fieldWithPath("posts[]").type(List.class).description("게시글 정보 리스트"),
+                                        fieldWithPath("posts[].id").type(Integer.class).description("게시글 식별자"),
+                                        fieldWithPath("posts[].coordinate").type(CoordinateDto.class).description("게시글이 가진 좌표,주소 객체"),
+                                        fieldWithPath("posts[].coordinate.lat").type(String.class).description("위도"),
+                                        fieldWithPath("posts[].coordinate.lng").type(String.class).description("경도"),
+                                        fieldWithPath("posts[].address").type(AddressDto.class).description("게시글이 가진 주소 객체"),
+                                        fieldWithPath("posts[].address.address").type(String.class).description("주소명").optional(),
+                                        fieldWithPath("posts[].address.addrCity").type(String.class).description("시").optional(),
+                                        fieldWithPath("posts[].address.addrDo").type(String.class).description("도").optional(),
+                                        fieldWithPath("posts[].address.addrGu").type(String.class).description("구").optional(),
+                                        fieldWithPath("posts[].emotion").type(Emotion.class).description("감정").optional(),
+                                        fieldWithPath("posts[].memo").type(String.class).description("메모").optional()
+                                )
+                        )
+                );
+    }
+
+    @Test
+    @DisplayName("지정한 회원의 게시글 정보를 얻어온다.")
+    public void getPostsOfMemberTest() throws Exception {
+        given(feignPostRemoteService.readPostsById(anyLong())).willReturn(Collections.singletonList(getExpectedPostDto()));
+        given(jwtService.findIdentityByToken(any())).willReturn("identity");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/display/post/member/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "{{authToken}}")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("post-member-read",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+                                pathParameters(
+                                        parameterWithName("id").description("조회할 회원의 식별자")
+                                ),
 //                                requestParameters(
 //                                        parameterWithName("X").description("쿼리 파라미터 없음")
 //                                ),
@@ -155,7 +209,7 @@ class PostControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/post")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
                         .content(objectMapper.writeValueAsString(new PostRequest(getExpectedPostDto())))
         )
@@ -213,7 +267,7 @@ class PostControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/display/post")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
                         .content(requestPostStr)
         )
@@ -229,7 +283,7 @@ class PostControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.delete("/display/post/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
