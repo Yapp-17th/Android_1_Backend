@@ -8,11 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.picon.config.RestDocsConfiguration;
-import org.picon.dto.BaseResponse;
 import org.picon.dto.member.MemberDto;
-import org.picon.dto.member.MemberResponse;
 import org.picon.dto.member.ProfileRequest;
-import org.picon.dto.post.PostRequest;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +28,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -213,7 +209,7 @@ class MemberControllerTest {
     @Rollback
     public void searchMemberTest() throws Exception {
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"image_url");
-        given(feignPostRemoteService.searchMember(any())).willReturn(Collections.singletonList(memberDto));
+        given(feignPostRemoteService.searchMember(identityByToken, any())).willReturn(Collections.singletonList(memberDto));
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(

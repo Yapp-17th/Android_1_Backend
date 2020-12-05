@@ -32,10 +32,10 @@ public class Member extends BaseEntity {
     /**
      * 나를 팔로우하는 사람들
      */
-    private Follower follower;
+    private Followers followers;
 
     public void following(Member followingMember) {
-        if (followings.isAlreadyFollwingMember(followingMember)) {
+        if (followings.isAlreadyFollowingMember(followingMember)) {
             throw new IllegalStateException("이미 팔로잉한 멤버입니다.");
         }
         followings.following(this, followingMember);
@@ -46,6 +46,10 @@ public class Member extends BaseEntity {
     }
 
     public List<Member> getFollowerMembers() {
-        return follower.getFollowerMembers();
+        return followers.getFollowerMembers();
+    }
+
+    public Boolean isFollowing(Member targetMember) {
+        return followings.isAlreadyFollowingMember(targetMember);
     }
 }

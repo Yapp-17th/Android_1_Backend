@@ -122,7 +122,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public List<MemberDto> searchMember(String input) {
+    @Override public List<MemberDto> searchMember(String identity, String input) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

@@ -46,8 +46,9 @@ public class MemberController {
     }
 
     @GetMapping("/member/search")
-    public ResponseEntity<?> searchMember(@RequestParam("input") String input) {
-        List<MemberDto> memberDtos = feignPostRemoteService.searchMember(input);
+    public ResponseEntity<?> searchMember(@RequestHeader("AccessToken") String accessToken, @RequestParam("input") String input) {
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        List<MemberDto> memberDtos = feignPostRemoteService.searchMember(identityByToken, input);
         return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
     }
 

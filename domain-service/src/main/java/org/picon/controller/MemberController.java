@@ -2,7 +2,7 @@ package org.picon.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.*;
+import org.modelmapper.ModelMapper;
 import org.picon.domain.Member;
 import org.picon.dto.MemberDto;
 import org.picon.dto.ProfileRequest;
@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,31 +25,31 @@ public class MemberController {
 
     @PostMapping("/profile")
     @Transactional
-    public MemberDto uploadProfile(@RequestParam("identity")String identity, @RequestBody ProfileRequest profileRequest) {
+    public MemberDto uploadProfile(@RequestParam("identity") String identity, @RequestBody ProfileRequest profileRequest) {
         Member findMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         Member uploadProfile = Member.builder()
                 .profileImageUrl(profileRequest.getProfileUrl())
                 .role(findMember.getRole())
-                .follower(findMember.getFollower())
+                .followers(findMember.getFollowers())
                 .followings(findMember.getFollowings())
                 .identity(findMember.getIdentity())
                 .password(findMember.getPassword())
                 .nickName(findMember.getNickName())
                 .id(findMember.getId())
                 .build();
-        return modelMapper.map(memberRepository.save(uploadProfile),MemberDto.class);
+        return modelMapper.map(memberRepository.save(uploadProfile), MemberDto.class);
     }
 
     @DeleteMapping("/profile")
     @Transactional
-    public Member deleteProfile(@RequestParam("identity")String identity) {
+    public Member deleteProfile(@RequestParam("identity") String identity) {
         Member findMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         Member uploadProfile = Member.builder()
                 .profileImageUrl(null)
                 .role(findMember.getRole())
-                .follower(findMember.getFollower())
+                .followers(findMember.getFollowers())
                 .followings(findMember.getFollowings())
                 .identity(findMember.getIdentity())
                 .password(findMember.getPassword())
@@ -61,17 +60,20 @@ public class MemberController {
     }
 
     @GetMapping("/search")
-    public List<MemberDto> searchMembers(@RequestParam("input") String input) {
+    public List<MemberDto> searchMembers(@RequestParam("identity") String identity, @RequestParam("input") String input) {
+        Member loginMember = memberRepository.findByIdentity(identity)
+                .orElseThrow(EntityNotFoundException::new);
         List<Member> members = memberRepository.searchAll(input);
-        return members.stream()
-                .map(e -> modelMapper.map(e, MemberDto.class))
+        List<MemberDto> memberDtos = members.stream()
+                .map(member -> MemberDto.fromForSearch(member, loginMember))
                 .collect(Collectors.toList());
+        return memberDtos;
     }
 
     @GetMapping("/")
     public MemberDto getMember(@RequestParam("identity") String identity) {
         Member findMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
-        return modelMapper.map(findMember,MemberDto.class);
+        return modelMapper.map(findMember, MemberDto.class);
     }
 }

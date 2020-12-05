@@ -26,7 +26,7 @@ public class Followings {
                 .collect(Collectors.toList());
     }
 
-    protected boolean isAlreadyFollwingMember(Member followingMember) {
+    protected boolean isAlreadyFollowingMember(Member followingMember) {
         return getFollowingMembers().contains(followingMember);
     }
 }

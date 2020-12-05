@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Embeddable
-public class Follower {
+public class Followers {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "followMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Follow> follows = new ArrayList<>();
 

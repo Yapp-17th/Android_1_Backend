@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.picon.domain.Member;
 
 import java.time.LocalDate;
 
@@ -24,4 +24,17 @@ public class MemberDto {
     private LocalDate createdDate;
     private String role;
     private String profileImageUrl;
+    private Boolean isFollowing;
+
+    public static MemberDto fromForSearch(Member member, Member loginMember) {
+        return MemberDto.builder()
+                .id(member.getId())
+                .identity(member.getIdentity())
+                .nickName(member.getNickName())
+                .createdDate(member.getCreateDate())
+                .role(member.getRole())
+                .profileImageUrl(member.getProfileImageUrl())
+                .isFollowing(loginMember.isFollowing(member))
+                .build();
+    }
 }
