@@ -26,7 +26,7 @@ public class MemberDto {
     private String profileImageUrl;
     private Boolean isFollowing;
 
-    public static MemberDto fromForSearch(Member member, Member loginMember) {
+    public static MemberDto from(Member member, Member loginMember) {
         return MemberDto.builder()
                 .id(member.getId())
                 .identity(member.getIdentity())

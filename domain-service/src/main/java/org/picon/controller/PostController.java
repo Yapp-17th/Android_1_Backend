@@ -29,10 +29,12 @@ public class PostController {
     private final MemberRepository memberRepository;
 
     @GetMapping(path = "/")
-    public List<PostDto> readPostsByLoginId(@RequestParam("identity") String identity) {
-        Member member = memberRepository.findByIdentity(identity)
+    public List<PostDto> readPostsWithFollowingMembersByLoginId(@RequestParam("identity") String identity) {
+        Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
-        List<Post> findPosts = postRepository.findAllByMember(member);
+        List<Member> followingMembers = loginMember.getFollowingMembers();
+        followingMembers.add(loginMember);
+        List<Post> findPosts = postRepository.findAllByMemberIn(followingMembers);
         List<PostDto> collect = findPosts.stream()
                 .map(e -> modelMapper.map(e, PostDto.class))
                 .collect(Collectors.toList());

@@ -8,7 +8,9 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+    properties:
+      hibernate.default_batch_fetch_size: 500
   application:
     name: domain
   servlet:

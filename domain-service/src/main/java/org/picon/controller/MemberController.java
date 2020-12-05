@@ -65,7 +65,7 @@ public class MemberController {
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> members = memberRepository.searchAll(input);
         List<MemberDto> memberDtos = members.stream()
-                .map(member -> MemberDto.fromForSearch(member, loginMember))
+                .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
         return memberDtos;
     }
@@ -83,7 +83,7 @@ public class MemberController {
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> followingMembers = loginMember.getFollowingMembers();
         return followingMembers.stream()
-                .map(e -> modelMapper.map(e, MemberDto.class))
+                .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
     }
 
@@ -93,7 +93,7 @@ public class MemberController {
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> followerMembers = loginMember.getFollowerMembers();
         return followerMembers.stream()
-                .map(e -> modelMapper.map(e, MemberDto.class))
+                .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
     }
 
