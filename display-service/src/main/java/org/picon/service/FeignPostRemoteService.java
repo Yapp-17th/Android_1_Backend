@@ -48,5 +48,11 @@ public interface FeignPostRemoteService {
 
     @DeleteMapping(path = "/domain/member/profile")
     void deleteProfile(@RequestParam("identity") String identity);
+
+    @GetMapping(path = "/domain/member/following")
+    List<MemberDto> getFollowingMembers(@RequestParam("identity") String identityByToken);
+
+    @GetMapping(path = "/domain/member/follower")
+    List<MemberDto> getFollowerMembers(@RequestParam("identity") String identityByToken);
 }
 

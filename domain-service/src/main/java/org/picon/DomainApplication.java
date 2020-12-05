@@ -1,5 +1,7 @@
 package org.picon;
 
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
 import org.picon.domain.Member;
@@ -18,6 +20,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class DomainApplication {
     public static void main(String args[]) {
         SpringApplication.run(DomainApplication.class, args);
+    }
+
+    public static <T> T initializeAndUnproxy(T entity) {
+        if (entity == null) {
+            throw new NullPointerException("Entity passed for initialization is null");
+        }
+
+        Hibernate.initialize(entity);
+        if (entity instanceof HibernateProxy) {
+            entity = (T) ((HibernateProxy) entity).getHibernateLazyInitializer()
+                    .getImplementation();
+        }
+        return entity;
     }
 
     @Bean

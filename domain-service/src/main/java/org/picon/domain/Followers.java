@@ -1,6 +1,7 @@
 package org.picon.domain;
 
 import lombok.NoArgsConstructor;
+import org.picon.DomainApplication;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
@@ -15,9 +16,11 @@ public class Followers {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "followMember", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Follow> follows = new ArrayList<>();
 
-    public List<Member> getFollowerMembers() {
-        return follows.stream()
+    protected List<Member> getFollowerMembers() {
+        List<Member> members = follows.stream()
                 .map(e -> e.member)
+                .map(DomainApplication::initializeAndUnproxy)
                 .collect(Collectors.toList());
+        return members;
     }
 }

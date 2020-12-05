@@ -76,4 +76,26 @@ public class MemberController {
                 .orElseThrow(EntityNotFoundException::new);
         return modelMapper.map(findMember, MemberDto.class);
     }
+
+    @GetMapping("/following")
+    public List<MemberDto> getFollowings(@RequestParam("identity") String identity) {
+        Member loginMember = memberRepository.findByIdentity(identity)
+                .orElseThrow(EntityNotFoundException::new);
+        List<Member> followingMembers = loginMember.getFollowingMembers();
+        return followingMembers.stream()
+                .map(e -> modelMapper.map(e, MemberDto.class))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/follower")
+    public List<MemberDto> getFollowers(@RequestParam("identity") String identity) {
+        Member loginMember = memberRepository.findByIdentity(identity)
+                .orElseThrow(EntityNotFoundException::new);
+        List<Member> followerMembers = loginMember.getFollowerMembers();
+        return followerMembers.stream()
+                .map(e -> modelMapper.map(e, MemberDto.class))
+                .collect(Collectors.toList());
+    }
+
+
 }

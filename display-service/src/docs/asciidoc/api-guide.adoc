@@ -80,7 +80,7 @@ include::{snippets}/post-uploadImages/curl-request.adoc[]
 
 ==== 응답
 
-include::{snippets}/member-uploadImage/response-fields.adoc[]
+//include::{snippets}/member-uploadImage/response-fields.adoc[]
 
 ==== 요청 HTTP
 
@@ -106,7 +106,7 @@ include::{snippets}/member-uploadImage/curl-request.adoc[]
 
 == 회원
 
-=== 회원 조회
+=== 로그인 한 회원의 정보 조회
 
 ==== 요청
 
@@ -201,6 +201,163 @@ include::{snippets}/member-deleteProfile/http-response.adoc[]
 ==== curl
 
 include::{snippets}/member-deleteProfile/curl-request.adoc[]
+
+// ========== <전체 회원 검색 시작> ==========
+
+=== 전체 회원 검색
+
+==== 요청
+
+===== path-parameter
+
+//include::{snippets}/member-search/path-parameters.adoc[]
+
+===== request-parameter
+
+include::{snippets}/member-search/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/member-search/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/member-search/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/member-search/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/member-search/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/member-search/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/member-search/curl-request.adoc[]
+// ========== <전체 회원 검색 끝> ==========
+
+// ========== <팔로우 하기 시작> ==========
+=== 팔로우 하기
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/follow/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/follow/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/follow/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/follow/request-body.adoc[]
+
+==== 응답
+
+//include::{snippets}/follow/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/follow/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/follow/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/follow/curl-request.adoc[]
+
+// ========== <팔로우 하기 끝> ==========
+
+// ========== <내가 팔로우한 회원 리스트(팔로잉) 조회 시작> ==========
+
+=== 내가 팔로우한 회원 리스트(팔로잉) 조회
+
+==== 요청
+
+===== path-parameter
+
+//include::{snippets}/member-search/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/following/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/following/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/following/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/following/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/following/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/following/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/following/curl-request.adoc[]
+
+// ========== <내가 팔로우한 회원 리스트(팔로잉) 조회 끝> ==========
+
+// ========== <나를 팔로우한 회원 리스트(팔로워) 조회 시작> ==========
+=== 나를 팔로우한 회원 리스트(팔로워)
+
+==== 요청
+
+===== path-parameter
+
+//include::{snippets}/follower/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/follower/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/follower/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/follower/request-body.adoc[]
+
+==== 응답
+
+include::{snippets}/follower/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/follower/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/follower/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/follower/curl-request.adoc[]
+
+// ========== <나를 팔로우한 회원 리스트(팔로워) 조회 끝> ==========
 
 [cols="2,3,2"]
 .통계 조회

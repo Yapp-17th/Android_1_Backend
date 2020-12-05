@@ -158,4 +158,28 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
             throw new BusinessException(cause);
         }
     }
+
+    @Override public List<MemberDto> getFollowingMembers(String identityByToken) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
+
+    @Override public List<MemberDto> getFollowerMembers(String identityByToken) {
+        if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
+            log.error("404 error took place"
+                    + ". Error message: "
+                    + cause.getLocalizedMessage());
+            throw new RuntimeException(cause);
+        } else {
+            log.error("Other error took place: " + cause.getLocalizedMessage());
+            throw new BusinessException(cause);
+        }
+    }
 }

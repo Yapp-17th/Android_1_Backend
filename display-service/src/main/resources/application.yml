@@ -28,7 +28,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutImMilliseconds: 10000 # Ribbon에서 설정한 타임아웃보다 커야지 동작
+            timeoutInMilliseconds: 10000 # Ribbon에서 설정한 타임아웃보다 커야지 동작
 JWT:
   SECRET:
     KEY: ${JWT_SECRET_KEY}

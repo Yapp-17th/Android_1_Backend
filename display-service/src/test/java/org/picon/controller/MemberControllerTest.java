@@ -79,9 +79,9 @@ class MemberControllerTest {
     @Rollback
     void uploadProfileSuccess() throws Exception {
         ProfileRequest profileRequest = new ProfileRequest("profileURL");
-        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"ProfileURL");
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "ProfileURL", false);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
-        given(feignPostRemoteService.UploadProfile("id",profileRequest)).willReturn(memberDto);
+        given(feignPostRemoteService.UploadProfile("id", profileRequest)).willReturn(memberDto);
 
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/member/profile")
@@ -155,10 +155,10 @@ class MemberControllerTest {
     }
 
     @Test
-    @DisplayName("회원 정보를 얻어온다.")
+    @DisplayName("로그인 한 회원 정보를 얻어온다.")
     @Rollback
     public void getMemberTest() throws Exception {
-        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"image_url");
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
         given(feignPostRemoteService.getMember(any())).willReturn(memberDto);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
@@ -198,7 +198,8 @@ class MemberControllerTest {
                                         fieldWithPath("member.nickName").type(String.class).description("닉네임"),
                                         fieldWithPath("member.role").type(String.class).description("역할"),
                                         fieldWithPath("member.createdDate").type(LocalDate.class).description("회원가입 날짜"),
-                                        fieldWithPath("member.profileImageUrl").type(String.class).description("프로필 이미지 사진")
+                                        fieldWithPath("member.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("member.isFollowing").type(Boolean.class).description("무시하세요")
                                 )
                         )
                 );
@@ -208,8 +209,8 @@ class MemberControllerTest {
     @DisplayName("회원 정보를 검색한다.")
     @Rollback
     public void searchMemberTest() throws Exception {
-        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now() ,"image_url");
-        given(feignPostRemoteService.searchMember(identityByToken, any())).willReturn(Collections.singletonList(memberDto));
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
+        given(feignPostRemoteService.searchMember(any(), any())).willReturn(Collections.singletonList(memberDto));
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
@@ -244,7 +245,8 @@ class MemberControllerTest {
                                         fieldWithPath("members[].nickName").type(String.class).description("닉네임"),
                                         fieldWithPath("members[].role").type(String.class).description("역할"),
                                         fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
-                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진")
+                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
                                 )
                         )
                 );
@@ -280,6 +282,99 @@ class MemberControllerTest {
                                 requestHeaders(
                                         headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
                                         headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                )
+                        )
+                );
+    }
+
+
+    @Test
+    @DisplayName("팔로잉 리스트를 조회한다.")
+    @Rollback
+    public void getFollowingsTest() throws Exception {
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
+        given(feignPostRemoteService.getFollowingMembers(any())).willReturn(Collections.singletonList(memberDto));
+        given(jwtService.findIdentityByToken(any())).willReturn("id");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/display/member/following")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "accessToken Example")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("following",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+//                                requestParameters(
+//                                        parameterWithName("input").description("검색어")
+//                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                ),
+                                relaxedResponseFields(
+                                        fieldWithPath("members[]").type(List.class).description("회원 정보"),
+                                        fieldWithPath("members[].id").type(MemberDto.class).description("회원 식별자"),
+                                        fieldWithPath("members[].identity").type(String.class).description("아이디"),
+                                        fieldWithPath("members[].nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("members[].role").type(String.class).description("역할"),
+                                        fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
+                                )
+                        )
+                );
+    }
+
+    @Test
+    @DisplayName("팔로워 리스트를 조회한다.")
+    @Rollback
+    public void getFollowersTest() throws Exception {
+        MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
+        given(feignPostRemoteService.getFollowerMembers(any())).willReturn(Collections.singletonList(memberDto));
+        given(jwtService.findIdentityByToken(any())).willReturn("id");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/display/member/follower")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "accessToken Example")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("follower",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+//                                requestParameters(
+//                                        parameterWithName("input").description("검색어")
+//                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                ),
+                                relaxedResponseFields(
+                                        fieldWithPath("members[]").type(List.class).description("회원 정보"),
+                                        fieldWithPath("members[].id").type(MemberDto.class).description("회원 식별자"),
+                                        fieldWithPath("members[].identity").type(String.class).description("아이디"),
+                                        fieldWithPath("members[].nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("members[].role").type(String.class).description("역할"),
+                                        fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
                                 )
                         )
                 );

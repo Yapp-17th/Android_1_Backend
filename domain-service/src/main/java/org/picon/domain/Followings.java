@@ -1,11 +1,11 @@
 package org.picon.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import org.picon.DomainApplication;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,9 +21,11 @@ public class Followings {
     }
 
     public List<Member> getFollowingMembers() {
-        return follows.stream()
-                .map(e -> e.followMember)
+        List<Member> members = follows.stream()
+                .map(follow -> follow.followMember)
+                .map(DomainApplication::initializeAndUnproxy)
                 .collect(Collectors.toList());
+        return members;
     }
 
     protected boolean isAlreadyFollowingMember(Member followingMember) {

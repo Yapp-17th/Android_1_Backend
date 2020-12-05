@@ -59,4 +59,18 @@ public class MemberController {
         feignPostRemoteService.follow(identityByToken, followingMemberId);
         return ResponseEntity.ok().body(new BaseResponse());
     }
+
+    @GetMapping("/member/following")
+    public ResponseEntity<?> getFollowings(@RequestHeader("AccessToken") String accessToken) {
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        List<MemberDto> memberDtos = feignPostRemoteService.getFollowingMembers(identityByToken);
+        return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
+    }
+
+    @GetMapping("/member/follower")
+    public ResponseEntity<?> getFollower(@RequestHeader("AccessToken") String accessToken) {
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        List<MemberDto> memberDtos = feignPostRemoteService.getFollowerMembers(identityByToken);
+        return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
+    }
 }
