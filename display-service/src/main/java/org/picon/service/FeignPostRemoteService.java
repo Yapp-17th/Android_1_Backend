@@ -57,5 +57,8 @@ public interface FeignPostRemoteService {
 
     @GetMapping(path = "/domain/member/follower")
     List<MemberDto> getFollowerMembers(@RequestParam("identity") String identityByToken);
+
+    @DeleteMapping(path = "/domain/member/follow/{id}")
+    void unfollow(@RequestParam("identity") String identity, @PathVariable("id") Long followMemberId);
 }
 

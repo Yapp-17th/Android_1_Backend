@@ -280,6 +280,45 @@ include::{snippets}/follow/curl-request.adoc[]
 
 // ========== <팔로우 하기 끝> ==========
 
+// ========== <언팔로우 하기 시작> ==========
+=== 언팔로우 하기
+
+==== 요청
+
+===== path-parameter
+
+include::{snippets}/unfollow/path-parameters.adoc[]
+
+===== request-parameter
+
+//include::{snippets}/follow/request-parameters.adoc[]
+
+===== request-header
+
+include::{snippets}/unfollow/request-headers.adoc[]
+
+===== request-body
+
+include::{snippets}/unfollow/request-body.adoc[]
+
+==== 응답
+
+//include::{snippets}/follow/response-fields.adoc[]
+
+==== 요청 HTTP
+
+include::{snippets}/unfollow/http-request.adoc[]
+
+==== 응답 HTTP
+
+include::{snippets}/unfollow/http-response.adoc[]
+
+==== curl
+
+include::{snippets}/unfollow/curl-request.adoc[]
+
+// ========== <언팔로우 하기 끝> ==========
+
 // ========== <내가 팔로우한 회원 리스트(팔로잉) 조회 시작> ==========
 
 === 내가 팔로우한 회원 리스트(팔로잉) 조회

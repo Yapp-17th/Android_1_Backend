@@ -20,7 +20,7 @@ public class Followings {
         follows.add(follow);
     }
 
-    public List<Member> getFollowingMembers() {
+    protected List<Member> getFollowingMembers() {
         List<Member> members = follows.stream()
                 .map(follow -> follow.followMember)
                 .map(DomainApplication::initializeAndUnproxy)
@@ -30,5 +30,10 @@ public class Followings {
 
     protected boolean isAlreadyFollowingMember(Member followingMember) {
         return getFollowingMembers().contains(followingMember);
+    }
+
+    protected void unfollowing(Member member, Member followingMember) {
+        Follow follow = Follow.of(member, followingMember);
+        follows.remove(follow);
     }
 }

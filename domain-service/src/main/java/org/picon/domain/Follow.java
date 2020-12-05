@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "FOLLOW")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Builder
 public class Follow extends BaseEntity {
     @Id @Column(name = "FOLLOW_ID")
@@ -19,11 +20,13 @@ public class Follow extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID")
+    @EqualsAndHashCode.Include
     @NaturalId
     protected Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FOLLOW_MEMBER_ID", referencedColumnName = "MEMBER_ID")
+    @EqualsAndHashCode.Include
     @NaturalId
     protected Member followMember;
 

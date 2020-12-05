@@ -62,6 +62,14 @@ public class MemberController {
         return ResponseEntity.ok().body(new BaseResponse());
     }
 
+    @PostMapping("/member/unfollow/{id}")
+    public ResponseEntity<?> unfollow(@RequestHeader("AccessToken") String accessToken,
+                                    @PathVariable("id") Long unfollowMemberId) {
+        String identityByToken = jwtService.findIdentityByToken(accessToken);
+        feignPostRemoteService.unfollow(identityByToken, unfollowMemberId);
+        return ResponseEntity.ok().body(new BaseResponse());
+    }
+
     @GetMapping("/member/following")
     public ResponseEntity<?> getFollowings(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);

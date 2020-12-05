@@ -52,4 +52,11 @@ public class Member extends BaseEntity {
     public Boolean isFollowing(Member targetMember) {
         return followings.isAlreadyFollowingMember(targetMember);
     }
+
+    public void unfollowing(Member followingMember) {
+        if (!followings.isAlreadyFollowingMember(followingMember)) {
+            throw new IllegalStateException("팔로잉하지 않은 멤버를 언팔로우 할 수 없습니다.");
+        }
+        followings.unfollowing(this, followingMember);
+    }
 }

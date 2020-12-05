@@ -86,7 +86,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/member/profile")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .content(objectMapper.writeValueAsString(profileRequest))
                         .characterEncoding("utf-8")
         )
@@ -127,7 +127,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.delete("/display/member/profile")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -165,7 +165,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/display/member/")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -217,7 +217,7 @@ class MemberControllerTest {
                 RestDocumentationRequestBuilders.get("/display/member/search")
                         .param("input", "input")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -254,7 +254,7 @@ class MemberControllerTest {
 
 
     @Test
-    @DisplayName("회원을 팔로잉한다.")
+    @DisplayName("회원을 팔로우한다.")
     @Rollback
     public void followingTest() throws Exception {
         given(jwtService.findIdentityByToken(any())).willReturn("id");
@@ -262,7 +262,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.post("/display/member/follow/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -287,6 +287,40 @@ class MemberControllerTest {
                 );
     }
 
+    @Test
+    @DisplayName("회원을 언팔로우한다.")
+    @Rollback
+    public void unfollowingTest() throws Exception {
+        given(jwtService.findIdentityByToken(any())).willReturn("id");
+
+        mockMvc.perform(
+                RestDocumentationRequestBuilders.post("/display/member/unfollow/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("AccessToken", "{{authToken}}")
+                        .characterEncoding("utf-8")
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+//                .andExpect(jsonPath("posts[].id", is(notNullValue())))
+                .andDo(
+                        document("unfollow",
+                                preprocessRequest(modifyUris()
+                                                .scheme("http")
+                                                .host("www.yappandone17.shop")
+                                                .removePort(),
+                                        prettyPrint()
+                                ),
+                                pathParameters(
+                                        parameterWithName("id").description("언팔로우하는 회원 식별자")
+                                ),
+                                requestHeaders(
+                                        headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
+                                        headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
+                                )
+                        )
+                );
+    }
+
 
     @Test
     @DisplayName("팔로잉 리스트를 조회한다.")
@@ -299,7 +333,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/display/member/following")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())
@@ -345,7 +379,7 @@ class MemberControllerTest {
         mockMvc.perform(
                 RestDocumentationRequestBuilders.get("/display/member/follower")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("AccessToken", "accessToken Example")
+                        .header("AccessToken", "{{authToken}}")
                         .characterEncoding("utf-8")
         )
                 .andDo(print())

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.domain.Member;
 import org.picon.repository.MemberRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +27,17 @@ public class FollowController {
                 .orElseThrow(EntityNotFoundException::new);
 
         loginMember.following(followMember);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void unfollow(@RequestParam("identity") String identity, @PathVariable("id") Long followMemberId) {
+        Member loginMember = memberRepository.findByIdentity(identity)
+                .orElseThrow(EntityNotFoundException::new);
+
+        Member followMember = memberRepository.findById(followMemberId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        loginMember.unfollowing(followMember);
     }
 }
