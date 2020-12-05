@@ -1,5 +1,6 @@
 package org.picon.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.picon.domain.Member;
@@ -27,6 +28,7 @@ class FollowControllerTest {
     @Rollback
 //    @Commit
     @DisplayName("로그인 한 회원이 지정한 회원을 팔로우한다.")
+    @Disabled
     void follow() {
         // given
         long followMemberId = 1L;
