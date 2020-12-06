@@ -15,10 +15,8 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @EntityGraph(attributePaths = {"member"})
     List<Post> findAllByMember(Member member);
 
-    @EntityGraph(attributePaths = {"member"})
     List<Post> findAllByMemberIn(List<Member> member);
 
     void deletePostByMemberAndId(Member member, Long id);

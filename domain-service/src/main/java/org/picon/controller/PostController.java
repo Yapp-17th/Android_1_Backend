@@ -54,13 +54,14 @@ public class PostController {
 
     @PostMapping(path = "/")
     @Transactional
-    public Post createPost(@RequestBody PostDto postDto, @RequestParam("identity") String identity) {
+    public PostDto createPost(@RequestBody PostDto postDto, @RequestParam("identity") String identity) {
         Member member = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         Post post = modelMapper.map(postDto, Post.class);
         post.setMember(member);
         Post save = postRepository.save(post);
-        return save;
+
+        return modelMapper.map(save, PostDto.class);
     }
 
     @DeleteMapping(path = "/{id}")
