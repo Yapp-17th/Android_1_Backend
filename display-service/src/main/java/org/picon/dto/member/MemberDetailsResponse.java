@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.picon.dto.BaseResponse;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDetailDto {
-    private MemberDto memberDto;
-    private FollowInfo followInfo;
+public class MemberDetailsResponse {
+    private List<MemberDetailDto> memberDetailDtos;
 }

@@ -10,7 +10,6 @@ import org.picon.dto.BaseResponse;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDetailDto {
-    private MemberDto memberDto;
-    private FollowInfo followInfo;
+public class MemberDetailResponse extends BaseResponse {
+    private MemberDetailDto memberDetailDto;
 }

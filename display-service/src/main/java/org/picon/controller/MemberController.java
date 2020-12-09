@@ -41,14 +41,14 @@ public class MemberController {
     public ResponseEntity<?> getMember(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
         MemberDetailDto memberDetailDto = feignPostRemoteService.getMember(identityByToken);
-        return ResponseEntity.ok().body(memberDetailDto);
+        return ResponseEntity.ok().body(new MemberDetailResponse(memberDetailDto));
     }
 
     @GetMapping("/member/search")
     public ResponseEntity<?> searchMember(@RequestHeader("AccessToken") String accessToken, @RequestParam("input") String input) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        List<MemberDto> memberDtos = feignPostRemoteService.searchMember(identityByToken, input);
-        return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
+        List<MemberDetailDto> memberDetailDtos = feignPostRemoteService.searchMember(identityByToken, input);
+        return ResponseEntity.ok().body(new MemberDetailsResponse(memberDetailDtos));
     }
 
     @PostMapping("/member/follow/{id}")
@@ -70,14 +70,14 @@ public class MemberController {
     @GetMapping("/member/following")
     public ResponseEntity<?> getFollowings(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        List<MemberDto> memberDtos = feignPostRemoteService.getFollowingMembers(identityByToken);
-        return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
+        MemberSearchResponse memberSearchResponse = feignPostRemoteService.getFollowingMembers(identityByToken);
+        return ResponseEntity.ok().body(memberSearchResponse);
     }
 
     @GetMapping("/member/follower")
     public ResponseEntity<?> getFollower(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        List<MemberDto> memberDtos = feignPostRemoteService.getFollowerMembers(identityByToken);
-        return ResponseEntity.ok().body(new MemberSearchResponse(memberDtos));
+        MemberSearchResponse memberSearchResponse = feignPostRemoteService.getFollowerMembers(identityByToken);
+        return ResponseEntity.ok().body(memberSearchResponse);
     }
 }

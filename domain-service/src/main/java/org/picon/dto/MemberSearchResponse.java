@@ -1,16 +1,17 @@
-package org.picon.dto.member;
+package org.picon.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.picon.dto.BaseResponse;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDetailDto {
-    private MemberDto memberDto;
+public class MemberSearchResponse {
+    private List<MemberDto> members;
     private FollowInfo followInfo;
 }

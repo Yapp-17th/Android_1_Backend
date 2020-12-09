@@ -3,10 +3,7 @@ package org.picon.service;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.picon.dto.member.MemberDetailDto;
-import org.picon.dto.member.MemberDto;
-import org.picon.dto.member.ProfileRequest;
-import org.picon.dto.member.ProfileResponse;
+import org.picon.dto.member.*;
 import org.picon.dto.post.PostDto;
 import org.picon.dto.statics.StatisticsDto;
 import org.picon.exception.BusinessException;
@@ -135,7 +132,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public List<MemberDto> searchMember(String identity, String input) {
+    @Override public List<MemberDetailDto> searchMember(String identity, String input) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
@@ -172,7 +169,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public List<MemberDto> getFollowingMembers(String identityByToken) {
+    @Override public MemberSearchResponse getFollowingMembers(String identityByToken) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "
@@ -184,7 +181,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public List<MemberDto> getFollowerMembers(String identityByToken) {
+    @Override public MemberSearchResponse getFollowerMembers(String identityByToken) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

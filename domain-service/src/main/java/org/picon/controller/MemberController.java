@@ -4,15 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.picon.domain.Member;
-import org.picon.dto.FollowInfo;
-import org.picon.dto.MemberDetailDto;
-import org.picon.dto.MemberDto;
-import org.picon.dto.ProfileRequest;
+import org.picon.dto.*;
 import org.picon.repository.MemberRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,14 +60,22 @@ public class MemberController {
     }
 
     @GetMapping("/search")
-    public List<MemberDto> searchMembers(@RequestParam("identity") String identity, @RequestParam("input") String input) {
+    public List<MemberDetailDto> searchMembers(@RequestParam("identity") String identity, @RequestParam("input") String input) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> members = memberRepository.searchAll(input);
-        List<MemberDto> memberDtos = members.stream()
-                .map(member -> MemberDto.from(member, loginMember))
-                .collect(Collectors.toList());
-        return memberDtos;
+        List<MemberDetailDto> memberDetailDtos = new ArrayList<>();
+        members.stream()
+                .forEach(member -> {
+                    int followers = member.getFollowerMembers().size();
+                    int followings = member.getFollowingMembers().size();
+                    memberDetailDtos.add(MemberDetailDto.builder()
+                            .memberDto(MemberDto.from(member,loginMember))
+                            .followInfo(FollowInfo.builder()
+                                    .followings(followings)
+                                    .followers(followers).build()).build());
+                });
+        return memberDetailDtos;
     }
 
     @GetMapping("/")
@@ -88,23 +94,31 @@ public class MemberController {
     }
 
     @GetMapping("/following")
-    public List<MemberDto> getFollowings(@RequestParam("identity") String identity) {
+    public MemberSearchResponse getFollowings(@RequestParam("identity") String identity) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> followingMembers = loginMember.getFollowingMembers();
-        return followingMembers.stream()
+        List<MemberDto> memberDtos = followingMembers.stream()
                 .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
+
+        return new MemberSearchResponse(memberDtos,FollowInfo.builder()
+        .followers(0)
+        .followings(followingMembers.size()).build());
     }
 
     @GetMapping("/follower")
-    public List<MemberDto> getFollowers(@RequestParam("identity") String identity) {
+    public MemberSearchResponse getFollowers(@RequestParam("identity") String identity) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> followerMembers = loginMember.getFollowerMembers();
-        return followerMembers.stream()
+        List<MemberDto> memberDtos = followerMembers.stream()
                 .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
+
+        return new MemberSearchResponse(memberDtos,FollowInfo.builder()
+                .followers(followerMembers.size())
+                .followings(0).build());
     }
 
 

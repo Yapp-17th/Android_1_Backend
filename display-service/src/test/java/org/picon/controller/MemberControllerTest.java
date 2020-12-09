@@ -8,10 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.picon.config.RestDocsConfiguration;
-import org.picon.dto.member.FollowInfo;
-import org.picon.dto.member.MemberDetailDto;
-import org.picon.dto.member.MemberDto;
-import org.picon.dto.member.ProfileRequest;
+import org.picon.dto.member.*;
 import org.picon.jwt.JwtService;
 import org.picon.service.FeignPostRemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -197,16 +194,17 @@ class MemberControllerTest {
 //                                        fieldWithPath("X").description("요청 본문 없음")
 //                                ),
                                 relaxedResponseFields(
-                                        fieldWithPath("memberDto").type(MemberDto.class).description("회원 정보"),
-                                        fieldWithPath("memberDto.identity").type(String.class).description("아이디"),
-                                        fieldWithPath("memberDto.nickName").type(String.class).description("닉네임"),
-                                        fieldWithPath("memberDto.role").type(String.class).description("역할"),
-                                        fieldWithPath("memberDto.createdDate").type(LocalDate.class).description("회원가입 날짜"),
-                                        fieldWithPath("memberDto.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
-                                        fieldWithPath("memberDto.isFollowing").type(Boolean.class).description("무시하세요"),
-                                        fieldWithPath("followInfo").type(FollowInfo.class).description("회원기준 팔로잉/팔로워 정보"),
-                                        fieldWithPath("followInfo.followers").type(FollowInfo.class).description("팔로수워 수"),
-                                        fieldWithPath("followInfo.followings").type(FollowInfo.class).description("팔로잉 수")
+                                        fieldWithPath("memberDetailDto").type(MemberDetailDto.class).description("회원 상세 정보"),
+                                        fieldWithPath("memberDetailDto.memberDto").type(MemberDto.class).description("회원 정보"),
+                                        fieldWithPath("memberDetailDto.memberDto.identity").type(String.class).description("아이디"),
+                                        fieldWithPath("memberDetailDto.memberDto.nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("memberDetailDto.memberDto.role").type(String.class).description("역할"),
+                                        fieldWithPath("memberDetailDto.memberDto.createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("memberDetailDto.memberDto.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("memberDetailDto.memberDto.isFollowing").type(Boolean.class).description("무시하세요"),
+                                        fieldWithPath("memberDetailDto.followInfo").type(FollowInfo.class).description("회원기준 팔로잉/팔로워 정보"),
+                                        fieldWithPath("memberDetailDto.followInfo.followers").type(FollowInfo.class).description("팔로수워 수"),
+                                        fieldWithPath("memberDetailDto.followInfo.followings").type(FollowInfo.class).description("팔로잉 수")
                                         )
                         )
                 );
@@ -217,7 +215,8 @@ class MemberControllerTest {
     @Rollback
     public void searchMemberTest() throws Exception {
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
-        given(feignPostRemoteService.searchMember(any(), any())).willReturn(Collections.singletonList(memberDto));
+        FollowInfo followInfo = new FollowInfo(0,3);
+        given(feignPostRemoteService.searchMember(any(), any())).willReturn(Collections.singletonList(new MemberDetailDto(memberDto,followInfo)) );
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
@@ -246,14 +245,18 @@ class MemberControllerTest {
                                         headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
                                 ),
                                 relaxedResponseFields(
-                                        fieldWithPath("members[]").type(List.class).description("회원 정보"),
-                                        fieldWithPath("members[].id").type(MemberDto.class).description("회원 식별자"),
-                                        fieldWithPath("members[].identity").type(String.class).description("아이디"),
-                                        fieldWithPath("members[].nickName").type(String.class).description("닉네임"),
-                                        fieldWithPath("members[].role").type(String.class).description("역할"),
-                                        fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
-                                        fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
-                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
+                                        fieldWithPath("memberDetailDtos[]").type(List.class).description("회원 정보리스트"),
+                                        fieldWithPath("memberDetailDtos[]").type(MemberDetailDto.class).description("회원 정보"),
+                                        fieldWithPath("memberDetailDtos[].memberDto").type(MemberDto.class).description("회원 정보"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.identity").type(String.class).description("아이디"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.role").type(String.class).description("역할"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("memberDetailDtos[].memberDto.isFollowing").type(Boolean.class).description("무시하세요"),
+                                        fieldWithPath("memberDetailDtos[].followInfo").type(FollowInfo.class).description("회원기준 팔로잉/팔로워 정보"),
+                                        fieldWithPath("memberDetailDtos[].followInfo.followers").type(FollowInfo.class).description("팔로수워 수"),
+                                        fieldWithPath("memberDetailDtos[].followInfo.followings").type(FollowInfo.class).description("팔로잉 수")
                                 )
                         )
                 );
@@ -334,7 +337,10 @@ class MemberControllerTest {
     @Rollback
     public void getFollowingsTest() throws Exception {
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
-        given(feignPostRemoteService.getFollowingMembers(any())).willReturn(Collections.singletonList(memberDto));
+        FollowInfo followInfo = new FollowInfo(0,3);
+       MemberSearchResponse m = MemberSearchResponse.builder().members(Collections.singletonList(memberDto))
+                .followInfo(followInfo).build();
+        given(feignPostRemoteService.getFollowingMembers(any())).willReturn(m);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
@@ -369,7 +375,9 @@ class MemberControllerTest {
                                         fieldWithPath("members[].role").type(String.class).description("역할"),
                                         fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
                                         fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
-                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
+                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부"),
+                                        fieldWithPath("followInfo.followers").type(FollowInfo.class).description("무시해주세요"),
+                                        fieldWithPath("followInfo.followings").type(FollowInfo.class).description("팔로잉 수")
                                 )
                         )
                 );
@@ -380,7 +388,10 @@ class MemberControllerTest {
     @Rollback
     public void getFollowersTest() throws Exception {
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
-        given(feignPostRemoteService.getFollowerMembers(any())).willReturn(Collections.singletonList(memberDto));
+        FollowInfo followInfo = new FollowInfo(0,3);
+        MemberSearchResponse m = MemberSearchResponse.builder().members(Collections.singletonList(memberDto))
+                .followInfo(followInfo).build();
+        given(feignPostRemoteService.getFollowerMembers(any())).willReturn(m);
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
@@ -400,9 +411,6 @@ class MemberControllerTest {
                                                 .removePort(),
                                         prettyPrint()
                                 ),
-//                                requestParameters(
-//                                        parameterWithName("input").description("검색어")
-//                                ),
                                 requestHeaders(
                                         headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type Header"),
                                         headerWithName("AccessToken").description("로그인으로 얻어온 토큰 값")
@@ -415,7 +423,9 @@ class MemberControllerTest {
                                         fieldWithPath("members[].role").type(String.class).description("역할"),
                                         fieldWithPath("members[].createdDate").type(LocalDate.class).description("회원가입 날짜"),
                                         fieldWithPath("members[].profileImageUrl").type(String.class).description("프로필 이미지 사진"),
-                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부")
+                                        fieldWithPath("members[].isFollowing").type(Boolean.class).description("팔로우하는 회원인지 여부"),
+                                        fieldWithPath("followInfo.followers").type(FollowInfo.class).description("팔로워 수"),
+                                        fieldWithPath("followInfo.followings").type(FollowInfo.class).description("무시해주세요")
                                 )
                         )
                 );

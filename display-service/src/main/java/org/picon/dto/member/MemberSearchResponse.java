@@ -1,17 +1,17 @@
 package org.picon.dto.member;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.picon.dto.BaseResponse;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class MemberSearchResponse extends BaseResponse {
     private List<MemberDto> members;
+    private FollowInfo followInfo;
+
 }
