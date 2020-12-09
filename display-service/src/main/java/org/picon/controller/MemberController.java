@@ -3,10 +3,7 @@ package org.picon.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.picon.dto.BaseResponse;
-import org.picon.dto.member.MemberDto;
-import org.picon.dto.member.MemberResponse;
-import org.picon.dto.member.MemberSearchResponse;
-import org.picon.dto.member.ProfileRequest;
+import org.picon.dto.member.*;
 import org.picon.dto.post.PostDto;
 import org.picon.dto.post.PostResponse;
 import org.picon.jwt.JwtService;
@@ -43,8 +40,8 @@ public class MemberController {
     @GetMapping("/member/")
     public ResponseEntity<?> getMember(@RequestHeader("AccessToken") String accessToken) {
         String identityByToken = jwtService.findIdentityByToken(accessToken);
-        MemberDto memberDto = feignPostRemoteService.getMember(identityByToken);
-        return ResponseEntity.ok().body(new MemberResponse(memberDto));
+        MemberDetailDto memberDetailDto = feignPostRemoteService.getMember(identityByToken);
+        return ResponseEntity.ok().body(memberDetailDto);
     }
 
     @GetMapping("/member/search")

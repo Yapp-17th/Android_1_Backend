@@ -46,8 +46,7 @@ public class DomainApplication {
                 .addMapping(e -> e.getMember().getProfileImageUrl(), PostDto::setProfileImageUrl)
                 .addMapping(e -> e.getCreateDate(), PostDto::setCreatedDate);
         modelMapper.createTypeMap(Member.class, MemberDto.class)
-                .addMapping(Member::getCreateDate, MemberDto::setCreatedDate);
-
+                .addMapping(e -> e.getCreateDate(), MemberDto::setCreatedDate);
         return modelMapper;
     }
 }

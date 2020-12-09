@@ -3,6 +3,7 @@ package org.picon.service;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.picon.dto.member.MemberDetailDto;
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.member.ProfileRequest;
 import org.picon.dto.member.ProfileResponse;
@@ -94,7 +95,7 @@ public class FeignPostRemoteServiceFallback implements FeignPostRemoteService {
         }
     }
 
-    @Override public MemberDto getMember(String identity) {
+    @Override public MemberDetailDto getMember(String identity) {
         if (cause instanceof FeignException && ((FeignException) cause).status() == 404) {
             log.error("404 error took place"
                     + ". Error message: "

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.picon.domain.Member;
+import org.picon.dto.FollowInfo;
+import org.picon.dto.MemberDetailDto;
 import org.picon.dto.MemberDto;
 import org.picon.dto.ProfileRequest;
 import org.picon.repository.MemberRepository;
@@ -71,10 +73,18 @@ public class MemberController {
     }
 
     @GetMapping("/")
-    public MemberDto getMember(@RequestParam("identity") String identity) {
+    public MemberDetailDto getMember(@RequestParam("identity") String identity) {
         Member findMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
-        return modelMapper.map(findMember, MemberDto.class);
+        MemberDto responseMemberDto = modelMapper.map(findMember,MemberDto.class);
+        FollowInfo followInfo = FollowInfo.builder()
+                .followers(findMember.getFollowerMembers().size())
+                .followings(findMember.getFollowingMembers().size()).build();
+        return MemberDetailDto.builder()
+                .memberDto(responseMemberDto)
+                .followInfo(followInfo)
+                .build();
+
     }
 
     @GetMapping("/following")

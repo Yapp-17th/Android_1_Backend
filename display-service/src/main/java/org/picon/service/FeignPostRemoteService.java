@@ -1,5 +1,6 @@
 package org.picon.service;
 
+import org.picon.dto.member.MemberDetailDto;
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.member.ProfileRequest;
 import org.picon.dto.member.ProfileResponse;
@@ -35,7 +36,7 @@ public interface FeignPostRemoteService {
     StatisticsDto getPostsByStatistics(@PathVariable("year") int year, @PathVariable("month") int month, @RequestParam("identity") String identity);
 
     @GetMapping(path = "/domain/member/")
-    MemberDto getMember(@RequestParam("identity") String identity);
+    MemberDetailDto getMember(@RequestParam("identity") String identity);
 
     @PostMapping(path = "/domain/member/image", consumes = MULTIPART_FORM_DATA_VALUE)
     ProfileResponse ImageUpload(@RequestPart("image") MultipartFile multipartFile);

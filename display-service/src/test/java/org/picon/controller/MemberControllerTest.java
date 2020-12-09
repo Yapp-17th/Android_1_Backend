@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.picon.config.RestDocsConfiguration;
+import org.picon.dto.member.FollowInfo;
+import org.picon.dto.member.MemberDetailDto;
 import org.picon.dto.member.MemberDto;
 import org.picon.dto.member.ProfileRequest;
 import org.picon.jwt.JwtService;
@@ -159,7 +161,9 @@ class MemberControllerTest {
     @Rollback
     public void getMemberTest() throws Exception {
         MemberDto memberDto = new MemberDto(1L, "id", "nickname", "role", LocalDate.now(), "image_url", false);
-        given(feignPostRemoteService.getMember(any())).willReturn(memberDto);
+        FollowInfo followInfo = new FollowInfo(0,3);
+        given(feignPostRemoteService.getMember(any())).willReturn(MemberDetailDto.builder()
+                .memberDto(memberDto).followInfo(followInfo).build());
         given(jwtService.findIdentityByToken(any())).willReturn("id");
 
         mockMvc.perform(
@@ -193,14 +197,17 @@ class MemberControllerTest {
 //                                        fieldWithPath("X").description("요청 본문 없음")
 //                                ),
                                 relaxedResponseFields(
-                                        fieldWithPath("member").type(MemberDto.class).description("회원 정보"),
-                                        fieldWithPath("member.identity").type(String.class).description("아이디"),
-                                        fieldWithPath("member.nickName").type(String.class).description("닉네임"),
-                                        fieldWithPath("member.role").type(String.class).description("역할"),
-                                        fieldWithPath("member.createdDate").type(LocalDate.class).description("회원가입 날짜"),
-                                        fieldWithPath("member.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
-                                        fieldWithPath("member.isFollowing").type(Boolean.class).description("무시하세요")
-                                )
+                                        fieldWithPath("memberDto").type(MemberDto.class).description("회원 정보"),
+                                        fieldWithPath("memberDto.identity").type(String.class).description("아이디"),
+                                        fieldWithPath("memberDto.nickName").type(String.class).description("닉네임"),
+                                        fieldWithPath("memberDto.role").type(String.class).description("역할"),
+                                        fieldWithPath("memberDto.createdDate").type(LocalDate.class).description("회원가입 날짜"),
+                                        fieldWithPath("memberDto.profileImageUrl").type(String.class).description("프로필 이미지 사진"),
+                                        fieldWithPath("memberDto.isFollowing").type(Boolean.class).description("무시하세요"),
+                                        fieldWithPath("followInfo").type(FollowInfo.class).description("회원기준 팔로잉/팔로워 정보"),
+                                        fieldWithPath("followInfo.followers").type(FollowInfo.class).description("팔로수워 수"),
+                                        fieldWithPath("followInfo.followings").type(FollowInfo.class).description("팔로잉 수")
+                                        )
                         )
                 );
     }

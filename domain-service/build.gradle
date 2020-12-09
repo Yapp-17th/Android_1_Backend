@@ -45,7 +45,6 @@ dependencies {
     implementation(platform("software.amazon.awssdk:bom:2.10.30"))
     runtimeOnly 'mysql:mysql-connector-java'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
     implementation 'org.modelmapper:modelmapper:2.3.0'
 }
 
