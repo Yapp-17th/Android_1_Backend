@@ -20,6 +20,7 @@ public class Post extends BaseEntity {
     private Coordinate coordinate;
     private Address address;
     @Convert(converter = ImageUrlsConverter.class)
+    @Column(columnDefinition = "TEXT")
     private List<String> imageUrls;
     @Enumerated(EnumType.STRING)
     private Emotion emotion;
