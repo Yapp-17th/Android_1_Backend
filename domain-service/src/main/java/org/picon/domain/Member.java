@@ -4,6 +4,7 @@ import lombok.*;
 import org.picon.config.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
