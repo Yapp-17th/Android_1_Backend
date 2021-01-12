@@ -7,7 +7,7 @@
 - [게시글 관련](http://www.yappandone17.shop/display/docs/api-guide.html)
 - [auth 관련](http://www.yappandone17.shop/auth/docs/api-guide.html)
 
-## 📂 프로젝트 구조(MSA)
+## 📂 프로젝트 구조
 - display-service
   - 조회 관련 서비스  
 - domain-service
