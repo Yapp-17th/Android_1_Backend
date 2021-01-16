@@ -25,6 +25,7 @@ public class Member extends BaseEntity {
     private String password;
     private String role;
     private String profileImageUrl;
+    private String token;
 
     /**
      * 내가 팔로우하는 사람들

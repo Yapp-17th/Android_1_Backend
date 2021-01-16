@@ -60,29 +60,30 @@ public class MemberController {
     }
 
     @GetMapping("/search")
+//    @Transactional
     public List<MemberDetailDto> searchMembers(@RequestParam("identity") String identity, @RequestParam("input") String input) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
         List<Member> members = memberRepository.searchAll(input);
         List<MemberDetailDto> memberDetailDtos = new ArrayList<>();
-        members.stream()
-                .forEach(member -> {
-                    int followers = member.getFollowerMembers().size();
-                    int followings = member.getFollowingMembers().size();
-                    memberDetailDtos.add(MemberDetailDto.builder()
-                            .memberDto(MemberDto.from(member,loginMember))
-                            .followInfo(FollowInfo.builder()
-                                    .followings(followings)
-                                    .followers(followers).build()).build());
-                });
+        members.forEach(member -> {
+            int followers = member.getFollowerMembers().size();
+            int followings = member.getFollowingMembers().size();
+            memberDetailDtos.add(MemberDetailDto.builder()
+                    .memberDto(MemberDto.from(member, loginMember))
+                    .followInfo(FollowInfo.builder()
+                            .followings(followings)
+                            .followers(followers).build()).build());
+        });
         return memberDetailDtos;
     }
 
     @GetMapping("/")
+    @Transactional
     public MemberDetailDto getMember(@RequestParam("identity") String identity) {
         Member findMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
-        MemberDto responseMemberDto = modelMapper.map(findMember,MemberDto.class);
+        MemberDto responseMemberDto = modelMapper.map(findMember, MemberDto.class);
         FollowInfo followInfo = FollowInfo.builder()
                 .followers(findMember.getFollowerMembers().size())
                 .followings(findMember.getFollowingMembers().size()).build();
@@ -94,6 +95,7 @@ public class MemberController {
     }
 
     @GetMapping("/following")
+    @Transactional
     public MemberSearchResponse getFollowings(@RequestParam("identity") String identity) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
@@ -102,12 +104,13 @@ public class MemberController {
                 .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
 
-        return new MemberSearchResponse(memberDtos,FollowInfo.builder()
-        .followers(0)
-        .followings(followingMembers.size()).build());
+        return new MemberSearchResponse(memberDtos, FollowInfo.builder()
+                .followers(0)
+                .followings(followingMembers.size()).build());
     }
 
     @GetMapping("/follower")
+    @Transactional
     public MemberSearchResponse getFollowers(@RequestParam("identity") String identity) {
         Member loginMember = memberRepository.findByIdentity(identity)
                 .orElseThrow(EntityNotFoundException::new);
@@ -116,7 +119,7 @@ public class MemberController {
                 .map(member -> MemberDto.from(member, loginMember))
                 .collect(Collectors.toList());
 
-        return new MemberSearchResponse(memberDtos,FollowInfo.builder()
+        return new MemberSearchResponse(memberDtos, FollowInfo.builder()
                 .followers(followerMembers.size())
                 .followings(0).build());
     }

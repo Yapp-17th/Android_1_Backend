@@ -23,7 +23,7 @@ public class Followings {
     protected List<Member> getFollowingMembers() {
         List<Member> members = follows.stream()
                 .map(follow -> follow.followMember)
-                .map(DomainApplication::initializeAndUnproxy)
+//                .map(DomainApplication::initializeAndUnproxy)
                 .collect(Collectors.toList());
         return members;
     }

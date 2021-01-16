@@ -1,6 +1,7 @@
 package org.picon.auth.request;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SignInRequest {
     @NotBlank(message = "아이디 필수 입력란입니다")
     private String identity;
@@ -18,6 +20,7 @@ public class SignInRequest {
     private String password;
     @NotNull @Size(min = 3, message = "닉네임은 최소 3글자 이상이여야 합니다")
     private String nickName;
+    private String token;
 
     public SignInRequest(String identity, String password, String nickName) {
         this.identity = identity;
